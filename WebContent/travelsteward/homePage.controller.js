@@ -33,6 +33,21 @@ sap.ui.controller("travelsteward.homePage", {
 */
 //	onExit: function() {
 //
-//	}
+//	},
+	
+	updateObjectHeader: function(number,numberunit,objectheader){
+		number=parseFloat(number); //获取小数型数据
+		number+="";
+		if(number.indexOf(".")==-1) 
+			number+=".0";//如果没有小数点，在后面补个小数点和0
+		if(/\.\d$/.test(number)) 
+			number+="0"; //正则判断
+		while(/\d{4}(\.|,)/.test(number))  
+			//符合条件则进行替换
+			number=number.replace(/(\d)(\d{3}(\.|,))/,"$1,$2");
+			//每隔3位添加一个	 
+		objectheader.setNumber(number);
+		objectheader.setNumberUnit(numberunit);
+	}
 
 });
