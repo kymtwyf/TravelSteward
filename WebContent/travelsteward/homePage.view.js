@@ -14,7 +14,7 @@ sap.ui.jsview("travelsteward.homePage", {
 	*/ 
 	createContent : function(oController) {
  		return new sap.m.Page({
-			title: "Title",
+			title: "Title1",
 			content: [
 			
 			]
