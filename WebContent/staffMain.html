@@ -9,18 +9,12 @@
 				data-sap-ui-theme="sap_bluecrystal">
 		</script>
 		<!-- only load the mobile lib "sap.m" and the "sap_mvi" theme -->
-		
+
 		<script>
-
 				sap.ui.localResources("travelsteward");
-				sap.ui.localResources("util");
-					
-				jQuery.sap.require("util.tools");
-
-				var bus = sap.ui.getCore().getEventBus();
-				var app = new sap.m.App({initialPage:"HomePage"});
-				var page = sap.ui.view({id:"HomePage", viewName:"travelsteward.homePage", type:sap.ui.core.mvc.ViewType.JS});
-				app.addPage(page);
+				var app = new sap.m.SplitApp();
+				var listPage = sap.ui.view({id:"StaffReqListPage", viewName:"travelsteward.StaffReqListPage", type:sap.ui.core.mvc.ViewType.JS});
+				app.addMasterPage(listPage);
 				app.placeAt("content");
 		</script>
 
