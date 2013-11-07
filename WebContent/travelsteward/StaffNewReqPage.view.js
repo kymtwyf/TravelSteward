@@ -14,9 +14,19 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 	*/ 
 	createContent : function(oController) {
  		return new sap.m.Page({
-			title: "Title",
+ 			customHeader: new sap.m.Bar({ 	
+ 				contentLeft: [new sap.m.Button({
+ 					icon: "sap-icon://home"})
+ 							 ],
+				contentMiddle: [new sap.m.Label({text: "Travel Request List"})],
+				contentRight: [
+				               new sap.m.Button({
+				            	   icon: "sap-icon://log",
+				               }),
+				               ],
+			}),
 			content: [
-			
+			          
 			]
 		});
 	}
