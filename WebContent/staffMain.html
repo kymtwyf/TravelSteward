@@ -8,11 +8,6 @@
 				data-sap-ui-libs="sap.m"
 				data-sap-ui-theme="sap_bluecrystal">
 		</script>
-		<script>
-		//global variables go here
-		var bus = sap.ui.getCore().getEventBus();
-
-		</script>
 		<!-- only load the mobile lib "sap.m" and the "sap_mvi" theme -->
 
 		<script>
@@ -21,7 +16,6 @@
 				var page = sap.ui.view({id:"idhomePage1", viewName:"travelsteward.homePage", type:sap.ui.core.mvc.ViewType.JS});
 				app.addPage(page);
 				app.placeAt("content");
-				//test
 		</script>
 
 	</head>
