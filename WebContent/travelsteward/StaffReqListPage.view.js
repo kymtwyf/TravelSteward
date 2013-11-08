@@ -32,7 +32,7 @@ sap.ui.jsview("travelsteward.StaffReqListPage", {
 			],
 			footer: new sap.m.Bar({
 				contentLeft: [
-				              new sap.m.Button({
+				              new sap.m.Button("newReqButton", {
 				            	  icon: "sap-icon://add"})
  							 ],
  				contentRight: [

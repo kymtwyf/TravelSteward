@@ -9,29 +9,29 @@ sap.ui.controller("travelsteward.StaffReqListPage", {
 		jQuery.sap.require("sap.ui.model.json.JSONModel");
 		var data = {
 		  teamMembers: [
-		    {firstName: "Indiana", lastName: "Jones", birthDate: "1991-12-03", gender: "Male"},
-		    {firstName: "Barbara", lastName: "Dreher", birthDate: "1999-08-31", gender: "Female"},
-		    {firstName: "Dante", lastName: "Alighieri", birthDate: "1982-04-22", gender: "Male"},
-		    {firstName: "Terry", lastName: "Jones", birthDate: "1988-06-07", gender: "Male"},
-		    {firstName: "Leia", lastName: "Vader", birthDate: "1991-11-09", gender: "Female"},
-		    {firstName: "John", lastName: "Dufke", birthDate: "1979-08-17", gender: "Male"},
-		    {firstName: "Dante", lastName: "Alioli", birthDate: "1987-05-11", gender: "Male"},
-		    {firstName: "Venus", lastName: "Botticelli", birthDate: "1976-09-08", gender: "Female"}
+		    {firstName: "Indiana", lastName: "Jones", birthDate: "1991-12-03", gender: "To Be Approved"},
+		    {firstName: "Barbara", lastName: "Dreher", birthDate: "1999-08-31", gender: "To Be Approved"},
+		    {firstName: "Dante", lastName: "Alighieri", birthDate: "1982-04-22", gender: "To Be Approved"},
+		    {firstName: "Terry", lastName: "Jones", birthDate: "1988-06-07", gender: "To Be Approved"},
+		    {firstName: "Leia", lastName: "Vader", birthDate: "1991-11-09", gender: "Approved"},
+		    {firstName: "John", lastName: "Dufke", birthDate: "1979-08-17", gender: "Approved"},
+		    {firstName: "Dante", lastName: "Alioli", birthDate: "1987-05-11", gender: "Approved"},
+		    {firstName: "Venus", lastName: "Botticelli", birthDate: "1976-09-08", gender: "Approved"}
 		  ]
 		};
 		var oModel = new sap.ui.model.json.JSONModel(data);
 		var oList = sap.ui.getCore().byId("reqList");
 		oList.setModel(oModel);
-		var oGenderSorter = new sap.ui.model.Sorter("gender", false, true);
+		var oGenderSorter = new sap.ui.model.Sorter("gender", true, true);
 		var oItemTemplate = new sap.m.StandardListItem({
 			  title: "{firstName}",
 			  description: "ABC",
-			  icon: {
-			    path: "gender",
-			    formatter: function (sGender) {
-			      return (sGender === "Male" ? "sap-icon://doctor" : "sap-icon://nurse"); 
-			    }
-			  }
+//			  icon: {
+//			    path: "gender",
+//			    formatter: function (sGender) {
+//			      return (sGender === "Male" ? "sap-icon://doctor" : "sap-icon://nurse"); 
+//			    }
+//			  }
 			});
 		oList.bindAggregation("items", {
 			  path: "/teamMembers",
@@ -39,6 +39,12 @@ sap.ui.controller("travelsteward.StaffReqListPage", {
 			  sorter: oGenderSorter
 		});
 		oList.getBinding("items").sort(oGenderSorter);
+		
+		var newReqButton = sap.ui.getCore().byId("newReqButton");
+		newReqButton.attachPress(function() {
+			var app = sap.ui.getCore().byId("staffApp");
+			app.toDetail("staffNewReqPage");
+		});
 	},
 
 /**

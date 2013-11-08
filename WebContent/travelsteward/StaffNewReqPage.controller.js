@@ -10,7 +10,11 @@ sap.ui.controller("travelsteward.StaffNewReqPage", {
 * @memberOf travelsteward.StaffNewReqPage
 */
 	onInit: function() {
-
+		var newReqBackButton = sap.ui.getCore().byId("newReqBackButton");
+		newReqBackButton.attachPress(function() {
+			var app = sap.ui.getCore().byId("staffApp");
+			app.toMaster("staffReqListPage");
+		});
 	},
 
 /**

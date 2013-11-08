@@ -15,8 +15,8 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 	createContent : function(oController) {
  		return new sap.m.Page({
  			customHeader: new sap.m.Bar({ 	
- 				contentLeft: [new sap.m.Button({
- 					icon: "sap-icon://home"})
+ 				contentLeft: [new sap.m.Button("newReqBackButton", {
+ 					icon: "sap-icon://nav-back"})
  							 ],
 				contentMiddle: [new sap.m.Label({text: "New Request"})],
 				contentRight: [
@@ -57,9 +57,8 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 				    	           }),
 				    	           new sap.m.Select({
 				    	        	   items: [
-							            	    new sap.m.StandardListItem({
-							            	    	title: "safa"
-							            	    }),
+							            	    new sap.ui.core.Item({text:"Shanghai"}),
+							            	    new sap.ui.core.Item({text:"Beijing"})
 							            	  ],
 				    	           }),
 			    	        	   ] 
@@ -74,9 +73,9 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 						            	    new sap.ui.core.Item({text: "Meeting"}),
 						            	  ],
 			    	           }),
-			        	       new sap.m.Label({
-			        	    	   text: "Detail Information"
-			        	       }),
+//			        	       new sap.m.Label({
+//			        	    	   text: "Detail Information"
+//			        	       }),
 			        	       new sap.m.Label({
 			        	    	   text: "Transportation"
 			        	       }),
@@ -101,7 +100,19 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			        	    	        	         ]
 			        	    	          }),
 			        	    	          ]
-			        	       })
+			        	       }),
+			        	       new sap.m.Label({
+			    	        	   text:"Plan Expense"
+			    	           }),
+			    	           new sap.m.Input({
+			    	        	   type: sap.m.InputType.Number
+			    	           }),
+			    	           new sap.m.Label({
+			    	        	   text:"Supplement"
+			    	           }),
+			    	           new sap.m.Input({
+			    	        	   type: sap.m.InputType.Text
+			    	           }),
 			        	       ] 
 			          }),
 			],
