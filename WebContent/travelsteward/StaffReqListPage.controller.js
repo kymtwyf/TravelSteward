@@ -24,7 +24,7 @@ sap.ui.controller("travelsteward.StaffReqListPage", {
 		oList.setModel(oModel);
 		var oGenderSorter = new sap.ui.model.Sorter("gender", false, true);
 		var oItemTemplate = new sap.m.StandardListItem({
-			  title: "{lastName}, {firstName}",
+			  title: "{firstName}",
 			  description: "ABC",
 			  icon: {
 			    path: "gender",

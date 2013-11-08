@@ -14,10 +14,35 @@ sap.ui.jsview("travelsteward.StaffReqDetailPage", {
 	*/ 
 	createContent : function(oController) {
  		return new sap.m.Page({
-			title: "Title",
+ 			customHeader: new sap.m.Bar({ 	
+ 				contentLeft: [new sap.m.Button({
+ 					icon: "sap-icon://home"})
+ 							 ],
+				contentMiddle: [new sap.m.Label({text: "Request Detail"})],
+				contentRight: [
+				               new sap.m.Button({
+				            	   icon: "sap-icon://log",
+				               }),
+				               ],
+			}),
 			content: [
 			
-			]
+			],
+			footer: new sap.m.Bar({
+				contentLeft: [
+				              new sap.m.Button({
+ 								icon: "sap-icon://edit"
+				              })
+ 							 ],
+ 				contentRight: [
+ 				               new sap.m.Button({
+ 				            	   icon: "sap-icon://email"
+ 				               }),
+ 				              new sap.m.Button({
+				            	   icon: "sap-icon://action-settings"
+				               }),
+ 				               ]
+			})
 		});
 	}
 

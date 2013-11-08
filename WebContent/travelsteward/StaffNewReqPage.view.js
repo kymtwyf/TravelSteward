@@ -18,7 +18,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
  				contentLeft: [new sap.m.Button({
  					icon: "sap-icon://home"})
  							 ],
-				contentMiddle: [new sap.m.Label({text: "Travel Request List"})],
+				contentMiddle: [new sap.m.Label({text: "New Request"})],
 				contentRight: [
 				               new sap.m.Button({
 				            	   icon: "sap-icon://log",
@@ -26,8 +26,95 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 				               ],
 			}),
 			content: [
-			          
-			]
+			          new sap.m.VBox({
+			        	 items:[
+			        	        new sap.m.Label({
+			        	        	text:"From Date"
+			        	        }),
+			        	        new sap.m.DateTimeInput({
+			        	        	type: sap.m.DateTimeInputType.Date
+			        	        }), 
+			    	           new sap.m.Label({
+			    	        	   text:"To Date"
+			    	           }),
+			    	           new sap.m.DateTimeInput({
+			    	        	   type: sap.m.DateTimeInputType.Date
+			    	           }),
+			    	           new sap.m.Label({
+			    	        	   text:"Destination"
+			    	           }),
+			    	           new sap.m.HBox({
+			    	        	   items:[
+			    	        	   new sap.m.Select({
+				    	        	   items: [
+							            	    new sap.ui.core.Item({text: "China"}),
+							            	    new sap.ui.core.Item({text: "Germany"}),
+							            	    new sap.ui.core.Item({key: "item3", text: "Item 3"}),
+							            	    new sap.ui.core.Item({text: "Item 4"}),
+							            	    new sap.ui.core.Item({text: "Item 5"})
+							            	  ],
+//							           selectedKey: "item3"
+				    	           }),
+				    	           new sap.m.Select({
+				    	        	   items: [
+							            	    new sap.m.StandardListItem({
+							            	    	title: "safa"
+							            	    }),
+							            	  ],
+				    	           }),
+			    	        	   ] 
+			    	           }),
+			    	           
+			    	           new sap.m.Label({
+			    	        	   text:"Reason"
+			    	           }),
+			    	           new sap.m.Select({
+			    	        	   items: [
+						            	    new sap.ui.core.Item({text: "Support"}),
+						            	    new sap.ui.core.Item({text: "Meeting"}),
+						            	  ],
+			    	           }),
+			        	       new sap.m.Label({
+			        	    	   text: "Detail Information"
+			        	       }),
+			        	       new sap.m.Label({
+			        	    	   text: "Transportation"
+			        	       }),
+			        	       new sap.m.HBox({
+			        	    	   items:[
+			        	    	          new sap.m.Label({
+			        	    	        	  text: "To"
+			        	    	          }), 
+			        	    	          new sap.m.Select({
+			        	    	        	  items:[
+			        	    	        	         new sap.ui.core.Item({text: "Flight"}),
+			        	    	        	         new sap.ui.core.Item({text: "Train"}),
+			        	    	        	         ]
+			        	    	          }),
+			        	    	          new sap.m.Label({
+			        	    	        	  text: "Back"
+			        	    	          }),
+			        	    	          new sap.m.Select({
+			        	    	        	  items:[
+			        	    	        	         new sap.ui.core.Item({text: "Flight"}),
+			        	    	        	         new sap.ui.core.Item({text: "Train"}),
+			        	    	        	         ]
+			        	    	          }),
+			        	    	          ]
+			        	       })
+			        	       ] 
+			          }),
+			],
+			footer: new sap.m.Bar({
+ 				contentRight: [
+ 				               new sap.m.Button({
+ 				            	   icon: "sap-icon://email"
+ 				               }),
+ 				              new sap.m.Button({
+				            	   icon: "sap-icon://action-settings"
+				               }),
+ 				               ]
+			})
 		});
 	}
 
