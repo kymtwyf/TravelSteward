@@ -6,14 +6,24 @@
 		<script src="resources/sap-ui-core.js"
 				id="sap-ui-bootstrap"
 				data-sap-ui-libs="sap.m"
-				data-sap-ui-theme="sap_mvi">
+				data-sap-ui-theme="sap_bluecrystal">
+
+		</script>
+		<script>
+		//global variables go here
+		var bus = sap.ui.getCore().getEventBus();
 		</script>
 		<!-- only load the mobile lib "sap.m" and the "sap_mvi" theme -->
-
+		
 		<script>
+
 				sap.ui.localResources("travelsteward");
-				var app = new sap.m.App({initialPage:"idhomePage1"});
-				var page = sap.ui.view({id:"idhomePage1", viewName:"travelsteward.homePage", type:sap.ui.core.mvc.ViewType.JS});
+				sap.ui.localResources("util");
+					
+				jQuery.sap.require("util.tools");
+
+				var app = new sap.m.App({initialPage:"HomePage"});
+				var page = sap.ui.view({id:"HomePage", viewName:"travelsteward.homePage", type:sap.ui.core.mvc.ViewType.JS});
 				app.addPage(page);
 				app.placeAt("content");
 				//test
