@@ -27,8 +27,72 @@ sap.ui.jsview("travelsteward.StaffReqListPage", {
 			}),
 			content: [
 			    new sap.m.List("reqList", {
-			    	
-			    })
+			    	items:[
+			    	       new sap.m.StandardListItem({
+			    	    	   title: "Chengdu For Meeting",
+			    	    	   description: "22/09/2013-25/09/2013",
+			    	    	   icon: "sap-icon://meeting-room",
+			    	    	   info: "Awaiting Approve",
+			    	    	   infoState: sap.ui.core.ValueState.Error
+			    	       }),
+			    	       new sap.m.StandardListItem({
+			    	    	   title: "Shanghai For Sale",
+			    	    	   description: "22/09/2013-25/09/2013",
+			    	    	   icon: "sap-icon://sales-order",
+			    	    	   info: "Awaiting Approve",
+			    	    	   infoState: sap.ui.core.ValueState.Error
+			    	       }),
+			    	       new sap.m.StandardListItem({
+			    	    	   title: "Beijing For Support",
+			    	    	   description: "22/09/2013-25/09/2013",
+			    	    	   icon: "sap-icon://wrench",
+			    	    	   info: "Approved",
+			    	    	   infoState: sap.ui.core.ValueState.Success
+			    	       }),
+			    	       new sap.m.StandardListItem({
+			    	    	   title: "Shanghai For Sale",
+			    	    	   description: "22/09/2013-25/09/2013",
+			    	    	   icon: "sap-icon://sales-order",
+			    	    	   info: "Approved",
+			    	    	   infoState: sap.ui.core.ValueState.Success
+			    	       }),
+			    	       new sap.m.StandardListItem({
+			    	    	   title: "Beijing For Support",
+			    	    	   description: "22/09/2013-25/09/2013",
+			    	    	   icon: "sap-icon://wrench",
+			    	    	   info: "Approved",
+			    	    	   infoState: sap.ui.core.ValueState.Success
+			    	       }),
+			    	       new sap.m.StandardListItem({
+			    	    	   title: "Chengdu For Meeting",
+			    	    	   description: "22/09/2013-25/09/2013",
+			    	    	   icon: "sap-icon://meeting-room",
+			    	    	   info: "Approved",
+			    	    	   infoState: sap.ui.core.ValueState.Success
+			    	       }),
+			    	       new sap.m.StandardListItem({
+			    	    	   title: "Chengdu For Meeting",
+			    	    	   description: "22/09/2013-25/09/2013",
+			    	    	   icon: "sap-icon://meeting-room",
+			    	    	   info: "Approved",
+			    	    	   infoState: sap.ui.core.ValueState.Success
+			    	       }),
+			    	       new sap.m.StandardListItem({
+			    	    	   title: "Shanghai For Sale",
+			    	    	   description: "22/09/2013-25/09/2013",
+			    	    	   icon: "sap-icon://sales-order",
+			    	    	   info: "Approved",
+			    	    	   infoState: sap.ui.core.ValueState.Success
+			    	       }),
+			    	       new sap.m.StandardListItem({
+			    	    	   title: "Beijing For Support",
+			    	    	   description: "22/09/2013-25/09/2013",
+			    	    	   icon: "sap-icon://wrench",
+			    	    	   info: "Approved",
+			    	    	   infoState: sap.ui.core.ValueState.Success
+			    	       }),
+			    	]
+			    }),
 			],
 			footer: new sap.m.Bar({
 				contentLeft: [

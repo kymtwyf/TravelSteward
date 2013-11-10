@@ -44,6 +44,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 //			        	        }),
 			        	        new sap.m.DateTimeInput({
 			        	        	type: sap.m.DateTimeInputType.Date,
+			        	        	displayFormat: 'd/M/y',
 			        	        	value: "2013-11-25"
 			        	        }),
 			    	           new sap.m.Label({
@@ -51,6 +52,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			    	           }),
 			    	           new sap.m.DateTimeInput({
 			    	        	   type: sap.m.DateTimeInputType.Date,
+			    	        	   displayFormat: 'd/M/y',
 			    	        	   value: "2013-12-05"
 			    	           }),
 			    	           new sap.m.Label({
@@ -166,7 +168,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			        	       ] 
 			          }),
 			          new sap.m.Button({
-			        	  icon: "sap-icon://action",
+			        	  icon: "sap-icon://accept",
 			        	  type: sap.m.ButtonType.Accept,
 			        	  text: "Submit"
 			          }).addStyleClass("floatRight")
