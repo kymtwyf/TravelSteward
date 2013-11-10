@@ -15,6 +15,35 @@ sap.ui.controller("travelsteward.StaffNewReqPage", {
 			var app = sap.ui.getCore().byId("staffApp");
 			app.toMaster("staffReqListPage");
 		});
+		
+		var subButton = sap.ui.getCore().byId("subButton");
+		subButton.attachPress(function() {
+			$.ajax({
+				   type:"get",
+				   async:false,
+				   url:"http://ld9415:8002/ta/TravelAnalysis/xsjs/newTraReq.xsjs",
+				   //dataType:"json",
+				   data: {
+					   reqId: 4653263,
+					   peId: 1,
+					   toDate: "2013/11/26",
+					   backDate: "2013/12/01",
+					   toWay: "Flight",
+					   backWay: "Train",
+					   plExp: 8000,
+					   traRea: "Meeting",
+					   desCoun: "China",
+					   desReg: "Shanghai"
+				   },
+//				   jsonp:"callback",
+				   success:function(res){
+					  alert('Succ');
+				  },
+				  error:function(){
+					  alert('Fail');
+				  }
+			  });
+		});
 	},
 
 /**

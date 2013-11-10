@@ -3,3 +3,11 @@
 .floatRight {
 	float: right;
 }
+
+.padding10 {
+	padding: 10px;
+}
+
+#subButton {
+	width: 20%;
+}
