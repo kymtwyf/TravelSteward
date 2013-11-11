@@ -44,7 +44,21 @@ sap.ui.controller("manager.analysisByCountry", {
 			"display":"block",
 			"position":"relative",
 		});
-		util.uiFactory.createDataMap('mapDiv');
+		
+		map = util.uiFactory.createDataMap('mapDiv');
+		map.legend();
+		map.fills = {
+			 'USA': '#1f77b4',
+	        'RUS': '#1f77b4',
+	        'PRK': '#ff7f0e',
+	        'PRC': '#2ca02c',
+	        'IND': '#1f77b4',
+	        'GBR': '#1f77b4',
+	        'FRA': '#1f77b4',
+	        'PAK': '#7f7f7f',
+		};
+		map.draw();
+
 	},
 	autoSetContainerSize:function(sId){
 		var width = $('#main').width();
@@ -53,7 +67,7 @@ sap.ui.controller("manager.analysisByCountry", {
 		$("#"+sId).height(height*0.7);
 		$("#"+sId).css({
 			"left":width*0.1,
-			"top":height*0.1
+			//"border":"solid"
 		});
 	}
 

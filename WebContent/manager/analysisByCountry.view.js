@@ -17,7 +17,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 	},
 	createContent : function(oController) {
 		jQuery.sap.require("util.uiFactory");
-		
+
 		var objectStatue = new sap.m.ObjectStatus({
             text : "In Stock",
             state : "Success"
@@ -37,7 +37,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 				new sap.ui.core.HTML("mapDiv",{
 				content:"<div id='mapDiv' style='display:none'></div>"
 			})]
-		})
+		});
 
 		var btn_personizedChart = new sap.m.Button({
 	        icon: "sap-icon://pie-chart",
@@ -54,8 +54,13 @@ sap.ui.jsview("manager.analysisByCountry", {
 	       // press:
 		});
 		
+		var sgBtn_chartType = new sap.m.SegmentedButton("sgBtn",{
+			buttons:[btn_personizedChart,btn_tableChart,btn_barChart],
+			selectedButton:btn_personizedChart
+
+		})
 	    var footer = new sap.m.Bar({ 
-            contentLeft: [btn_personizedChart,btn_tableChart,btn_barChart]
+            contentLeft: [sgBtn_chartType]
 	    });
 	
 		var page = new sap.m.Page("analysisByCountry",{
