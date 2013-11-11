@@ -39,6 +39,8 @@ sap.ui.jsview("manager.analysisByCountry", {
 			})]
 		});
 
+
+		
 		var btn_personizedChart = new sap.m.Button({
 	        icon: "sap-icon://pie-chart",
 	       // press:
@@ -58,9 +60,23 @@ sap.ui.jsview("manager.analysisByCountry", {
 			buttons:[btn_personizedChart,btn_tableChart,btn_barChart],
 			selectedButton:btn_personizedChart
 
-		})
+		});
+		var btn_setTime = new sap.m.Button({
+                icon: "sap-icon://history",
+                  // press : function() {
+                	 //  	monthActionSheet.openBy(this);
+                                   
+                  //       }        
+        });	
+		var btn_setting = new sap.m.Button({
+                icon: "sap-icon://settings",
+                  // press : function() {
+                  //                   stdDialog.open();
+                  //       }        
+        });
 	    var footer = new sap.m.Bar({ 
-            contentLeft: [sgBtn_chartType]
+            contentLeft: [sgBtn_chartType],
+            contentRight:[btn_setTime,btn_setting]
 	    });
 	
 		var page = new sap.m.Page("analysisByCountry",{

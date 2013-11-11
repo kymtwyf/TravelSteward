@@ -32,13 +32,33 @@ sap.ui.controller("manager.analysisByCountry", {
 */
 	onAfterRendering: function() {
 		jQuery.sap.require("util.uiFactory");
+
+		var picContainer = $("#mapDiv");
+		//记录mouse click时鼠标的X 和Y
+		picContainer.on("click",function(evt){
+			console.log(evt);
+			clickedX = evt.pageX;
+			clickedY = evt.pageY;
+			var popoverHeight = $('#mapPopover').height();
+			var correctTop = clickedY - popoverHeight/2;
+			var correctLeft = clickedX+15;
+			// alert('clicked outer');
+			if(currentCountry){
+				bus.publish('mapPopover','show',{
+					top:correctTop,
+					left:correctLeft,
+					country:currentCountry,
+					sale:currentSale,
+					cost:currentCost
+				})
+			}
+		});
 		
 		console.log($("#analysisByCountry").width());
 		$("#main").css({
 			"width":$("#analysisByCountry").width(),
 			"height":"650px",
 		});
-		var picContainer = $("#mapDiv");
 		this.autoSetContainerSize('mapDiv');
 		picContainer.css({
 			"display":"block",
@@ -58,6 +78,8 @@ sap.ui.controller("manager.analysisByCountry", {
 	        'PAK': '#7f7f7f',
 		};
 		map.draw();
+
+		// this.getView().mapPopover.openBy("testBtn");
 
 	},
 	autoSetContainerSize:function(sId){
@@ -81,3 +103,17 @@ sap.ui.controller("manager.analysisByCountry", {
 
 });
 
+bus.subscribe('mapPopover','show',function(channelId,eventId,data){
+	var country = data.country;
+	var sale = data.sale;
+	var cost = data.cost;
+	var top = data.top;
+	var left = data.left;
+	var tmp = sap.ui.getCore().byId('main');
+	util.uiFactory.createPopover(country,sale,cost).openBy(tmp);
+	$('#mapPopover').css({
+		"top":top,
+		"left":left,
+		"width":"180px"
+	})
+},this);

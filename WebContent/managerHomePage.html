@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		
 		<script src="lib/js/d3/d3.v3.min.js" type="text/javascript"></script>
 		<script src="lib/js/datamaps.world.min.js" type="text/javascript"></script>
 		<script src="lib/js/topojson.v1.min.js" type="text/javascript"></script>
@@ -15,11 +15,13 @@
 				data-sap-ui-theme="sap_bluecrystal">
 
 		</script>
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script>
 		//global variables go here
 		var bus = sap.ui.getCore().getEventBus();
 		var map;
-		var currentCountrySelection;
+		var currentCountry,currentSale,currentCost;
+		var clickedX,clickedY;
 		</script>
 		<!-- only load the mobile lib "sap.m" and the "sap_mvi" theme -->
 		<style>
@@ -50,38 +52,6 @@
 	<body class="sapUiBody" role="application">
 		<div id="content"></div>
 		<div id='bulletContainer' style='display:none'></div>
-		<!-- <div id='mapC' style='display:block;width = 1000px;height = 2000px;'></div> -->
-		<script>
-		// new Datamap({
-	 //        element: document.getElementById("mapC"),
-	 //        fills: {
-	 //            HIGH: '#afafaf',
-	 //            LOW: '#123456',
-	 //            MEDIUM: 'blue',
-	 //            UNKNOWN: 'rgb(0,0,0)',
-	 //            defaultFill: 'green'
-	 //        },
-	 //        data: {
-	 //            IRL: {
-	 //                fillKey: 'LOW',
-	 //                numberOfThings: 2002
-	 //            },
-	 //            USA: {
-	 //                fillKey: 'MEDIUM',
-	 //                numberOfThings: 10381
-	 //            }
-	 //        },
-	 //        geographyConfig: {
-	 //            popupTemplate: function(geo, data) {
-	 //                return ['<div class="hoverinfo"><strong>',
-	 //                        'Number of things in ' + geo.properties.name,
-	 //                        ': ' + data.numberOfThings,
-	 //                        '</strong></div>'].join('');
-	 //            }
-	 //        }
-  //   	})
-		</script>
-		
 	</body>
 	
 </html>

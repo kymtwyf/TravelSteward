@@ -27,32 +27,81 @@ util.uiFactory = {
 	        'PAK': {fillKey: 'PAK',cost:1237576},
 	        'USA': {fillKey: 'USA',cost:1283576}
         },
+
         geographyConfig: {
             popupTemplate: function(geo, data) {
-            	var cost = data?data.cost:0;
-                return ['<div class="hoverinfo"><strong>',
-                		"Country:"+geo.properties.name,
-                        "<br />Cost:"+cost ,
-                        '</strong>',
-                        '<button type="button">SBC</button></div>'].join('');
+            	var cost = data?data.cost:0;            	
+            	currentCost = data.cost;
+            	currentSale = data.sale;
+                return null;
 
             }
         },
         done: function(datamap) {
+        	 
             datamap.svg.selectAll('.datamaps-subunit').on('click', function(geo) {
-            	currentCountrySelection = geo.properties.name
-                //alert(geography.properties.name);
+            	currentCountry = geo.properties.name
+            	// alert("clicked inner");
+            	console.log('arguments');
+            	console.log(arguments);
             });
             datamap.svg.selectAll('.datamaps-subunit').on('mouseleave', function(geo) {
             	console.log("geography is");
-            	console.log(geo);
-            	currentCountrySelection = null
-                
-                //alert(geography.properties.name);
+            	console.log(geo);//geo 有值，是上次留下的。。。
+            	currentCountry = null;
+            	currentCost = null;
+            	currentSale = null;
             });
+            // datamap.svg.selectAll('.datamaps-subunit').on('click', function(geo) {
+            // 	currentCountry = geo.properties.name
+            //     //alert(geography.properties.name);
+            // });
+            $(".datamaps-legend").css({"z-index":0});
+
             
         }
     	});
     	return map;
-	}
+	},
+	createPopover:function(sCountry,sSale,sCost){
+		if(this.mapPopover){
+			this.mapPopover.destroy();
+		}
+		this.mapPopover = new sap.m.Popover("mapPopover",{                                                                                                        //popover
+                title: "Detail",
+                placement: sap.m.PlacementType.Right,
+                content: [
+                	new sap.m.List({
+				        items: [
+					        new sap.m.ObjectListItem({
+					        	title:'Country:'+(sCountry?sCountry:"unknown"),
+					            attributes:[
+						            new sap.m.ObjectAttribute({
+						              text : "Total Sale:"+(sSale?sSale:0)
+						            }),
+						            new sap.m.ObjectAttribute({
+						              text : "Trip Cost:"+(sCost?sCost:0)
+						            })
+					            ]
+					        }),		        
+				        ]
+		    		})            	
+                ],
+                footer: new sap.m.Bar({
+                	contentMiddle:new sap.m.Button({
+			            text: "ViewDetail",
+			            icon: "sap-icon://drill-down",
+			            press:function(){
+
+			            }
+	            	})
+                }) 
+
+                
+        });
+
+        return this.mapPopover;
+	},
+
+
 }
