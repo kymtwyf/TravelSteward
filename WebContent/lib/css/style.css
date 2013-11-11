@@ -4,6 +4,10 @@
 	float: right;
 }
 
+.floatLeft {
+	float: left;
+}
+
 .padding10 {
 	padding: 10px;
 }
