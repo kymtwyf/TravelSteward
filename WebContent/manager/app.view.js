@@ -28,6 +28,8 @@ sap.ui.jsview("manager.app", {
 		this.app.addDetailPage(sap.ui.jsview("manager.analysis", "manager.analysis"));
 
 		this.app.addMasterPage(sap.ui.jsview("manager.master", "manager.master"));
+		
+		this.app.addMasterPage(sap.ui.jsview("manager.masterdetail", "manager.masterdetail"));
 
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByCountry", "manager.analysisByCountry"));
 
@@ -35,7 +37,21 @@ sap.ui.jsview("manager.app", {
 		this.app.toDetail("manager.analysisByCountry");
 
 		this.app.toMaster("manager.master");
-
+		
+		function ToMaster2(channelId,eventId,requestid)
+		{
+			this.app.toMaster("manager.masterdetail",{
+				id:requestid
+			});
+		}
+		
+		function ToMaster1(channelId,eventId)
+		{
+			this.app.backMaster("manager.master");
+		}
+		
+		bus.subscribe("splitapp","tomaster2",ToMaster2,this);
+		bus.subscribe('masterdetail','backtomaster1',ToMaster1,this);
 		// done
 		return new sap.m.Shell("Shell", {
 			showLogout : false,
