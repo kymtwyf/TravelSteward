@@ -16,24 +16,18 @@ sap.ui.jsview("manager.masterdetail", {
 	* @memberOf manager.masterdetail
 	*/ 
 	createContent : function(oController) {
+		
+		this.proposal = new sap.m.ObjectAttribute();
+		this.personalid = new sap.m.ObjectAttribute();
+		this.department = new sap.m.ObjectAttribute();
+	    this.status =  new sap.m.ObjectStatus();
+	    
 		this.detailOjectHeader = new sap.m.ObjectHeader("detailobjectheader", {
-		      title : "No.9999999",
-		      number: "300.00",
-		      numberUnit : "RMB",
-		      attributes : [
-		        new sap.m.ObjectAttribute({
-		          text : "Proposal: Owen Xu"
-		        }),
-		        new sap.m.ObjectAttribute({
-			      text : "Department: FGI"
-			    })
-		      ],
-		      firstStatus : new sap.m.ObjectStatus({
-		        text : "Pending",
-		        state : "Warning"
-		      })
+		      attributes : [this.proposal,this.personalid,this.department],
+		      firstStatus : this.status
 		    });
 		
+		  
 		var detailIconTabBar = new sap.m.IconTabBar("detailicontabbar", {
 			items: [
 			    new sap.m.IconTabFilter({

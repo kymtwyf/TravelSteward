@@ -26,7 +26,6 @@ sap.ui.jsview("manager.master", {
 		var requestList = new sap.m.List();
 		
 		function generateList(channelId,eventId,requestdata){
-			console.log(requestdata);
 			
 			for(var i = 0; i<requestdata.length; i++ ){
 				

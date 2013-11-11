@@ -12,17 +12,14 @@ sap.ui.controller("manager.master", {
 				console.log("Error");
 			},
 			success:function(data){
-				console.log("success loaded data"+data.d.results.length);
 				var id;
 				for(var i = 0; i<data.d.results.length ; i++ ){
 					id = data.d.results[i].REQID;
 					model.data["request"] = new Object();
 					model.data["request"].content = data.d.results;
 				}
-			    console.log(model.data["request"].content.length);
 				
 				bus.publish("master","generatelist",model.data["request"].content);
-				
 			}
 		});
 	},

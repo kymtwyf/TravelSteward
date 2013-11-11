@@ -20,8 +20,35 @@ sap.ui.controller("manager.masterdetail", {
 	onBeforeShow:function(evt){
         var id = evt.data.id;
         this.getView().detailOjectHeader.setTitle("NO."+id);
+        var requestdata = model.data["request"].content;
+        
+        console.log(requestdata[1]);
+        	for(var i = 0; i<requestdata.length; i++){
+        		if(requestdata[i].REQID == id){
+        			
+        			this.getView().proposal.setText("Name: "+requestdata[i].PNAME);
+        			this.getView().personalid.setText("Employer ID: "+requestdata[i].PEID);
+        		    this.getView().department.setText("Department: "+requestdata[i].DNAME);
+        		    this.getView().status.setText(requestdata[i].STATUS);
+        			
+        			if(requestdata[i].STATUS =="Approved")
+        				this.getView().status.setState("Success");
+        		    else if (requestdata[i].STATUS =="Pending")
+        		    	this.getView().status.setState("Warning");
+        		    else this.getView().status.setState("Error");
+        			
+        			this.getView().detailOjectHeader.setTitle("NO."+id);
+        			this.getView().detailOjectHeader.setNumber(requestdata[i].PLEXP);
+        			this.getView().detailOjectHeader.setNumberUnit("RMB");
+        		}
+        	}
+        	
+ 
+       
+        
+       
         },
-
+    
 /**
 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
 * This hook is the same one that SAPUI5 controls get after being rendered.
