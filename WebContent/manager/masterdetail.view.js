@@ -38,9 +38,25 @@ sap.ui.jsview("manager.masterdetail", {
 			      icon: "sap-icon://instance",
 			      count: "1",
 			      text: "Comments",
-			    	  content:[ new sap.m.Label({
-							text:"content"
-						})]
+			    	  content:[ 
+//			    	            new sap.m.Label({
+//			    	            	text:"content"
+//			    	            }),
+			    	            new sap.m.List("messList", {
+						        	  
+						        }),
+						        new sap.m.TextArea("inputArea", {
+						        	width: "80%",
+						        	cols:2
+						        }),
+						        new sap.m.CheckBox({
+						        	text: "auto-translate"
+						        }),
+						        new sap.m.Button("sendMessButton", {
+						        	type : sap.m.ButtonType.Accept,
+						        	text: "Send"
+						        })
+			    	            ]
 			    }),
 			   
 		    ]
@@ -49,10 +65,12 @@ sap.ui.jsview("manager.masterdetail", {
 		detailIconTabBar.setExpandable(false);
 		detailIconTabBar.addStyleClass("detailIconTabBar");
 		
+		var view = this;		//alias
 		var detailMasterPage = new sap.m.Page("detail_master_page", {
  			title:"Request Detail",
  			showNavButton: true,
  			 navButtonPress:function(){
+ 				view.getController().keepRefresh = false;				//stop refresh messages
              	bus.publish('masterdetail','backtomaster1');
              },
  			content:[this.detailOjectHeader,detailIconTabBar]
