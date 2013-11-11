@@ -22,15 +22,23 @@ sap.ui.controller("manager.masterdetail", {
         this.getView().detailOjectHeader.setTitle("NO."+id);
         var requestdata = model.data["request"].content;
         
-        console.log(requestdata[1]);
+        console.log(requestdata);
         	for(var i = 0; i<requestdata.length; i++){
         		if(requestdata[i].REQID == id){
         			
         			this.getView().proposal.setText("Name: "+requestdata[i].PNAME);
         			this.getView().personalid.setText("Employer ID: "+requestdata[i].PEID);
+        		    this.getView().email.setText("Email: "+requestdata[i].EMAIL);
         		    this.getView().department.setText("Department: "+requestdata[i].DNAME);
         		    this.getView().status.setText(requestdata[i].STATUS);
-        			
+        		    this.getView().destinationCountry.setValue(requestdata[i].DESCOUN);
+        		    this.getView().destinationCity.setValue(requestdata[i].DESREG);
+        		    this.getView().reason.setValue(requestdata[i].REA);
+        		    this.getView().leaveDate.setValue(requestdata[i].TDATE);
+        		    this.getView().leaveWay.setValue(requestdata[i].TWAY);
+        		    this.getView().returnDate.setValue(requestdata[i].BDATE);
+        		    this.getView().returnWay.setValue(requestdata[i].BWAY);
+        		    
         			if(requestdata[i].STATUS =="Approved")
         				this.getView().status.setState("Success");
         		    else if (requestdata[i].STATUS =="Pending")

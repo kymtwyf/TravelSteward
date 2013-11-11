@@ -19,20 +19,70 @@ sap.ui.jsview("manager.masterdetail", {
 		
 		this.proposal = new sap.m.ObjectAttribute();
 		this.personalid = new sap.m.ObjectAttribute();
+		this.email =  new sap.m.ObjectAttribute();
 		this.department = new sap.m.ObjectAttribute();
 	    this.status =  new sap.m.ObjectStatus();
 	    
 		this.detailOjectHeader = new sap.m.ObjectHeader("detailobjectheader", {
-		      attributes : [this.proposal,this.personalid,this.department],
+		      attributes : [this.proposal,this.personalid,this.email,this.department],
 		      firstStatus : this.status
-		    });
+		});
 		
-		  
+		this.destinationCountry = new sap.m.DisplayListItem({
+            label: "Country"
+        });
+		this.destinationCity = new sap.m.DisplayListItem({
+            label: "City"
+        });
+		this.reason = new sap.m.DisplayListItem({
+            label: "Reason"
+        });
+		this.leaveDate = new sap.m.DisplayListItem({
+            label: "Leave Date"
+        });
+		this.leaveWay = new sap.m.DisplayListItem({
+            label: "Transportation"
+        });
+		this.returnDate = new sap.m.DisplayListItem({
+            label: "Return Date"
+        });
+		this.returnWay = new sap.m.DisplayListItem({
+            label: "Transportation"
+        });
+		
+		this.destinationCountry.addStyleClass("detaildisplayItem");
+		this.destinationCity.addStyleClass("detaildisplayItem");
+		this.reason.addStyleClass("detaildisplayItem");
+		this.leaveDate.addStyleClass("detaildisplayItem");
+		this.leaveWay.addStyleClass("detaildisplayItem");
+		this.returnDate.addStyleClass("detaildisplayItem");
+		this.returnWay.addStyleClass("detaildisplayItem");
+		
+		var detailList = new sap.m.List({
+		      items: [this.destinationCountry,this.destinationCity,this.reason,
+		              this.leaveDate,this.leaveWay,this.returnDate,this.returnWay]
+		 });
+		
+		var scrollContainer = new sap.m.ScrollContainer({
+			horizontal: false,
+			vertical: true,
+			height: "350px",
+			content: detailList
+			
+		});
+		
+		 window.onresize = function(event){
+				var offset = document.documentElement.clientHeight-425;
+				offset = offset.toString()+"px";
+				scrollContainer.setHeight(offset);
+			}
+		 
 		var detailIconTabBar = new sap.m.IconTabBar("detailicontabbar", {
 			items: [
 			    new sap.m.IconTabFilter({
 			      icon: "sap-icon://task",
-			      text: "Detail"
+			      text: "Detail",
+			      content:[scrollContainer]
 			    }),
 			    new sap.m.IconTabFilter({
 			      icon: "sap-icon://instance",
@@ -49,13 +99,17 @@ sap.ui.jsview("manager.masterdetail", {
 		detailIconTabBar.setExpandable(false);
 		detailIconTabBar.addStyleClass("detailIconTabBar");
 		
+		var detailFooter = new sap.m.Bar();
+		
 		var detailMasterPage = new sap.m.Page("detail_master_page", {
  			title:"Request Detail",
+ 			enableScrolling:false,
  			showNavButton: true,
  			 navButtonPress:function(){
              	bus.publish('masterdetail','backtomaster1');
              },
- 			content:[this.detailOjectHeader,detailIconTabBar]
+ 			content:[this.detailOjectHeader,detailIconTabBar],
+ 			footer:detailFooter
  		});
  		return detailMasterPage;
 	}
