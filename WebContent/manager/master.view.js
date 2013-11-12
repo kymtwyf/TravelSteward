@@ -23,12 +23,83 @@ sap.ui.jsview("manager.master", {
 		    contentMiddle: [searchField]
 		});
 		
-		var requestList = new sap.m.List();
+		var requestList = new sap.m.GrowingList({
+			threshold : 4,
+			scrollToLoad : false
+	    });
+		
+		
+		var requestItems = {
+			    items : []
+			};
+		
+		var model = new sap.ui.model.json.JSONModel(requestItems);
 		
 		function generateList(channelId,eventId,requestdata){
 			
 			for(var i = 0; i<requestdata.length; i++ ){
 				
+				requestItems.items[i] = [];
+				requestItems.items[i].title = "Request No."+requestdata[i].REQID;
+				requestItems.items[i].number = requestdata[i].PLEXP;
+				requestItems.items[i].numberUnit =  "RMB";
+				
+				if(requestdata[i].STATUS =="Approved")
+					requestItems.items[i].state = "Success";
+			    else if (requestdata[i].STATUS =="Pending")
+			    	requestItems.items[i].state = "Warning";
+			    else requestItems.items[i].state = "Error";
+				
+				requestItems.items[i].proposal =  requestdata[i].PNAME;
+				requestItems.items[i].destination = requestdata[i].DESCOUN+"/"+requestdata[i].DESREG;
+				requestItems.items[i].time =  requestdata[i].TDATE +"~"+requestdata[i].BDATE;
+				requestItems.items[i].status =  requestdata[i].STATUS;
+				
+			}
+			
+			
+			requestList.setModel(model);
+			
+			var objectItemTemplate = new sap.m.ObjectListItem({
+				type: sap.m.ListType.Active,
+				title:"{title}",
+				number:"{number}",
+				numberUnit:"{numberUnit}",
+				attributes : [
+				    new sap.m.ObjectAttribute({
+			              text : "{proposal}"
+				    }),
+				    new sap.m.ObjectAttribute({
+			              text : "{destination}"
+				    }),
+				    new sap.m.ObjectAttribute({
+				          text : "{time}"
+					})
+				],
+				firstStatus : 
+					new sap.m.ObjectStatus({
+						text : "{status}",
+						state:"{state}"
+					}),
+				press: function(oControlEvent){
+					console.log("aaa");
+					var id = util.tools.getRequireID(oControlEvent.getSource().mProperties.title);
+					bus.publish("splitapp","tomaster2",id);
+				}
+			});
+			
+		 //  var objectItemSorter = new sap.ui.model.Sorter("status",false,true);
+		   
+			requestList.bindAggregation("items", 
+					{
+						  path: "/items",
+						  template: objectItemTemplate,
+					//	  sorter: objectItemSorter
+					}
+			);
+			requestList.getBinding("items").sort(objectItemSorter);
+			
+			/*	
 				var proposal = new sap.m.ObjectAttribute({
 			          text : requestdata[i].PNAME
 			    });
@@ -64,8 +135,9 @@ sap.ui.jsview("manager.master", {
 				item.setNumberUnit("RMB");
 				item.setType(sap.m.ListType.Active);
 				requestList.addItem(item); 
+				
 			}
-			
+			*/
 		}
 		bus.subscribe("master","generatelist",generateList,this);
 		

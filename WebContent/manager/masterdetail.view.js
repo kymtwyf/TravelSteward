@@ -95,7 +95,7 @@ sap.ui.jsview("manager.masterdetail", {
 			    	           new sap.m.ScrollContainer({
 			    	        	   horizontal: false,
 			    	        	   vertical: true,
-			    	        	   height: "220px",
+			    	        	   height: "260px",
 			    	        	   content: new sap.m.List("messList", {
 							        	
 							        }),
@@ -105,13 +105,6 @@ sap.ui.jsview("manager.masterdetail", {
 						        	width: "80%",
 						        	cols:2
 						        }),
-						        new sap.m.CheckBox({
-						        	text: "auto-translate"
-						        }),
-						        new sap.m.Button("sendMessButton", {
-						        	type : sap.m.ButtonType.Accept,
-						        	text: "Send"
-						        })
 			    	            ]
 			    }),
 			   
@@ -121,7 +114,20 @@ sap.ui.jsview("manager.masterdetail", {
 		detailIconTabBar.setExpandable(false);
 		detailIconTabBar.addStyleClass("detailIconTabBar");
 
-		var detailFooter = new sap.m.Bar();
+		var detailFooter = new sap.m.Bar({
+			contentLeft:[
+			             new sap.m.CheckBox("transSelect", {
+			            	 text: "auto-translate",
+			            	 visible: false
+			             }),
+			             ],
+			contentRight:[
+			              new sap.m.Button("sendMessButton", {
+			            	  icon: "sap-icon://email",
+			            	  visible: false
+			              })
+			             ]
+		});
 
 		var view = this;		//alias
 		var detailMasterPage = new sap.m.Page("detail_master_page", {
