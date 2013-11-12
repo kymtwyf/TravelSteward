@@ -92,9 +92,15 @@ sap.ui.jsview("manager.masterdetail", {
 			      count: "1",
 			      text: "Comments",
 			    	  content:[ 
-			    	            new sap.m.List("messList", {
-						        	
-						        }),
+			    	           new sap.m.ScrollContainer({
+			    	        	   horizontal: false,
+			    	        	   vertical: true,
+			    	        	   height: "220px",
+			    	        	   content: new sap.m.List("messList", {
+							        	
+							        }),
+	
+			    	           }),
 						        new sap.m.TextArea("inputArea", {
 						        	width: "80%",
 						        	cols:2

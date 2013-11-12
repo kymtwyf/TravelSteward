@@ -95,7 +95,6 @@ sap.ui.controller("manager.masterdetail", {
 			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME asc&$format=json",
 			   dataType:"json",
 			   data: {
-				   reqId: controller.reqId,								//messages about this request
 				   time: new Date().toLocaleTimeString()				//ensure not use cache
 			   },
 			   success:function(res){ //console.log(res.d.results.length);
@@ -109,20 +108,6 @@ sap.ui.controller("manager.masterdetail", {
 			    		   text: res.d.results[controller.locMessCount].CONTENT
 			    	   }));
 				   }
-				   
-//				  if(res.d.results.length > controller.locMessCount) {
-//					  
-//					  var list = sap.ui.getCore().byId("messList");
-//					  var model = new sap.ui.model.json.JSONModel();
-//					  model.setData(res);
-//					  list.setModel(model);
-//					  controller.locMessCount = res.d.results.length;
-//    				  list.bindAggregation("items", {					//change list
-//    					  path: "/d/results",
-//  						  template: itemTemplate,
-//  						  //sorter: new sap.ui.model.Sorter("{STIME}", true)
-//  					  });
-//				  }
 			  },
 			  error:function(){
 				  alert('Fail to get messages from HANA server!');
@@ -138,7 +123,6 @@ sap.ui.controller("manager.masterdetail", {
     			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME asc&$format=json",
     			   dataType:"json",
     			   data: {
-    				   reqId: controller.reqId,								//messages about this request
     				   time: new Date().toLocaleTimeString()				//ensure not use cache
     			   },
     			   success:function(res){ 
@@ -152,18 +136,6 @@ sap.ui.controller("manager.masterdetail", {
     			    		   text: res.d.results[controller.locMessCount].CONTENT
     			    	   }));
     				   }
-//    				  if(res.d.results.length > controller.locMessCount) {
-//    					  var list = sap.ui.getCore().byId("messList");
-//    					  var model = new sap.ui.model.json.JSONModel();
-//    					  model.setData(res);
-//    					  list.setModel(model);
-//    					  controller.locMessCount = res.d.results.length;
-//        				  list.bindAggregation("items", {					//change list
-//      						  path: "/d/results",
-//      						  template: itemTemplate,
-//      						  //sorter: new sap.ui.model.Sorter("STIME", true)
-//      					  });
-//    				  }
     			  },
     			  error:function(){
     				  alert('Fail to get messages from HANA server!');
