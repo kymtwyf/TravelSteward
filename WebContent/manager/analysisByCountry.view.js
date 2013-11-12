@@ -65,9 +65,9 @@ sap.ui.jsview("manager.analysisByCountry", {
         });	
 		var btn_setting = new sap.m.Button({
                 icon: "sap-icon://settings",
-                  // press : function() {
-                  //                   stdDialog.open();
-                  //       }        
+              	press : function() {
+                             bus.publish('mapDiv','draw',model.data.getFakeData());
+                    	}        
         });
 	    var footer = new sap.m.Bar({ 
             contentLeft: [sgBtn_chartType],

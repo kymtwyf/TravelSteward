@@ -20,10 +20,21 @@ sap.ui.controller("manager.analysisByCountry", {
 //
 //	},
 	onBeforeShow:function(evt){
-		var data = evt.data;
-		if(data){
+		console.log('onbeforeshow');
+		jQuery.sap.require('model.data');
+		var data = model.data.getFakeData();
+		if($('#mapDiv').length){
+			console.log('find div');
 
+			console.log($("mapDiv"));
+			map = bus.publish('mapDiv','draw',{
+				fills:data.fills,
+				data:data.data
+			});
 		}
+
+
+
 	},
 /**
 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
@@ -31,6 +42,7 @@ sap.ui.controller("manager.analysisByCountry", {
 * @memberOf manager.analysisByCountry
 */
 	onAfterRendering: function() {
+		console.log('onafter rendering');
 		jQuery.sap.require("util.uiFactory");
 
 		var picContainer = $("#mapDiv");
@@ -69,17 +81,17 @@ sap.ui.controller("manager.analysisByCountry", {
 		
 		map = util.uiFactory.createDataMap('mapDiv');
 		map.legend();
-		map.fills = {
-			 'USA': '#1f77b4',
-	        'RUS': '#1f77b4',
-	        'PRK': '#ff7f0e',
-	        'PRC': '#2ca02c',
-	        'IND': '#1f77b4',
-	        'GBR': '#1f77b4',
-	        'FRA': '#1f77b4',
-	        'PAK': '#7f7f7f',
-		};
-		map.draw();
+		// map.fills = {
+		// 	 'USA': '#1f77b4',
+	 //        'RUS': '#1f77b4',
+	 //        'PRK': '#ff7f0e',
+	 //        'PRC': '#2ca02c',
+	 //        'IND': '#1f77b4',
+	 //        'GBR': '#1f77b4',
+	 //        'FRA': '#1f77b4',
+	 //        'PAK': '#7f7f7f',
+		// };
+		// map.draw();
 
 		// this.getView().mapPopover.openBy("testBtn");
 

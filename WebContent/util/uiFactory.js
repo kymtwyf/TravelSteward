@@ -1,33 +1,17 @@
 jQuery.sap.declare("util.uiFactory");
 
 util.uiFactory = {
-	createDataMap:function(sId){
+	createDataMap:function(sId,fills,data){
+        if($("#"+sId).length){
+            $("#"+sId).empty();
+        }
+        jQuery.sap.require("model.data");
 		var map = new Datamap({
         element: document.getElementById(sId),
         scope:'world',
         projection:"mercator",
-        fills: {
-            'USA': '#1f77b4',
-	        'RUS': '#9467bd',
-	        'PRK': '#ff7f0e',
-	        'PRC': '#2ca02c',
-	        'IND': '#e377c2',
-	        'GBR': '#8c564b',
-	        'FRA': '#d62728',
-	        'PAK': '#7f7f7f',
-	        defaultFill: '#EDDC4E'
-        },
-        data: {
-            'RUS': {fillKey: 'RUS',cost:123576},
-	        'PRK': {fillKey: 'PRK',cost:1235761},
-	        'PRC': {fillKey: 'PRC',cost:1235762},
-	        'IND': {fillKey: 'IND',cost:1235763},
-	        'GBR': {fillKey: 'GBR',cost:1235756},
-	        'FRA': {fillKey: 'FRA',cost:1235766},
-	        'PAK': {fillKey: 'PAK',cost:1237576},
-	        'USA': {fillKey: 'USA',cost:1283576}
-        },
-
+        fills:fills?fills:model.data.fakeData.fills,
+        data:data?data:model.data.fakeData.data,
         geographyConfig: {
             popupTemplate: function(geo, data) {
             	var cost = data?data.cost:0;            	
@@ -56,11 +40,13 @@ util.uiFactory = {
             // 	currentCountry = geo.properties.name
             //     //alert(geography.properties.name);
             // });
+            console.log('i am changing the z-index');
             $(".datamaps-legend").css({"z-index":0});
 
             
         }
     	});
+
     	return map;
 	},
 	createPopover:function(sCountry,sSale,sCost){
@@ -189,3 +175,8 @@ util.uiFactory = {
 
 
 }
+bus.subscribe('mapDiv','draw',function(channelId,eventId,data){
+    util.uiFactory.createDataMap('mapDiv',data.fills,data.data);
+    // map.legend();
+
+},this);
