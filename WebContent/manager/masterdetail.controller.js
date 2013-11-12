@@ -56,7 +56,9 @@ sap.ui.controller("manager.masterdetail", {
         	
         //Handle Message
        this.reqId = id;
-       this.locMessCount = -1;
+       this.locMessCount = 0;
+       var list = sap.ui.getCore().byId("messList");
+       list.destroyItems(); 
        var controller = this;												//alias
        
        var sendMessButton = sap.ui.getCore().byId("sendMessButton");
@@ -64,6 +66,15 @@ sap.ui.controller("manager.masterdetail", {
     	   var inputMess = sap.ui.getCore().byId("inputArea").getValue();
     	   sap.ui.getCore().byId("inputArea").setValue("");
     	   var transMess = controller.transContent(inputMess);
+    	   var list = sap.ui.getCore().byId("messList");					//refresh list immediately
+    	   controller.locMessCount++;
+    	   list.addItem(new sap.m.FeedListItem({
+    		   sender: "May Grace",
+    		   //icon: "img/important_grey.png",	//TODO
+    		   //info: "Message",
+    		   timestamp: new Date().toLocaleString(),
+    		   text: transMess
+    	   }));
     	   controller.sendMessage(transMess);
        });
        
@@ -81,33 +92,37 @@ sap.ui.controller("manager.masterdetail", {
 		   $.ajax({
 			   type:"get",
 			   async:false,
-			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME desc&$format=json",
+			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME asc&$format=json",
 			   dataType:"json",
 			   data: {
 				   reqId: controller.reqId,								//messages about this request
 				   time: new Date().toLocaleTimeString()				//ensure not use cache
 			   },
 			   success:function(res){ //console.log(res.d.results.length);
-				  if(res.d.results.length > controller.locMessCount) {
-					  var list = sap.ui.getCore().byId("messList");
-					  var model = new sap.ui.model.json.JSONModel();
-					  model.setData(res);
-					  list.setModel(model);
-					  controller.locMessCount = res.d.results.length;
-//					  var itemTemplate = new sap.m.FeedListItem({
-//				    	   sender: "{FNAME}",
-//				    	   //icon: "img/important_grey.png",	//TODO
-//				    	   //info: "Message",
-//				    	   timestamp: "{STIME}",
-//				    	   text: "{CONTENT}"
-//				       });
-					  //list.bindRows("/d/results");
-    				  list.bindAggregation("items", {					//change list
-    					  path: "/d/results",
-  						  template: itemTemplate,
-  						  sorter: new sap.ui.model.Sorter("{STIME}", true)
-  					  });
-				  }
+				   for(;controller.locMessCount < res.d.results.length;controller.locMessCount++) {
+					   var list = sap.ui.getCore().byId("messList");
+					   list.addItem(new sap.m.FeedListItem({
+			    		   sender: res.d.results[controller.locMessCount].FNAME,
+			    		   //icon: "img/important_grey.png",	//TODO
+			    		   //info: "Message",
+			    		   timestamp: res.d.results[controller.locMessCount].STIME,
+			    		   text: res.d.results[controller.locMessCount].CONTENT
+			    	   }));
+				   }
+				   
+//				  if(res.d.results.length > controller.locMessCount) {
+//					  
+//					  var list = sap.ui.getCore().byId("messList");
+//					  var model = new sap.ui.model.json.JSONModel();
+//					  model.setData(res);
+//					  list.setModel(model);
+//					  controller.locMessCount = res.d.results.length;
+//    				  list.bindAggregation("items", {					//change list
+//    					  path: "/d/results",
+//  						  template: itemTemplate,
+//  						  //sorter: new sap.ui.model.Sorter("{STIME}", true)
+//  					  });
+//				  }
 			  },
 			  error:function(){
 				  alert('Fail to get messages from HANA server!');
@@ -120,32 +135,35 @@ sap.ui.controller("manager.masterdetail", {
     		   $.ajax({
     			   type:"get",
     			   async:false,
-    			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME desc&$format=json",
+    			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME asc&$format=json",
     			   dataType:"json",
     			   data: {
     				   reqId: controller.reqId,								//messages about this request
     				   time: new Date().toLocaleTimeString()				//ensure not use cache
     			   },
-    			   success:function(res){ //console.log(res.d.results.length);
-    				  if(res.d.results.length > controller.locMessCount) {
-    					  var list = sap.ui.getCore().byId("messList");
-    					  var model = new sap.ui.model.json.JSONModel();
-    					  model.setData(res);
-    					  list.setModel(model);
-    					  controller.locMessCount = res.d.results.length;
-//    					  var itemTemplate = new sap.m.FeedListItem({
-//    				    	   sender: "{FNAME}",
-//    				    	   //icon: "img/important_grey.png",	//TODO
-//    				    	   //info: "Message",
-//    				    	   timestamp: "{STIME}",
-//    				    	   text: "{CONTENT}"
-//    				       });
-        				  list.bindAggregation("items", {					//change list
-      						  path: "/d/results",
-      						  template: itemTemplate,
-      						  //sorter: new sap.ui.model.Sorter("STIME", true)
-      					  });
-    				  }
+    			   success:function(res){ 
+    				   for(;controller.locMessCount < res.d.results.length;controller.locMessCount++) {
+    					   var list = sap.ui.getCore().byId("messList");
+    					   list.addItem(new sap.m.FeedListItem({
+    			    		   sender: res.d.results[controller.locMessCount].FNAME,
+    			    		   //icon: "img/important_grey.png",	//TODO
+    			    		   //info: "Message",
+    			    		   timestamp: res.d.results[controller.locMessCount].STIME,
+    			    		   text: res.d.results[controller.locMessCount].CONTENT
+    			    	   }));
+    				   }
+//    				  if(res.d.results.length > controller.locMessCount) {
+//    					  var list = sap.ui.getCore().byId("messList");
+//    					  var model = new sap.ui.model.json.JSONModel();
+//    					  model.setData(res);
+//    					  list.setModel(model);
+//    					  controller.locMessCount = res.d.results.length;
+//        				  list.bindAggregation("items", {					//change list
+//      						  path: "/d/results",
+//      						  template: itemTemplate,
+//      						  //sorter: new sap.ui.model.Sorter("STIME", true)
+//      					  });
+//    				  }
     			  },
     			  error:function(){
     				  alert('Fail to get messages from HANA server!');
@@ -159,7 +177,7 @@ sap.ui.controller("manager.masterdetail", {
      
     reqId: -1,
      
-	locMessCount: -1,
+	locMessCount: 0,
 	
 	keepRefresh: false,														//control whether refresh
 	
@@ -191,7 +209,7 @@ sap.ui.controller("manager.masterdetail", {
 	sendMessage: function(transCont) {
 		$.ajax({
 			   type:"get",
-			   async:false,													//asynchron is ok
+			   async:true,													//asynchron is ok
 			   url:"http://ld9415:8002/ta/TravelAnalysis/xsjs/insertChat.xsjs",
 			   dataType:"json",
 			   data: {
