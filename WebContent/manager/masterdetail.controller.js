@@ -88,7 +88,8 @@ sap.ui.controller("manager.masterdetail", {
     		   //icon: "img/important_grey.png",	//TODO
     		   //info: "Message",
     		   timestamp: new Date().toLocaleString(),
-    		   text: transMess
+    		   text: transMess,
+    		   iconDensityAware:false
     	   }));
     	   controller.sendMessage(transMess);
        });

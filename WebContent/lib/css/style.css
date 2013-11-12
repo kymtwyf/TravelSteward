@@ -12,6 +12,14 @@
 	padding: 10px;
 }
 
+.padding0 {
+	padding: 0px;	
+}
+
+.margin1 {
+	margin: 1px;
+}
+
 #subButton {
 	width: 20%;
 }
