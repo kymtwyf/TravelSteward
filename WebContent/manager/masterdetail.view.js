@@ -77,6 +77,8 @@ sap.ui.jsview("manager.masterdetail", {
 				offset = offset.toString()+"px";
 				scrollContainer.setHeight(offset);
 			}
+		
+		 
 		 
 		var detailIconTabBar = new sap.m.IconTabBar("detailicontabbar", {
 			items: [
@@ -90,12 +92,15 @@ sap.ui.jsview("manager.masterdetail", {
 			      count: "1",
 			      text: "Comments",
 			    	  content:[ 
-//			    	            new sap.m.Label({
-//			    	            	text:"content"
-//			    	            }),
-			    	            new sap.m.List("messList", {
-						        	  
-						        }),
+			    	           new sap.m.ScrollContainer({
+			    	        	   horizontal: false,
+			    	        	   vertical: true,
+			    	        	   height: "220px",
+			    	        	   content: new sap.m.List("messList", {
+							        	
+							        }),
+	
+			    	           }),
 						        new sap.m.TextArea("inputArea", {
 						        	width: "80%",
 						        	cols:2
