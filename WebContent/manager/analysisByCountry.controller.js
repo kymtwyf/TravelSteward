@@ -91,7 +91,7 @@ sap.ui.controller("manager.analysisByCountry", {
 	 //        'FRA': '#1f77b4',
 	 //        'PAK': '#7f7f7f',
 		// };
-		// map.draw();
+		map.draw();
 
 		// this.getView().mapPopover.openBy("testBtn");
 

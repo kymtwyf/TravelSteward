@@ -46,7 +46,8 @@ util.uiFactory = {
             
         }
     	});
-
+        map.legend();
+        map.draw();
     	return map;
 	},
 	createPopover:function(sCountry,sSale,sCost){
@@ -177,6 +178,5 @@ util.uiFactory = {
 }
 bus.subscribe('mapDiv','draw',function(channelId,eventId,data){
     util.uiFactory.createDataMap('mapDiv',data.fills,data.data);
-    // map.legend();
 
 },this);
