@@ -53,8 +53,23 @@ sap.ui.controller("manager.masterdetail", {
         			this.getView().detailOjectHeader.setNumberUnit("RMB");
         		}
         }
-        	
-        //Handle Message
+        
+       //Handle show or hide check box and send message button 	
+       var detailIconTabBar = new sap.ui.getCore().byId("detailicontabbar");
+       detailIconTabBar.attachSelect(function(evt) {
+    	   var selected = evt.getParameters().item.getText();
+    	   var transSelect = sap.ui.getCore().byId("transSelect");
+    	   var sendMessButton = sap.ui.getCore().byId("sendMessButton");
+    	   if(selected == "Detail") {
+    		   transSelect.setVisible(false);
+    		   sendMessButton.setVisible(false);
+    	   }
+    	   else if(selected == "Comments") {
+    		   transSelect.setVisible(true);
+    		   sendMessButton.setVisible(true);
+    	   }
+       });
+        //Handle send message
        this.reqId = id;
        this.locMessCount = 0;
        var list = sap.ui.getCore().byId("messList");
@@ -78,6 +93,8 @@ sap.ui.controller("manager.masterdetail", {
     	   controller.sendMessage(transMess);
        });
        
+       
+       //handle refresh messages
        this.keepRefresh = true;												//start refresh messages
        
        var itemTemplate = new sap.m.FeedListItem({
