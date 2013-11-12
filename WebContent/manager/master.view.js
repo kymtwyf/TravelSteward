@@ -69,12 +69,13 @@ sap.ui.jsview("manager.master", {
 		}
 		bus.subscribe("master","generatelist",generateList,this);
 		
-
+		var masterFooter = new sap.m.Bar();
 		
  		var listMasterPage = new sap.m.Page("list_master_page", {
  			title:"Travel requests",
  			subHeader:searchBar,
- 			content:[requestList]
+ 			content:[requestList],
+ 			footer:masterFooter
  		});
  		return listMasterPage;
 	}
