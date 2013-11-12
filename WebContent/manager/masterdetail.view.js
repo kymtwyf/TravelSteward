@@ -30,7 +30,11 @@ sap.ui.jsview("manager.masterdetail", {
 		      firstStatus : this.status
 		});
 		this.destinationCountry = new sap.m.DisplayListItem({
-            label: "Country"
+			type: sap.m.ListType.Active, 
+            label: "Country",
+            press: function(oControlEvent){
+				alert("Hey Man! You can add an event here");
+			}
         });
 		this.destinationCity = new sap.m.DisplayListItem({
             label: "City"
