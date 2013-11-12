@@ -18,18 +18,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 	createContent : function(oController) {
 		jQuery.sap.require("util.uiFactory");
 
-		var objectStatue = new sap.m.ObjectStatus({
-            text : "In Stock",
-            state : "Success"
-        });
-		var objectheader = new sap.m.ObjectHeader("analysisHeader",{			
-			  title:"This Year",
-		      number : 0,
-		      numberUnit : "USD",
-			 firstStatus : objectStatue
-		 });
-		bus.subscribe("analysisHeader","update",oController.updateObjectHeader,this);
-		
+		var objectheader = util.uiFactory.getAnalysisObjectHeader();		
 
 		var content = new sap.m.VBox("main",{
 			items:[
@@ -39,7 +28,13 @@ sap.ui.jsview("manager.analysisByCountry", {
 			})]
 		});
 
-
+		bus.publish("analysisHeader","update",{
+			title:"Total Cost",
+			description:"in Year 2013",
+			total:"123457",
+			currency:'EUR',
+			budget:"1234.0"
+		});
 		
 		var btn_personizedChart = new sap.m.Button({
 	        icon: "sap-icon://pie-chart",

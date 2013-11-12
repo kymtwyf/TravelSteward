@@ -39,7 +39,9 @@ sap.ui.controller("manager.analysisByCountry", {
 			console.log(evt);
 			clickedX = evt.pageX;
 			clickedY = evt.pageY;
-			var popoverHeight = $('#mapPopover').height();
+			var popoverHeight = $('#mapPopover').height()?$('#mapPopover').height():205;
+
+			// console.log(popoverHeight);
 			var correctTop = clickedY - popoverHeight/2;
 			var correctLeft = clickedX+15;
 			// alert('clicked outer');
