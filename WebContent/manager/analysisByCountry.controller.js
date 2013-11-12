@@ -32,19 +32,55 @@ sap.ui.controller("manager.analysisByCountry", {
 */
 	onAfterRendering: function() {
 		jQuery.sap.require("util.uiFactory");
+
+		var picContainer = $("#mapDiv");
+		//记录mouse click时鼠标的X 和Y
+		picContainer.on("click",function(evt){
+			console.log(evt);
+			clickedX = evt.pageX;
+			clickedY = evt.pageY;
+			var popoverHeight = $('#mapPopover').height();
+			var correctTop = clickedY - popoverHeight/2;
+			var correctLeft = clickedX+15;
+			// alert('clicked outer');
+			if(currentCountry){
+				bus.publish('mapPopover','show',{
+					top:correctTop,
+					left:correctLeft,
+					country:currentCountry,
+					sale:currentSale,
+					cost:currentCost
+				})
+			}
+		});
 		
 		console.log($("#analysisByCountry").width());
 		$("#main").css({
 			"width":$("#analysisByCountry").width(),
 			"height":"650px",
 		});
-		var picContainer = $("#mapDiv");
 		this.autoSetContainerSize('mapDiv');
 		picContainer.css({
 			"display":"block",
 			"position":"relative",
 		});
-		util.uiFactory.createDataMap('mapDiv');
+		
+		map = util.uiFactory.createDataMap('mapDiv');
+		map.legend();
+		map.fills = {
+			 'USA': '#1f77b4',
+	        'RUS': '#1f77b4',
+	        'PRK': '#ff7f0e',
+	        'PRC': '#2ca02c',
+	        'IND': '#1f77b4',
+	        'GBR': '#1f77b4',
+	        'FRA': '#1f77b4',
+	        'PAK': '#7f7f7f',
+		};
+		map.draw();
+
+		// this.getView().mapPopover.openBy("testBtn");
+
 	},
 	autoSetContainerSize:function(sId){
 		var width = $('#main').width();
@@ -53,7 +89,7 @@ sap.ui.controller("manager.analysisByCountry", {
 		$("#"+sId).height(height*0.7);
 		$("#"+sId).css({
 			"left":width*0.1,
-			"top":height*0.1
+			//"border":"solid"
 		});
 	}
 
@@ -67,3 +103,17 @@ sap.ui.controller("manager.analysisByCountry", {
 
 });
 
+bus.subscribe('mapPopover','show',function(channelId,eventId,data){
+	var country = data.country;
+	var sale = data.sale;
+	var cost = data.cost;
+	var top = data.top;
+	var left = data.left;
+	var tmp = sap.ui.getCore().byId('main');
+	util.uiFactory.createPopover(country,sale,cost).openBy(tmp);
+	$('#mapPopover').css({
+		"top":top,
+		"left":left,
+		"width":"180px"
+	})
+},this);
