@@ -56,22 +56,32 @@ sap.ui.controller("manager.masterdetail", {
         	
         //Handle Message
        this.reqId = id;
+       this.locMessCount = -1;
        var controller = this;												//alias
        
        var sendMessButton = sap.ui.getCore().byId("sendMessButton");
        sendMessButton.attachPress(function() {
     	   var inputMess = sap.ui.getCore().byId("inputArea").getValue();
+    	   sap.ui.getCore().byId("inputArea").setValue("");
     	   var transMess = controller.transContent(inputMess);
     	   controller.sendMessage(transMess);
        });
        
        this.keepRefresh = true;												//start refresh messages
        
+       var itemTemplate = new sap.m.FeedListItem({
+    	   sender: "{FNAME}",
+    	   //icon: "img/important_grey.png",	//TODO
+    	   //info: "Message",
+    	   timestamp: "{STIME}",
+    	   text: "{CONTENT}"
+     }); 
+       
        if(controller.keepRefresh) {											//run once immediately						
 		   $.ajax({
 			   type:"get",
 			   async:false,
-			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$format=json",
+			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME desc&$format=json",
 			   dataType:"json",
 			   data: {
 				   reqId: controller.reqId,								//messages about this request
@@ -84,16 +94,18 @@ sap.ui.controller("manager.masterdetail", {
 					  model.setData(res);
 					  list.setModel(model);
 					  controller.locMessCount = res.d.results.length;
-					  var itemTemplate = new sap.m.FeedListItem({
-				    	   sender: "{FNAME}",
-				    	   //icon: "img/important_grey.png",	//TODO
-				    	   //info: "Message",
-				    	   timestamp: "{STIME}",
-				    	   text: "{CONTENT}"
-				       });
+//					  var itemTemplate = new sap.m.FeedListItem({
+//				    	   sender: "{FNAME}",
+//				    	   //icon: "img/important_grey.png",	//TODO
+//				    	   //info: "Message",
+//				    	   timestamp: "{STIME}",
+//				    	   text: "{CONTENT}"
+//				       });
+					  //list.bindRows("/d/results");
     				  list.bindAggregation("items", {					//change list
-  						  path: "/d/results",
-  						  template: itemTemplate
+    					  path: "/d/results",
+  						  template: itemTemplate,
+  						  sorter: new sap.ui.model.Sorter("{STIME}", true)
   					  });
 				  }
 			  },
@@ -108,29 +120,30 @@ sap.ui.controller("manager.masterdetail", {
     		   $.ajax({
     			   type:"get",
     			   async:false,
-    			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$format=json",
+    			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME desc&$format=json",
     			   dataType:"json",
     			   data: {
     				   reqId: controller.reqId,								//messages about this request
     				   time: new Date().toLocaleTimeString()				//ensure not use cache
     			   },
-    			   success:function(res){ console.log(res.d.results.length);
+    			   success:function(res){ //console.log(res.d.results.length);
     				  if(res.d.results.length > controller.locMessCount) {
     					  var list = sap.ui.getCore().byId("messList");
     					  var model = new sap.ui.model.json.JSONModel();
     					  model.setData(res);
     					  list.setModel(model);
     					  controller.locMessCount = res.d.results.length;
-    					  var itemTemplate = new sap.m.FeedListItem({
-    				    	   sender: "{FNAME}",
-    				    	   //icon: "img/important_grey.png",	//TODO
-    				    	   //info: "Message",
-    				    	   timestamp: "{STIME}",
-    				    	   text: "{CONTENT}"
-    				       });
+//    					  var itemTemplate = new sap.m.FeedListItem({
+//    				    	   sender: "{FNAME}",
+//    				    	   //icon: "img/important_grey.png",	//TODO
+//    				    	   //info: "Message",
+//    				    	   timestamp: "{STIME}",
+//    				    	   text: "{CONTENT}"
+//    				       });
         				  list.bindAggregation("items", {					//change list
       						  path: "/d/results",
-      						  template: itemTemplate
+      						  template: itemTemplate,
+      						  //sorter: new sap.ui.model.Sorter("STIME", true)
       					  });
     				  }
     			  },
@@ -146,7 +159,7 @@ sap.ui.controller("manager.masterdetail", {
      
     reqId: -1,
      
-	locMessCount: 0,
+	locMessCount: -1,
 	
 	keepRefresh: false,														//control whether refresh
 	
