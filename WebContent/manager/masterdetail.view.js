@@ -113,13 +113,15 @@ sap.ui.jsview("manager.masterdetail", {
 		});
 		detailIconTabBar.setExpandable(false);
 		detailIconTabBar.addStyleClass("detailIconTabBar");
+		
+		
 
 		var detailFooter = new sap.m.Bar({
 			contentLeft:[
 			             new sap.m.CheckBox("transSelect", {
 			            	 text: "auto-translate",
 			            	 visible: false
-			             }),
+			             })
 			             ],
 			contentRight:[
 			              new sap.m.Button("sendMessButton", {

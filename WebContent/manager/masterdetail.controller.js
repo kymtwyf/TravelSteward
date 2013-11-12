@@ -25,7 +25,7 @@ sap.ui.controller("manager.masterdetail", {
         this.getView().detailOjectHeader.setTitle("NO."+id);
         var requestdata = model.data["request"].content;
         
-        console.log(requestdata);
+        console.log("hey"+requestdata);
         	for(var i = 0; i<requestdata.length; i++){
         		if(requestdata[i].REQID == id){
         			
