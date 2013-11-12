@@ -31,8 +31,8 @@ util.uiFactory = {
         geographyConfig: {
             popupTemplate: function(geo, data) {
             	var cost = data?data.cost:0;            	
-            	currentCost = data.cost;
-            	currentSale = data.sale;
+            	currentCost = data?data.cost:0;
+            	currentSale = data?data.sale:0;
                 return null;
 
             }
