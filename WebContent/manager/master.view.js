@@ -55,6 +55,7 @@ sap.ui.jsview("manager.master", {
 				requestItems.items[i].time =  requestdata[i].TDATE +"~"+requestdata[i].BDATE;
 				requestItems.items[i].status =  requestdata[i].STATUS;
 				
+				requestItems.items[i].prio =  requestdata[i].PRIO;
 			}
 			
 			
@@ -88,16 +89,28 @@ sap.ui.jsview("manager.master", {
 				}
 			});
 			
-		 //  var objectItemSorter = new sap.ui.model.Sorter("status",false,true);
+		   var objectItemSorter = new sap.ui.model.Sorter("prio",false,function (oContext) {
+			   var prio = oContext.getProperty("prio");
+			   var str;
+			   if(prio == 1)
+				   str = "Pending";
+			   else if( prio ==2 )
+				   str = "Rejected";
+			   else str = "Approved";
+			   return {
+			     key: str, // group by first letter of last name
+			     text: str
+			   };
+			 });
 		   
 			requestList.bindAggregation("items", 
 					{
 						  path: "/items",
 						  template: objectItemTemplate,
-					//	  sorter: objectItemSorter
+						  sorter: objectItemSorter
 					}
 			);
-			requestList.getBinding("items").sort(objectItemSorter);
+			
 			
 			/*	
 				var proposal = new sap.m.ObjectAttribute({
