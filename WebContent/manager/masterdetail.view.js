@@ -30,7 +30,11 @@ sap.ui.jsview("manager.masterdetail", {
 		      firstStatus : this.status
 		});
 		this.destinationCountry = new sap.m.DisplayListItem({
-            label: "Country"
+			type: sap.m.ListType.Active, 
+            label: "Country",
+            press: function(oControlEvent){
+				alert("Hey Man! You can add an event here");
+			}
         });
 		this.destinationCity = new sap.m.DisplayListItem({
             label: "City"
@@ -113,13 +117,15 @@ sap.ui.jsview("manager.masterdetail", {
 		});
 		detailIconTabBar.setExpandable(false);
 		detailIconTabBar.addStyleClass("detailIconTabBar");
+		
+		
 
 		var detailFooter = new sap.m.Bar({
 			contentLeft:[
 			             new sap.m.CheckBox("transSelect", {
 			            	 text: "auto-translate",
 			            	 visible: false
-			             }),
+			             })
 			             ],
 			contentRight:[
 			              new sap.m.Button("sendMessButton", {

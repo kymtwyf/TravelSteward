@@ -35,7 +35,6 @@
 	background:transparent;
 	color:white;
 }	
-/*.datamaps-legend{
-	z-index:0;
-}*/
-
+.sapMFeedListItemTextText{
+	padding-right:40px
+}

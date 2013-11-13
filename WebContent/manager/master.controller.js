@@ -19,10 +19,55 @@ sap.ui.controller("manager.master", {
 					model.data["request"].content = data.d.results;
 				}
 				
-				bus.publish("master","generatelist",model.data["request"].content);
+				bus.publish("master","generatelist",{
+					content:model.data["request"].content,
+					filter:"all"
+				});
 			}
 		});
+		
 	},
+	
+	
+	onBeforeShow:function(evt){
+			
+		console.log("on before show");
+		
+		var pendingButton = new sap.ui.getCore().byId("pendingbutton");
+		pendingButton.attachPress(function() {
+			console.log("press pending button");
+	    	   bus.publish("master","generatelist",{
+		  			content:model.data["request"].content,
+		  			filter:"pending"
+		  		});
+	     });
+		
+		
+		var approvedButton =  new sap.ui.getCore().byId("approvedbutton");
+		approvedButton.attachPress(function() {
+	    	   bus.publish("master","generatelist",{
+		  			content:model.data["request"].content,
+		  			filter:"approved"
+		  		});
+	    });
+		
+		var rejectedButton =  new sap.ui.getCore().byId("rejectedbutton");
+		rejectedButton.attachPress(function() {
+	    	   bus.publish("master","generatelist",{
+		  			content:model.data["request"].content,
+		  			filter:"rejected"
+		  		});
+	    });
+		
+		var allButton =  new sap.ui.getCore().byId("allbutton");
+		allButton.attachPress(function() {
+	    	   bus.publish("master","generatelist",{
+		  			content:model.data["request"].content,
+		  			filter:"all"
+		  		});
+	    });
+	}
+	
 
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
@@ -38,9 +83,9 @@ sap.ui.controller("manager.master", {
 * This hook is the same one that SAPUI5 controls get after being rendered.
 * @memberOf manager.master
 */
-	onAfterRendering: function() {
+//	onAfterRendering: function() {
 
-	},
+//	},
 
 /**
 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.

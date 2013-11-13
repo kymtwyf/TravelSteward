@@ -7,6 +7,9 @@ sap.ui.jsview("manager.master", {
 	getControllerName : function() {
 		return "manager.master";
 	},
+	onBeforeShow:function(evt){
+        this.getController().onBeforeShow(evt);
+	},
 
 	/** Is initially called once after the Controller has been instantiated. It is the place where the UI is constructed. 
 	* Since the Controller is given to this method, its event handlers can be attached right away. 
@@ -28,35 +31,122 @@ sap.ui.jsview("manager.master", {
 			scrollToLoad : false
 	    });
 		
-		
-		var requestItems = {
-			    items : []
-			};
-		
-		var model = new sap.ui.model.json.JSONModel(requestItems);
-		
 		function generateList(channelId,eventId,requestdata){
 			
-			for(var i = 0; i<requestdata.length; i++ ){
-				
-				requestItems.items[i] = [];
-				requestItems.items[i].title = "Request No."+requestdata[i].REQID;
-				requestItems.items[i].number = requestdata[i].PLEXP;
-				requestItems.items[i].numberUnit =  "RMB";
-				
-				if(requestdata[i].STATUS =="Approved")
-					requestItems.items[i].state = "Success";
-			    else if (requestdata[i].STATUS =="Pending")
-			    	requestItems.items[i].state = "Warning";
-			    else requestItems.items[i].state = "Error";
-				
-				requestItems.items[i].proposal =  requestdata[i].PNAME;
-				requestItems.items[i].destination = requestdata[i].DESCOUN+"/"+requestdata[i].DESREG;
-				requestItems.items[i].time =  requestdata[i].TDATE +"~"+requestdata[i].BDATE;
-				requestItems.items[i].status =  requestdata[i].STATUS;
-				
-				requestItems.items[i].prio =  requestdata[i].PRIO;
-			}
+			var requestItems = {
+				    items : []
+				};
+			var model = new sap.ui.model.json.JSONModel(requestItems);
+			console.log("in generate");
+			if(requestdata.filter == "all"){
+				//filter is all & init this view -> will show all the items in the list
+				for(var i = 0; i<requestdata.content.length; i++ ){
+					requestItems.items[i] = [];
+					requestItems.items[i].title = "Request No."+requestdata.content[i].REQID;
+					requestItems.items[i].number = requestdata.content[i].PLEXP;
+					requestItems.items[i].numberUnit =  "RMB";
+						
+					if(requestdata.content[i].STATUS =="Approved")
+						requestItems.items[i].state = "Success";
+					else if (requestdata.content[i].STATUS =="Pending")
+					   	requestItems.items[i].state = "Warning";
+					 else requestItems.items[i].state = "Error";
+						
+					requestItems.items[i].proposal =  requestdata.content[i].PNAME;
+					requestItems.items[i].destination = requestdata.content[i].DESCOUN+"/"+requestdata.content[i].DESREG;
+					requestItems.items[i].time =  requestdata.content[i].TDATE +"~"+requestdata.content[i].BDATE;
+					requestItems.items[i].status =  requestdata.content[i].STATUS;
+						
+					requestItems.items[i].prio =  requestdata.content[i].PRIO;
+				}
+			}	
+			else if(requestdata.filter == "pending"){
+				//filter is pending -> will show all the pending items in the list	
+				var i = 0;
+				for(var j = 0; j<requestdata.content.length; j++ ){
+					
+					if(requestdata.content[j].STATUS =="Pending"){
+						
+						requestItems.items[i] = [];
+						requestItems.items[i].title = "Request No."+requestdata.content[j].REQID;
+						requestItems.items[i].number = requestdata.content[j].PLEXP;
+						requestItems.items[i].numberUnit =  "RMB";
+						
+						if(requestdata.content[j].STATUS =="Approved")
+							requestItems.items[i].state = "Success";
+					    else if (requestdata.content[j].STATUS =="Pending")
+					    	requestItems.items[i].state = "Warning";
+					    else requestItems.items[i].state = "Error";
+						
+						requestItems.items[i].proposal =  requestdata.content[j].PNAME;
+						requestItems.items[i].destination = requestdata.content[j].DESCOUN+"/"+requestdata.content[j].DESREG;
+						requestItems.items[i].time =  requestdata.content[j].TDATE +"~"+requestdata.content[j].BDATE;
+						requestItems.items[i].status =  requestdata.content[j].STATUS;
+						
+						requestItems.items[i].prio =  requestdata.content[j].PRIO;
+						i++;
+						}
+					
+					}
+			 }
+			 else if(requestdata.filter == "approved"){
+				//filter is approved -> will show all the approved items in the list
+					var i = 0;
+					for(var j = 0; j<requestdata.content.length; j++ ){
+						
+						if(requestdata.content[j].STATUS =="Approved"){
+							
+							requestItems.items[i] = [];
+							requestItems.items[i].title = "Request No."+requestdata.content[j].REQID;
+							requestItems.items[i].number = requestdata.content[j].PLEXP;
+							requestItems.items[i].numberUnit =  "RMB";
+							
+							if(requestdata.content[j].STATUS =="Approved")
+								requestItems.items[i].state = "Success";
+						    else if (requestdata.content[j].STATUS =="Pending")
+						    	requestItems.items[i].state = "Warning";
+						    else requestItems.items[i].state = "Error";
+							
+							requestItems.items[i].proposal =  requestdata.content[j].PNAME;
+							requestItems.items[i].destination = requestdata.content[j].DESCOUN+"/"+requestdata.content[j].DESREG;
+							requestItems.items[i].time =  requestdata.content[j].TDATE +"~"+requestdata.content[j].BDATE;
+							requestItems.items[i].status =  requestdata.content[j].STATUS;
+							
+							requestItems.items[i].prio =  requestdata.content[j].PRIO;
+							i++;
+							}
+						
+						}
+			 }
+			 else if(requestdata.filter == "rejected"){
+				//filter is rejected -> will show all the rejected items in the list
+					var i = 0;
+					for(var j = 0; j<requestdata.content.length; j++ ){
+						
+						if(requestdata.content[j].STATUS =="Rejected"){
+							
+							requestItems.items[i] = [];
+							requestItems.items[i].title = "Request No."+requestdata.content[j].REQID;
+							requestItems.items[i].number = requestdata.content[j].PLEXP;
+							requestItems.items[i].numberUnit =  "RMB";
+							
+							if(requestdata.content[j].STATUS =="Approved")
+								requestItems.items[i].state = "Success";
+						    else if (requestdata.content[j].STATUS =="Pending")
+						    	requestItems.items[i].state = "Warning";
+						    else requestItems.items[i].state = "Error";
+							
+							requestItems.items[i].proposal =  requestdata.content[j].PNAME;
+							requestItems.items[i].destination = requestdata.content[j].DESCOUN+"/"+requestdata.content[j].DESREG;
+							requestItems.items[i].time =  requestdata.content[j].TDATE +"~"+requestdata.content[j].BDATE;
+							requestItems.items[i].status =  requestdata.content[j].STATUS;
+							
+							requestItems.items[i].prio =  requestdata.content[j].PRIO;
+							i++;
+							}
+						
+						}
+				}//finish generate questitems in different situtatons
 			
 			
 			requestList.setModel(model);
@@ -83,7 +173,6 @@ sap.ui.jsview("manager.master", {
 						state:"{state}"
 					}),
 				press: function(oControlEvent){
-					console.log("aaa");
 					var id = util.tools.getRequireID(oControlEvent.getSource().mProperties.title);
 					bus.publish("splitapp","tomaster2",id);
 				}
@@ -110,51 +199,40 @@ sap.ui.jsview("manager.master", {
 						  sorter: objectItemSorter
 					}
 			);
-			
-			
-			/*	
-				var proposal = new sap.m.ObjectAttribute({
-			          text : requestdata[i].PNAME
-			    });
-				
-				var destnation = new sap.m.ObjectAttribute({
-			          text : requestdata[i].DESCOUN+"/"+requestdata[i].DESREG
-			    });
-				
-				var time = new sap.m.ObjectAttribute({
-			          text :  requestdata[i].TDATE +"~"+requestdata[i].BDATE 
-			    });
-				
-			    var status = new sap.m.ObjectStatus({
-				        text : requestdata[i].STATUS
-				});
-			    
-			    if(requestdata[i].STATUS =="Approved")
-			    	status.setState("Success");
-			    else if (requestdata[i].STATUS =="Pending")
-			    	status.setState("Warning");
-			    else status.setState("Error");
-			        
-				var item = new sap.m.ObjectListItem({
-					attributes : [proposal,destnation,time],
-					firstStatus : status,
-					press: function(oControlEvent){
-						var id = util.tools.getRequireID(oControlEvent.getSource().mProperties.title);
-						bus.publish("splitapp","tomaster2",id);
-					}
-				});
-				item.setTitle("Request No."+requestdata[i].REQID);
-				item.setNumber(requestdata[i].PLEXP);
-				item.setNumberUnit("RMB");
-				item.setType(sap.m.ListType.Active);
-				requestList.addItem(item); 
-				
-			}
-			*/
 		}
 		bus.subscribe("master","generatelist",generateList,this);
 		
-		var masterFooter = new sap.m.Bar();
+		var pendingButton =  new sap.m.Button("pendingbutton",{
+		  	  text: "Pending"
+		});
+		
+		var approvedButton =  new sap.m.Button("approvedbutton",{
+	  	      text: "Approved"
+	    });
+		
+		var rejectedButton =  new sap.m.Button("rejectedbutton",{
+	  	      text: "Rejected"
+	    });
+		
+		var allButton =  new sap.m.Button("allbutton",{
+	  	      text: "All"
+	    });
+		
+		var filterActionSheet = new sap.m.ActionSheet({
+			  placement: sap.m.PlacementType.Top,
+			  buttons: [pendingButton,approvedButton,rejectedButton,allButton]
+		});
+		
+		var filterButton = new sap.m.Button("filter", {
+	      	  icon: "sap-icon://filter",
+	    	  press : function () {
+	    		  filterActionSheet.openBy(this);
+	    		  }
+      });	
+		
+		var masterFooter = new sap.m.Bar({
+			contentLeft:[filterButton]
+		});
 		
  		var listMasterPage = new sap.m.Page("list_master_page", {
  			title:"Travel requests",
