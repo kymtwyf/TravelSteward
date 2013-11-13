@@ -7,7 +7,11 @@ sap.ui.controller("manager.master", {
 */
 	onInit: function() {
 		jQuery.ajax({
-			url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllReqs?$format=json",
+			//url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllReqs?$format=json",
+			//jsonp parameter
+			url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getReqs.xsjs",
+			dataType: "jsonp",
+			//end 
 			error:function(error){
 				console.log("Error");
 			},

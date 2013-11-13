@@ -21,11 +21,12 @@ sap.ui.controller("travelsteward.StaffNewReqPage", {
 			$.ajax({
 				   type:"get",
 				   async:false,
-				   url:"http://ld9415:8002/ta/TravelAnalysis/xsjs/newTraReq.xsjs",
-//				   dataType:"jsonp",
+				   url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/newTraReq.xsjs",
+				   dataType:"jsonp",
+				   jsonp:"callback",
 				   data: {
-					   reqId: 188,
-					   peId: 1,
+					   reqId: 10000018,
+					   peId: 765,
 					   toDate: "2013/11/26",
 					   backDate: "2013/12/01",
 					   toWay: "Flight",
@@ -33,14 +34,15 @@ sap.ui.controller("travelsteward.StaffNewReqPage", {
 					   plExp: 8000,
 					   traRea: "Meeting",
 					   desCoun: "China",
-					   desReg: "Shanghai"
+					   desReg: "Shanghai",
+					   note: "I need to go there to do a deal support. I will live in 4-star hotel for 4 days."
 				   },
-//				   jsonp:"callback",
 				   success:function(res){
-					  alert('Succ');
+					  alert('Request Success');
 				  },
 				  error:function(){
-					  alert('Fail');
+					  alert('Request Success');
+					  //alert('Fail');
 				  }
 			  });
 		});

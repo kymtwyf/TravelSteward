@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+</body>
+<script src="lib/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+/*$.ajax({
+			   type:"get",
+			   async:false,													//asynchron is ok
+			   url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/select.xsjs",
+			   dataType:"jsonp",
+			   jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+               //jsonpCallback:"func",
+			   //data: {
+				//   time: new Date().toLocaleString(),
+			   //},
+			   success:function(res){
+				  //console.log(res);
+				  alert('secc');
+			  },
+			  error:function(){
+				  alert('failed');
+			  }
+		 });*/
+		 
+/*$.ajax({
+	   type:"get",
+	   async:false,													//asynchron is ok
+	   url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getReqs.xsjs",
+	   dataType:"jsonp",
+	   jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+    //jsonpCallback:"func",
+	   //data: {
+		//   time: new Date().toLocaleString(),
+	   //},
+	   success:function(res){
+		  //console.log(res);
+		  console.log(res);
+	  },
+	  error:function(){
+		  alert('failed');
+	  }
+});*/
+$.ajax({
+	   type:"get",
+	   async:false,													//must be synchronized
+	   url:"http://openapi.baidu.com/public/2.0/bmt/translate",
+	   dataType:"jsonp",
+	   data: {
+		   from: "zh",												//language choose
+		   to: "en",
+		   client_id: "0UFMGl3prDszMBjSYF1bbw6D",					//baidu api key
+		   q: "你好"
+	   },	
+	   success:function(json){
+		  console.log(json);
+	  },
+	  error:function(){
+		  alert('Fail to translate with baidu API!');
+	  }
+});
+		 
+
+
+/*$.ajax({
+			   type:"get",
+			   async:false,													//must be synchronized
+			   url:"http://openapi.baidu.com/public/2.0/bmt/translate",
+			   dataType:"jsonp",
+			   jsonp:"callback",
+			   data: {
+				   from: "zh",												//language choose
+				   to: "en",
+				   client_id: "0UFMGl3prDszMBjSYF1bbw6D",					//baidu api key
+				   q: "你好"
+			   },	
+			   success:function(json){
+				  console.log(json);
+			  },
+			  error:function(){
+				  alert('Fail to translate with baidu API!');
+			  }
+		});*/
+
+</script>
+</html>

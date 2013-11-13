@@ -71,7 +71,7 @@
 
 	<servlet>
 		<servlet-name>SimpleProxyServlet</servlet-name>
-		<servlet-class>com.sap.ui5.proxy.SimpleProxyServlet</servlet-class>
+		<servlet-class>com.sap.ui5.proxy.ProxyServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SimpleProxyServlet</servlet-name>
