@@ -37,7 +37,6 @@ sap.ui.jsview("manager.master", {
 				    items : []
 				};
 			var model = new sap.ui.model.json.JSONModel(requestItems);
-			console.log("in generate");
 			if(requestdata.filter == "all"){
 				//filter is all & init this view -> will show all the items in the list
 				var i = 0;

@@ -21,36 +21,52 @@ sap.ui.controller("manager.masterdetail", {
 	
 	
 	onBeforeShow:function(evt){
-        var id = evt.data.id;
-        this.getView().detailOjectHeader.setTitle("NO."+id);
-        var requestdata = model.data["request"].content;
+       
         
-        console.log("hey"+requestdata);
+        var proposal=sap.ui.getCore().byId("proposal");
+        var personalid = sap.ui.getCore().byId("personalid");
+		var email =  sap.ui.getCore().byId("email");
+		var department = sap.ui.getCore().byId("department");
+	    var status =  sap.ui.getCore().byId("status");
+	    
+	    var detailOjectHeader =sap.ui.getCore().byId("detailobjectheader");
+		var destinationCountry = sap.ui.getCore().byId("destinationcountry");
+		var destinationCity = sap.ui.getCore().byId("destinationcity");
+		var reason = sap.ui.getCore().byId("reason");
+		var leaveDate = sap.ui.getCore().byId("leavedate");
+		var leaveWay = sap.ui.getCore().byId("leaveway");
+		var returnDate = sap.ui.getCore().byId("returndate");
+		var returnWay = sap.ui.getCore().byId("returnway");
+		
+		var requestdata = model.data["request"].content;
+        var id = evt.data.id;
+        detailOjectHeader.setTitle("NO."+id);
+        
         	for(var i = 0; i<requestdata.length; i++){
         		if(requestdata[i].REQID == id){
         			
-        			this.getView().proposal.setText("Name: "+requestdata[i].PNAME);
-        			this.getView().personalid.setText("Employer ID: "+requestdata[i].PEID);
-        		    this.getView().email.setText("Email: "+requestdata[i].EMAIL);
-        		    this.getView().department.setText("Department: "+requestdata[i].DNAME);
-        		    this.getView().status.setText(requestdata[i].STATUS);
-        		    this.getView().destinationCountry.setValue(requestdata[i].DESCOUN);
-        		    this.getView().destinationCity.setValue(requestdata[i].DESREG);
-        		    this.getView().reason.setValue(requestdata[i].REA);
-        		    this.getView().leaveDate.setValue(requestdata[i].TDATE);
-        		    this.getView().leaveWay.setValue(requestdata[i].TWAY);
-        		    this.getView().returnDate.setValue(requestdata[i].BDATE);
-        		    this.getView().returnWay.setValue(requestdata[i].BWAY);
+        			proposal.setText("Name: "+requestdata[i].PNAME);
+        			personalid.setText("Employer ID: "+requestdata[i].PEID);
+        		    email.setText("Email: "+requestdata[i].EMAIL);
+        		    department.setText("Department: "+requestdata[i].DNAME);
+        		    status.setText(requestdata[i].STATUS);
+        		    destinationCountry.setValue(requestdata[i].DESCOUN);
+        		    destinationCity.setValue(requestdata[i].DESREG);
+        		    reason.setValue(requestdata[i].REA);
+        		    leaveDate.setValue(requestdata[i].TDATE);
+        		    leaveWay.setValue(requestdata[i].TWAY);
+        		    returnDate.setValue(requestdata[i].BDATE);
+        		    returnWay.setValue(requestdata[i].BWAY);
         		    
         			if(requestdata[i].STATUS =="Approved")
-        				this.getView().status.setState("Success");
+        				status.setState("Success");
         		    else if (requestdata[i].STATUS =="Pending")
-        		    	this.getView().status.setState("Warning");
-        		    else this.getView().status.setState("Error");
+        		    	status.setState("Warning");
+        		    else status.setState("Error");
         			
-        			this.getView().detailOjectHeader.setTitle("NO."+id);
-        			this.getView().detailOjectHeader.setNumber(requestdata[i].PLEXP);
-        			this.getView().detailOjectHeader.setNumberUnit("RMB");
+        			detailOjectHeader.setTitle("NO."+id);
+        			detailOjectHeader.setNumber(requestdata[i].PLEXP);
+        			detailOjectHeader.setNumberUnit("RMB");
         		}
         }
         

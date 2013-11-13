@@ -18,54 +18,55 @@ sap.ui.jsview("manager.masterdetail", {
 	createContent : function(oController) {
 		
 		
-		this.proposal = new sap.m.ObjectAttribute();
-		this.personalid = new sap.m.ObjectAttribute();
-		this.email =  new sap.m.ObjectAttribute();
-		this.department = new sap.m.ObjectAttribute();
-	    this.status =  new sap.m.ObjectStatus();
-	    this.secondStatus =  new sap.m.ObjectStatus();
+		
+		var proposal = new sap.m.ObjectAttribute("proposal");
+		var personalid = new sap.m.ObjectAttribute("personalid");
+		var email =  new sap.m.ObjectAttribute("email");
+		var department = new sap.m.ObjectAttribute("department");
+	    var status =  new sap.m.ObjectStatus("status");
+	//    var secondStatus =  new sap.m.ObjectStatus("secondstatus");
 	    
-		this.detailOjectHeader = new sap.m.ObjectHeader("detailobjectheader", {
-		      attributes : [this.proposal,this.personalid,this.email,this.department],
-		      firstStatus : this.status
+		var detailOjectHeader = new sap.m.ObjectHeader("detailobjectheader", {
+		      attributes : [proposal, personalid,email, department],
+		      firstStatus : status
 		});
-		this.destinationCountry = new sap.m.DisplayListItem({
+		var destinationCountry = new sap.m.DisplayListItem("destinationcountry",{
 			type: sap.m.ListType.Active, 
             label: "Country",
             press: function(oControlEvent){
 				alert("Hey Man! You can add an event here");
 			}
         });
-		this.destinationCity = new sap.m.DisplayListItem({
+		var destinationCity = new sap.m.DisplayListItem("destinationcity",{
             label: "City"
         });
-		this.reason = new sap.m.DisplayListItem({
+		var reason = new sap.m.DisplayListItem("reason",{
             label: "Reason"
         });
-		this.leaveDate = new sap.m.DisplayListItem({
+		var leaveDate = new sap.m.DisplayListItem("leavedate",{
             label: "Leave Date"
         });
-		this.leaveWay = new sap.m.DisplayListItem({
+		var leaveWay = new sap.m.DisplayListItem("leaveway",{
             label: "Transportation"
         });
-		this.returnDate = new sap.m.DisplayListItem({
+		var returnDate = new sap.m.DisplayListItem("returndate",{
             label: "Return Date"
         });
-		this.returnWay = new sap.m.DisplayListItem({
+		var returnWay = new sap.m.DisplayListItem("returnway",{
             label: "Transportation"
         });
 		
-		this.destinationCountry.addStyleClass("detaildisplayItem");
-		this.destinationCity.addStyleClass("detaildisplayItem");
-		this.reason.addStyleClass("detaildisplayItem");
-		this.leaveDate.addStyleClass("detaildisplayItem");
-		this.leaveWay.addStyleClass("detaildisplayItem");
-		this.returnDate.addStyleClass("detaildisplayItem");
-		this.returnWay.addStyleClass("detaildisplayItem");
+		destinationCountry.addStyleClass("detaildisplayItem");
+		destinationCity.addStyleClass("detaildisplayItem");
+		reason.addStyleClass("detaildisplayItem");
+		leaveDate.addStyleClass("detaildisplayItem");
+		leaveWay.addStyleClass("detaildisplayItem");
+		returnDate.addStyleClass("detaildisplayItem");
+		returnWay.addStyleClass("detaildisplayItem");
 		
 		var detailList = new sap.m.List({
-		      items: [this.destinationCountry,this.destinationCity,this.reason,
-		              this.leaveDate,this.leaveWay,this.returnDate,this.returnWay]
+		      items: [destinationCountry,destinationCity,reason,
+		              leaveDate,leaveWay,returnDate,returnWay]
 		 });
 		
 		var scrollContainer = new sap.m.ScrollContainer({
@@ -80,9 +81,7 @@ sap.ui.jsview("manager.masterdetail", {
 				var offset = document.documentElement.clientHeight-425;
 				offset = offset.toString()+"px";
 				scrollContainer.setHeight(offset);
-			}
-		
-		 
+			};
 		 
 		var detailIconTabBar = new sap.m.IconTabBar("detailicontabbar", {
 			items: [
@@ -101,7 +100,6 @@ sap.ui.jsview("manager.masterdetail", {
 			    	        	   vertical: true,
 			    	        	   height: "260px",
 			    	        	   content: new sap.m.List("messList", {
-							        	
 							        }),
 	
 			    	           }),
@@ -118,8 +116,40 @@ sap.ui.jsview("manager.masterdetail", {
 		detailIconTabBar.setExpandable(false);
 		detailIconTabBar.addStyleClass("detailIconTabBar");
 		
+		var rejectedButton = new sap.m.Button({
+		      icon: "sap-icon://decline",
+	          type: "Reject",
+		      text: "Reject",
+		      press:function(){
+		    	 status.setText("Rejected");
+		    	 status.setState("Error");
+		      }
+		      
+		});
+		var approvedButton = new sap.m.Button({
+		      icon: "sap-icon://accept",
+              type: "Accept",
+		      text: "Approve",
+		      press:function(){
+		    	 status.setText("Approved");
+		    	 status.setState("Success");
+		      }
+		      
+		});
 		
-
+		var actionSheet = new sap.m.ActionSheet({
+			  buttons: [approvedButton,rejectedButton],
+			  placement: sap.m.PlacementType.Bottom
+	    });
+		
+		
+		var action =   new sap.m.Button({ 
+	          icon: "sap-icon://action",
+	          press: function(){
+	        	  actionSheet.openBy(this);
+	          }
+	    });
+		
 		var detailFooter = new sap.m.Bar({
 			contentLeft:[
 			             new sap.m.CheckBox("transSelect", {
@@ -138,13 +168,14 @@ sap.ui.jsview("manager.masterdetail", {
 		var view = this;		//alias
 		var detailMasterPage = new sap.m.Page("detail_master_page", {
  			title:"Request Detail",
+ 			headerContent:action,
  			enableScrolling:false,
  			showNavButton: true,
  			 navButtonPress:function(){
  				view.getController().keepRefresh = false;				//stop refresh messages
              	bus.publish('masterdetail','backtomaster1');
              },
- 			content:[this.detailOjectHeader,detailIconTabBar],
+ 			content:[detailOjectHeader,detailIconTabBar],
  			footer:detailFooter
  		});
  		return detailMasterPage;
