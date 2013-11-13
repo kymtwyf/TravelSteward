@@ -31,7 +31,7 @@ sap.ui.controller("manager.master", {
 	
 	onBeforeShow:function(evt){
 			
-		console.log("on before show");
+		console.log("master.controller on before show");
 		
 		var pendingButton = new sap.ui.getCore().byId("pendingbutton");
 		pendingButton.attachPress(function() {

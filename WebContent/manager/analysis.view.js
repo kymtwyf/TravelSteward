@@ -47,7 +47,9 @@ sap.ui.jsview("manager.analysis", {
 		
 		var settingButton = new sap.m.Button({
 	        icon: "sap-icon://settings",
-	       // press:
+	       press:function(){
+	       	bus.publish("splitapp","toDetail","manager.analysisByCountry");
+	       }
 		});
 		
 	    var footer = new sap.m.Bar({ 

@@ -1,7 +1,7 @@
 jQuery.sap.declare("model.data");
 
 model.data = {
-	numberBase:"2,000,000,000",//设置了1亿为基准100M,60M,20M,10M,1M
+	numberBase:"2000,000,000",//设置了1亿为基准100M,60M,20M,10M,1M
 	colorMapping:{
 		">100%":"RGB(183,44,52)",
 		"80%~100%":"RGB(204,25,25)",

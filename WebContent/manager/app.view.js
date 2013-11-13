@@ -50,7 +50,19 @@ sap.ui.jsview("manager.app", {
 			this.app.backMaster("manager.master");
 		}
 		
+		function toDetail(channelId,eventId,pageId){
+			if(sap.ui.getCore().byId(pageId)){
+				this.app.toDetail(pageId);
+			}
+		}
+		function backDetail(channelId,eventId,pageId){
+			if(sap.ui.getCore().byId(pageId)){
+				this.app.backDetail(pageId);
+			}
+		}
 		bus.subscribe("splitapp","tomaster2",ToMaster2,this);
+		bus.subscribe("splitapp","toDetail",toDetail,this);
+		bus.subscribe("splitapp","backDetail",backDetail,this);		
 		bus.subscribe('masterdetail','backtomaster1',ToMaster1,this);
 		// done
 		return new sap.m.Shell("Shell", {
