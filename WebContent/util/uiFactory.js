@@ -14,7 +14,6 @@ util.uiFactory = {
         data:data?data:model.data.fakeData.data,
         geographyConfig: {
             popupTemplate: function(geo, data) {
-            	var cost = data?data.cost:0;            	
             	currentCost = data?data.cost:0;
             	currentSale = data?data.sale:0;
                 return null;
@@ -54,6 +53,8 @@ util.uiFactory = {
 		if(this.mapPopover){
 			this.mapPopover.destroy();
 		}
+
+        jQuery.sap.require('util.tools');
 		this.mapPopover = new sap.m.Popover("mapPopover",{                                                                                                        //popover
                 title: "Detail",
                 placement: sap.m.PlacementType.Right,
@@ -64,10 +65,10 @@ util.uiFactory = {
 					        	title:'Country:'+(sCountry?sCountry:"unknown"),
 					            attributes:[
 						            new sap.m.ObjectAttribute({
-						              text : "Total Sale:"+(sSale?sSale:0)
+						              text : "Total Sale:"+(sSale?util.tools.formatNumber(sSale):0)
 						            }),
 						            new sap.m.ObjectAttribute({
-						              text : "Trip Cost:"+(sCost?sCost:0)
+						              text : "Trip Cost:"+(sCost?util.tools.formatNumber(sCost):0)
 						            })
 					            ]
 					        }),		        
@@ -135,16 +136,8 @@ util.uiFactory = {
                         attribute.setText(description);
                     }
                     if(total){
-                        var number=parseFloat(total); //获取小数型数据
-                        number+="";
-                        if(number.indexOf(".")==-1) 
-                            number+=".0";//如果没有小数点，在后面补个小数点和0
-                        if(/\.\d$/.test(number)) 
-                            number+="0"; //正则判断
-                        while(/\d{4}(\.|,)/.test(number))  
-                            //符合条件则进行替换
-                            number=number.replace(/(\d)(\d{3}(\.|,))/,"$1,$2");
-                            //每隔3位添加一个   
+                        jQuery.sap.require('util.tools');
+                        var number = util.tools.formatNumber(total)
                         objectheader.setNumber(number);
                     }
                     if(currency){

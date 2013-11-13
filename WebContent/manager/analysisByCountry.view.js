@@ -24,10 +24,15 @@ sap.ui.jsview("manager.analysisByCountry", {
 			items:[
 				objectheader,
 				new sap.ui.core.HTML("mapDiv",{
-				content:"<div id='mapDiv' style='display:none'></div>"
-			})]
-		});
+					content:"<div id='mapDiv' style='display:none'></div>"
+				}),
 
+				new sap.ui.core.HTML("chartDiv",{
+					content:"<div id='chartDiv' style='display:none'></div>"
+				})
+			]
+		});
+		//for test
 		bus.publish("analysisHeader","update",{
 			title:"Total Cost",
 			description:"in Year 2013",

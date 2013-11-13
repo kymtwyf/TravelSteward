@@ -128,6 +128,6 @@ bus.subscribe('mapPopover','show',function(channelId,eventId,data){
 	$('#mapPopover').css({
 		"top":top,
 		"left":left,
-		"width":"180px"
+		"width":"200px"
 	})
 },this);
