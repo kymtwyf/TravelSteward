@@ -1,36 +1,19 @@
 jQuery.sap.declare("util.uiFactory");
 
 util.uiFactory = {
-	createDataMap:function(sId){
+	createDataMap:function(sId,fills,data){
+        if($("#"+sId).length){
+            $("#"+sId).empty();
+        }
+        jQuery.sap.require("model.data");
 		var map = new Datamap({
         element: document.getElementById(sId),
         scope:'world',
         projection:"mercator",
-        fills: {
-            'USA': '#1f77b4',
-	        'RUS': '#9467bd',
-	        'PRK': '#ff7f0e',
-	        'PRC': '#2ca02c',
-	        'IND': '#e377c2',
-	        'GBR': '#8c564b',
-	        'FRA': '#d62728',
-	        'PAK': '#7f7f7f',
-	        defaultFill: '#EDDC4E'
-        },
-        data: {
-            'RUS': {fillKey: 'RUS',cost:123576},
-	        'PRK': {fillKey: 'PRK',cost:1235761},
-	        'PRC': {fillKey: 'PRC',cost:1235762},
-	        'IND': {fillKey: 'IND',cost:1235763},
-	        'GBR': {fillKey: 'GBR',cost:1235756},
-	        'FRA': {fillKey: 'FRA',cost:1235766},
-	        'PAK': {fillKey: 'PAK',cost:1237576},
-	        'USA': {fillKey: 'USA',cost:1283576}
-        },
-
+        fills:fills?fills:model.data.fakeData.fills,
+        data:data?data:model.data.fakeData.data,
         geographyConfig: {
             popupTemplate: function(geo, data) {
-            	var cost = data?data.cost:0;            	
             	currentCost = data?data.cost:0;
             	currentSale = data?data.sale:0;
                 return null;
@@ -56,17 +39,22 @@ util.uiFactory = {
             // 	currentCountry = geo.properties.name
             //     //alert(geography.properties.name);
             // });
+            console.log('i am changing the z-index');
             $(".datamaps-legend").css({"z-index":0});
 
             
         }
     	});
+        map.legend();
+        map.draw();
     	return map;
 	},
 	createPopover:function(sCountry,sSale,sCost){
 		if(this.mapPopover){
 			this.mapPopover.destroy();
 		}
+
+        jQuery.sap.require('util.tools');
 		this.mapPopover = new sap.m.Popover("mapPopover",{                                                                                                        //popover
                 title: "Detail",
                 placement: sap.m.PlacementType.Right,
@@ -77,10 +65,10 @@ util.uiFactory = {
 					        	title:'Country:'+(sCountry?sCountry:"unknown"),
 					            attributes:[
 						            new sap.m.ObjectAttribute({
-						              text : "Total Sale:"+(sSale?sSale:0)
+						              text : "Total Sale:"+(sSale?util.tools.formatNumber(sSale):0)
 						            }),
 						            new sap.m.ObjectAttribute({
-						              text : "Trip Cost:"+(sCost?sCost:0)
+						              text : "Trip Cost:"+(sCost?util.tools.formatNumber(sCost):0)
 						            })
 					            ]
 					        }),		        
@@ -148,16 +136,8 @@ util.uiFactory = {
                         attribute.setText(description);
                     }
                     if(total){
-                        var number=parseFloat(total); //获取小数型数据
-                        number+="";
-                        if(number.indexOf(".")==-1) 
-                            number+=".0";//如果没有小数点，在后面补个小数点和0
-                        if(/\.\d$/.test(number)) 
-                            number+="0"; //正则判断
-                        while(/\d{4}(\.|,)/.test(number))  
-                            //符合条件则进行替换
-                            number=number.replace(/(\d)(\d{3}(\.|,))/,"$1,$2");
-                            //每隔3位添加一个   
+                        jQuery.sap.require('util.tools');
+                        var number = util.tools.formatNumber(total)
                         objectheader.setNumber(number);
                     }
                     if(currency){
@@ -189,3 +169,7 @@ util.uiFactory = {
 
 
 }
+bus.subscribe('mapDiv','draw',function(channelId,eventId,data){
+    util.uiFactory.createDataMap('mapDiv',data.fills,data.data);
+
+},this);
