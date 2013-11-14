@@ -45,7 +45,7 @@ util.uiFactory = {
             done: function(datamap) {
             	 
                 datamap.svg.selectAll('.datamaps-subunit').on('click', function(geo) {
-                	currentCountry = geo.properties.name
+                	currentCountry = geo.properties.name;
                 	// alert("clicked inner");
                 	console.log('arguments');
                 	console.log(arguments);
@@ -157,7 +157,7 @@ util.uiFactory = {
                     }
                     if(total){
                         jQuery.sap.require('util.tools');
-                        var number = util.tools.formatNumber(total)
+                        var number = util.tools.formatNumber(total);
                         objectheader.setNumber(number);
                     }
                     if(currency){
@@ -187,7 +187,7 @@ util.uiFactory = {
     },
     
     showContainer:function(index){
-        var ids = ['mapDiv','table','chartDiv'];
+        var ids = ['mapDiv','tablevbox','chartDiv'];
         for(var i = 0 ; i < ids.length; i++){
             console.log('showing container and hidding container');
             if(i==index){
@@ -197,11 +197,105 @@ util.uiFactory = {
             }
             
         }
+    },
+    createTable:function(data){
+    	
+    	var tableChartData = {
+			    items : data
+			};
+    	var tableChartModel= new sap.ui.model.json.JSONModel(tableChartData);
+    	
+    	var tableChart = sap.ui.getCore().byId('tableChart');
+    	
+    	var costCell = new sap.m.Text({
+    		text: "{TRAEXP}"
+    	});
+    	
+    	var saleCell = new sap.m.Text({
+    		text:"{SALEAMOU}"
+    	});
+    	
+    	var tableItemTemplate = new sap.m.ColumnListItem({
+            cells: [
+                    new sap.m.ObjectIdentifier({
+                      title: "{COUNAME}"
+                    }),
+                    costCell,
+                    saleCell
+                  ]
+        });
+    	
+		tableChart.setModel(tableChartModel);
+		
+		tableChart.bindAggregation("items", 
+				{
+					  path: "/items",
+					  template: tableItemTemplate
+				}
+		);
+		// create dialog
+	    var tableDialog = new sap.m.ViewSettingsDialog({
+	      title: "Ordered By",
+	      sortItems : [
+	        new sap.m.ViewSettingsItem({
+	          text : "Country",
+	          key : "COUNAME",
+	          selected: true
+	        }),
+	        new sap.m.ViewSettingsItem({
+	          text : "Cost",
+	          key : "TRAEXP"
+	        }),
+	        new sap.m.ViewSettingsItem({
+	          text : "Sales",
+	          key : "SALEAMOU"
+	        })
+	      ],
+	      
+	      confirm : function (evt) {
+	        var mParams = evt.getParameters();
+	        var tableBinding = tableChart.getBinding("items");
+	        
+	        // apply sorter to binding
+	        // (grouping comes before sorting)
+	        var aSorters = [];
+	        if (mParams.groupItem) {
+	          var sPath = mParams.groupItem.getKey();
+	          var bDescending = mParams.groupDescending;
+	          var vGroup = mGroupFunctions[sPath];
+	          aSorters.push(new sap.ui.model.Sorter(sPath, bDescending, vGroup));
+	        }
+	        var sPath = mParams.sortItem.getKey();
+	        var bDescending = mParams.sortDescending;
+	        aSorters.push(new sap.ui.model.Sorter(sPath, bDescending));
+	        tableBinding.sort(aSorters);
+	      }
+	    });
+
+	    // add a button to the table header for opening the dialog
+	    tableChart.setHeaderToolbar(
+	      new sap.m.Toolbar({
+	        content: [
+	          new sap.m.Button({
+	            icon: "sap-icon://drop-down-list",
+	            press: function () {
+	            	tableDialog.open();
+	            }
+	          })
+	        ]
+	      })
+	    );
+		
     }
 
-}
+};
 bus.subscribe('mapDiv','draw',function(channelId,eventId,data){
     util.uiFactory.createDataMap('mapDiv',data.fills,data.data);
+    util.uiFactory.showContainer(0);
+},this);
+bus.subscribe('tableChart','draw',function(channelId,eventId,data){
+    util.uiFactory.createTable(data);
+    util.uiFactory.showContainer(1);
 },this);
 bus.subscribe('container','show',function(channelId,eventId,data){
     util.uiFactory.showContainer(data.index);
