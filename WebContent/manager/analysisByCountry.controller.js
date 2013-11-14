@@ -117,7 +117,76 @@ sap.ui.controller("manager.analysisByCountry", {
 	},
 	onDataReady:function(channelId,eventId,data){
 		bus.publish('mapDiv','draw',data);
+		
+		console.log("here is on data ready:");
+		console.log(data.data);
+		
+		var model = new sap.ui.model.json.JSONModel(data.data);
+		
+		 var table = new sap.m.Table("table",{
+		      columns: [
+		        new sap.m.Column({
+		          header: new sap.m.Label({text: "Country"})
+		        }),
+		        new sap.m.Column({
+		          header: new sap.m.Label({text: "Cost"})
+		        }),
+		        new sap.m.Column({
+		          header: new sap.m.Label({text: "Sales"})
+		        })
+		      ],
+		      items: {
+		        path: "/ProductCollection",
+		        template: new sap.m.ColumnListItem({
+		          cells: [
+		            new sap.m.ObjectIdentifier({
+		              title: "[A]",
+		              text: "Country"
+		            }),
+		            new sap.m.Text({
+		              text: "{cost}"
+		            }),
+		            new sap.m.Text({
+		              text: "{sale}"
+		            })
+		          ]
+		        })
+		      }
+		    });
+		 
+		 table.setModel(model);
 
+		/*
+		var table = sap.ui.getCore().byId('table');
+		
+		table.addColumn(new sap.m.Column({
+	                      header: new sap.m.Label({text: "Country"})
+	    	}));
+		
+		table.addColumn(new sap.m.Column({
+		  		          header: new sap.m.Label({text: "Cost"})
+			}));
+		
+		table.addColumn(new sap.m.Column({
+		  		          header: new sap.m.Label({text: "Sales"})
+		    }));
+		
+		var listItem = new sap.m.ColumnListItem({
+	          cells: [
+	            new sap.m.ObjectIdentifier({
+	              title: "[A]",
+	              text: "Country"
+	            }),
+	            new sap.m.Text({
+	              text: "{cost}"
+	            }),
+	            new sap.m.Text({
+	              text: "{sale}"
+	            })
+	          ]
+	        })
+		*/
+		
 	},
 	showContainer:function(index){
 		var ids = ['mapDiv','table','chartDiv'];
