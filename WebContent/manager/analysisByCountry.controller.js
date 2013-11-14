@@ -42,7 +42,6 @@ sap.ui.controller("manager.analysisByCountry", {
 		if(!model.data['analysisByCountry']){
 			jQuery.when(util.queries.getDataForView('analysisByCountry'))
 			.done(function(data){
-					model.data["analysisByCountry"] = data;
 					// bus.publish('mapDiv','draw',data);
 					bus.publish("data","ready",data);
 
@@ -68,6 +67,7 @@ sap.ui.controller("manager.analysisByCountry", {
 		jQuery.sap.require("model.data");
 
 		var mapContainer = $("#mapDiv");
+		var chartContainer = $("#chartDiv");
 		//记录mouse click时鼠标的X 和Y
 		mapContainer.on("click",function(evt){
 			console.log(evt);
@@ -98,11 +98,17 @@ sap.ui.controller("manager.analysisByCountry", {
 			// "height":"650px",
 		});
 		util.tools.autoSetContainerSize('mapDiv');
+		util.tools.autoSetContainerSize('chartDiv');
 		mapContainer.css({
 			"display":"block",
 			"position":"relative",
 		});
-
+		chartContainer.css({
+			// "display":"block",
+			"position":"relative",
+		});
+		// console.log('!!!!!');
+		// console.log(sap.ui.getCore().byId('sdgaetdradsf'));
 		
 
 
@@ -119,16 +125,7 @@ sap.ui.controller("manager.analysisByCountry", {
 		bus.publish('mapDiv','draw',data);
 
 	},
-	showContainer:function(index){
-		var ids = ['mapDiv','table','chartDiv'];
-		for(var i = 0 ; i < ids.length; i++){
-			if(i==index){
-				sap.ui.getCore().byId("#"+ids[i]).css({"display":"block"});
-			}else{
-				sap.ui.getCore().byId("#"+ids[i]).css({"display":"none"});
-			}
-		}
-	}
+	
 
 /**
 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.

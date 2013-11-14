@@ -27,7 +27,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 					content:"<div id='mapDiv' style='display:none'></div>"
 				}),
 				new sap.m.VBox("table",{
-					
+
 				}),
 				new sap.ui.core.HTML("chartDiv",{
 					content:"<div id='chartDiv' style='display:none'></div>"
@@ -45,17 +45,26 @@ sap.ui.jsview("manager.analysisByCountry", {
 		
 		var btn_personizedChart = new sap.m.Button({
 	        icon: "sap-icon://globe",
-	       // press:
+	       press:function(){
+	       	//再次点这个地图的时候肯定已经画好了地图。
+		       bus.publish('container','show',{
+		       		index:0
+		       });
+	       }
 		});
 		
 		var btn_tableChart = new sap.m.Button({
 	        icon: "sap-icon://table-chart",
-	       // press:
+	       press:function(){
+
+	       }
 		});
 		
 		var btn_barChart = new sap.m.Button({
 	        icon: "sap-icon://bar-chart",
-	       // press:
+	       	press:function(){
+	       		bus.publish('chartDiv','draw');
+	        }
 		});
 		
 		var sgBtn_chartType = new sap.m.SegmentedButton("sgBtn",{
