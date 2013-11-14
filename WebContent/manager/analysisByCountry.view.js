@@ -26,7 +26,9 @@ sap.ui.jsview("manager.analysisByCountry", {
 				new sap.ui.core.HTML("mapDiv",{
 					content:"<div id='mapDiv' style='display:none'></div>"
 				}),
-
+				new sap.m.VBox("table",{
+					
+				}),
 				new sap.ui.core.HTML("chartDiv",{
 					content:"<div id='chartDiv' style='display:none'></div>"
 				})

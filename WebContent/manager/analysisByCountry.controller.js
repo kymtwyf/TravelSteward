@@ -6,20 +6,22 @@ sap.ui.controller("manager.analysisByCountry", {
 * @memberOf manager.analysisByCountry
 */
 	onInit: function() {
+		console.log('analysisBycountry ON INIT');
+
 		jQuery.sap.require('model.data');
 		jQuery.sap.require('model.fakeData');
 		jQuery.sap.require('util.queries');
 		jQuery.sap.require('util.tools');
 
-		jQuery.when(util.queries.getDataForView('analysisByCountry'))
-		.done(function(data){
-			// console.log('the formatted data is')
-			// console.log(data);
-			model.data["analysisByCountry"] = data;
-			bus.publish('mapDiv','draw',data);
-		})
+		// jQuery.when(util.queries.getDataForView('analysisByCountry'))
+		// .done(function(data){
+		// 	// console.log('the formatted data is')
+		// 	// console.log(data);
+		// 	model.data["analysisByCountry"] = data;
+		// 	bus.publish('mapDiv','draw',data);
+		// })
 		// console.log(model.fakeData);
-
+		bus.subscribe("data","ready",this.onDataReady,this);
 
 		//this.CURRENT_DATA = model.fakeData;
 	},
@@ -34,11 +36,20 @@ sap.ui.controller("manager.analysisByCountry", {
 //	},
 	onBeforeShow:function(evt){
 		console.log('analysisByCountry onbeforeshow');
-		
-		// var data = model.data.getFakeData();
-		// map = bus.publish('mapDiv','draw',data);
+		console.log($('#mapDiv'));
+		console.log($("#analysisByCountry").height());
+		console.log($("#analysisByCountry").width());
+		if(!model.data['analysisByCountry']){
+			jQuery.when(util.queries.getDataForView('analysisByCountry'))
+			.done(function(data){
+					model.data["analysisByCountry"] = data;
+					// bus.publish('mapDiv','draw',data);
+					bus.publish("data","ready",data);
 
-
+					//Owen
+			})
+				// map = bus.publish('mapDiv','draw',model.data['analysisByCountry']);
+		}
 	},
 /**
 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
@@ -47,12 +58,18 @@ sap.ui.controller("manager.analysisByCountry", {
 */
 	onAfterRendering: function() {
 		console.log('analysisByCountry on after rendering');
+		console.log($('#mapDiv'));
+
+		console.log($("#analysisByCountry").height());
+
+		console.log($("#analysisByCountry").width());
+
 		jQuery.sap.require("util.uiFactory");
 		jQuery.sap.require("model.data");
 
-		var picContainer = $("#mapDiv");
+		var mapContainer = $("#mapDiv");
 		//记录mouse click时鼠标的X 和Y
-		picContainer.on("click",function(evt){
+		mapContainer.on("click",function(evt){
 			console.log(evt);
 			clickedX = evt.pageX;
 			clickedY = evt.pageY;
@@ -73,47 +90,45 @@ sap.ui.controller("manager.analysisByCountry", {
 			}
 		});
 		
-		console.log($("#analysisByCountry").width());
+		var analysisByCountryWidth = $("#analysisByCountry").width();
+		var windowHeight = $(window).height();
 		$("#main").css({
-			"width":$("#analysisByCountry").width(),
-			"height":"650px",
+			"width":analysisByCountryWidth,
+			"height":windowHeight*0.8
+			// "height":"650px",
 		});
 		util.tools.autoSetContainerSize('mapDiv');
-		picContainer.css({
+		mapContainer.css({
 			"display":"block",
 			"position":"relative",
 		});
-		jQuery.sap.require('model.data');
-		//var data = model.data.getFakeData();
-		if($('#mapDiv').length==0){
-			console.log('find div');
-			console.log($("mapDiv"));
 
-			if(model.data['analysisByCountry']){
-				console.log('drawing map');
-				map = bus.publish('mapDiv','draw',model.data['analysisByCountry']);
-			}
-			
-		}
-		// var tmpD = model.data['analysisByCountry'];
-		// map = util.uiFactory.createDataMap('mapDiv',tmpD.fills,tmpD.data);
-		// map.legend();
-		// map.fills = {
-		// 	 'USA': '#1f77b4',
-	 //        'RUS': '#1f77b4',
-	 //        'PRK': '#ff7f0e',
-	 //        'PRC': '#2ca02c',
-	 //        'IND': '#1f77b4',
-	 //        'GBR': '#1f77b4',
-	 //        'FRA': '#1f77b4',
-	 //        'PAK': '#7f7f7f',
-		// };
-		// map.draw();
+		
 
-		// this.getView().mapPopover.openBy("testBtn");
+
+		// if($('#mapDiv').length==0){
+		// 	console.log('find div');
+		// 	console.log($("mapDiv"));
+		// 	if(){
+		// 		console.log('drawing map');
+		// 	}			
+		// }
 
 	},
-	
+	onDataReady:function(channelId,eventId,data){
+		bus.publish('mapDiv','draw',data);
+
+	},
+	showContainer:function(index){
+		var ids = ['mapDiv','table','chartDiv'];
+		for(var i = 0 ; i < ids.length; i++){
+			if(i==index){
+				sap.ui.getCore().byId("#"+ids[i]).css({"display":"block"});
+			}else{
+				sap.ui.getCore().byId("#"+ids[i]).css({"display":"none"});
+			}
+		}
+	}
 
 /**
 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
