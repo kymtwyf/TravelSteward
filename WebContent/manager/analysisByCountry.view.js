@@ -26,7 +26,9 @@ sap.ui.jsview("manager.analysisByCountry", {
 				new sap.ui.core.HTML("mapDiv",{
 					content:"<div id='mapDiv' style='display:none'></div>"
 				}),
+				new sap.m.VBox("table",{
 
+				}),
 				new sap.ui.core.HTML("chartDiv",{
 					content:"<div id='chartDiv' style='display:none'></div>"
 				})
@@ -42,18 +44,27 @@ sap.ui.jsview("manager.analysisByCountry", {
 		});
 		
 		var btn_personizedChart = new sap.m.Button({
-	        icon: "sap-icon://pie-chart",
-	       // press:
+	        icon: "sap-icon://globe",
+	       press:function(){
+	       	//再次点这个地图的时候肯定已经画好了地图。
+		       bus.publish('container','show',{
+		       		index:0
+		       });
+	       }
 		});
 		
 		var btn_tableChart = new sap.m.Button({
 	        icon: "sap-icon://table-chart",
-	       // press:
+	       press:function(){
+
+	       }
 		});
 		
 		var btn_barChart = new sap.m.Button({
 	        icon: "sap-icon://bar-chart",
-	       // press:
+	       	press:function(){
+	       		bus.publish('chartDiv','draw');
+	        }
 		});
 		
 		var sgBtn_chartType = new sap.m.SegmentedButton("sgBtn",{
@@ -63,15 +74,17 @@ sap.ui.jsview("manager.analysisByCountry", {
 		});
 		var btn_setTime = new sap.m.Button({
                 icon: "sap-icon://history",
-                  // press : function() {
-                	 //  	monthActionSheet.openBy(this);
+                  press : function() {
+                  	bus.publish("splitapp","toDetail","manager.analysisByCountry");
+                	  //	monthActionSheet.openBy(this);
                                    
-                  //       }        
+                        }        
         });	
 		var btn_setting = new sap.m.Button({
                 icon: "sap-icon://settings",
               	press : function() {
-                             bus.publish('mapDiv','draw',model.data.getFakeData());
+              		bus.publish("splitapp","toDetail","manager.analysis");
+                             // bus.publish('mapDiv','draw',model.data.getFakeData());
                     	}        
         });
 	    var footer = new sap.m.Bar({ 

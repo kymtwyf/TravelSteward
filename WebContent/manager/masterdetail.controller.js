@@ -22,7 +22,6 @@ sap.ui.controller("manager.masterdetail", {
 	
 	onBeforeShow:function(evt){
        
-        
         var proposal=sap.ui.getCore().byId("proposal");
         var personalid = sap.ui.getCore().byId("personalid");
 		var email =  sap.ui.getCore().byId("email");
@@ -38,15 +37,18 @@ sap.ui.controller("manager.masterdetail", {
 		var returnDate = sap.ui.getCore().byId("returndate");
 		var returnWay = sap.ui.getCore().byId("returnway");
 		
+		var actionButton = sap.ui.getCore().byId("actionbutton");
+		actionButton.setVisible(true);
+		
 		var requestdata = model.data["request"].content;
         var id = evt.data.id;
-        detailOjectHeader.setTitle("NO."+id);
+        detailOjectHeader.setTitle("No."+id);
         
         	for(var i = 0; i<requestdata.length; i++){
         		if(requestdata[i].REQID == id){
         			
         			proposal.setText("Name: "+requestdata[i].PNAME);
-        			personalid.setText("Employer ID: "+requestdata[i].PEID);
+        			personalid.setText("EmployerID: "+requestdata[i].PEID);
         		    email.setText("Email: "+requestdata[i].EMAIL);
         		    department.setText("Department: "+requestdata[i].DNAME);
         		    status.setText(requestdata[i].STATUS);
@@ -58,17 +60,24 @@ sap.ui.controller("manager.masterdetail", {
         		    returnDate.setValue(requestdata[i].BDATE);
         		    returnWay.setValue(requestdata[i].BWAY);
         		    
-        			if(requestdata[i].STATUS =="Approved")
-        				status.setState("Success");
+        			if(requestdata[i].STATUS =="Approved"){
+            		   	actionButton.setVisible(false);
+            		   	status.setState("Success");
+        			}
+        				
         		    else if (requestdata[i].STATUS =="Pending")
         		    	status.setState("Warning");
-        		    else status.setState("Error");
+        		    else {
+        		    	actionButton.setVisible(false);
+        		    	status.setState("Error");
+        		    }
         			
         			detailOjectHeader.setTitle("NO."+id);
         			detailOjectHeader.setNumber(requestdata[i].PLEXP);
         			detailOjectHeader.setNumberUnit("RMB");
         		}
         }
+        			
         
        //Handle show or hide check box and send message button 	
        var detailIconTabBar = new sap.ui.getCore().byId("detailicontabbar");
@@ -99,14 +108,16 @@ sap.ui.controller("manager.masterdetail", {
     	   var transMess = controller.transContent(inputMess);
     	   var list = sap.ui.getCore().byId("messList");					//refresh list immediately
     	   controller.locMessCount++;
-    	   list.addItem(new sap.m.FeedListItem({
+    	   var feedItem = new sap.m.FeedListItem({
     		   sender: "May Grace",
     		   //icon: "img/important_grey.png",	//TODO
     		   //info: "Message",
     		   timestamp: new Date().toLocaleString(),
     		   text: transMess,
     		   iconDensityAware:false
-    	   }));
+    	   });
+    	   feedItem.addStyleClass("feedItem");
+    	   list.addItem(feedItem);
     	   controller.sendMessage(transMess);
        });
        
