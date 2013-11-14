@@ -81,6 +81,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 	
 		var page = new sap.m.Page("analysisByCountry",{
 			title: "Title2",
+			enableScrolling:false,
 			footer:footer,
 			content: [content]
 		});

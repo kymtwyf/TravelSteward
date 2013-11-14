@@ -126,8 +126,9 @@ sap.ui.controller("manager.masterdetail", {
 		   $.ajax({
 			   type:"get",
 			   async:false,
-			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME asc&$format=json",
-			   dataType:"json",
+			   //url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME asc&$format=json",
+			   url: "http://ld9415:8002/ta/TravelAnalysis/xsjs/getChat.xsjs?reqId="+controller.reqId,
+			   dataType:"jsonp",
 			   data: {
 				   time: new Date().toLocaleTimeString()				//ensure not use cache
 			   },
@@ -154,8 +155,10 @@ sap.ui.controller("manager.masterdetail", {
     		   $.ajax({
     			   type:"get",
     			   async:false,
-    			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME asc&$format=json",
-    			   dataType:"json",
+//    			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME asc&$format=json",
+//    			   dataType:"json",
+    			   url: "http://ld9415:8002/ta/TravelAnalysis/xsjs/getChat.xsjs?reqId="+controller.reqId,
+    			   dataType:"jsonp",
     			   data: {
     				   time: new Date().toLocaleTimeString()				//ensure not use cache
     			   },
