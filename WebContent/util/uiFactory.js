@@ -2,15 +2,31 @@ jQuery.sap.declare("util.uiFactory");
 jQuery.sap.require('util.tools');
 
 util.uiFactory = {
+    create3dPieChart:function(sId,data){
+        if($("#"+sId).length){
+            $("#"+sId).empty();
+            
+        }
+        util.tools.autoSetContainerSize(sId);
+
+        var chartData = model.data['analysisByCountry'];//[{title:"Pie I have eaten",value:70},{title:"Pie I haven\'t eaten",value:30}];          
+        var chart = new AmCharts.AmPieChart();
+        chart.valueField = "TRAEXP";
+        chart.titleField = "COUNAME";
+        chart.dataProvider = chartData;
+        chart.write("chartDiv");
+
+
+    },
 	createDataMap:function(sId,fills,data){
         console.log('画地图的数据');
         console.log(fills);
         console.log(data);
-        // if($("#"+sId).length){
-        //     $("#"+sId).empty();
+        if($("#"+sId).length){
+            $("#"+sId).empty();
            
-        // }
-        // util.tools.autoSetContainerSize(sId);
+        }
+        util.tools.autoSetContainerSize(sId);
         jQuery.sap.require("model.data");
 		var map = new Datamap({
             element: document.getElementById(sId),
@@ -46,9 +62,7 @@ util.uiFactory = {
                 //     //alert(geography.properties.name);
                 // });
                 console.log('i am changing the z-index');
-                $(".datamaps-legend").css({"z-index":0});
-
-                
+                $(".datamaps-legend").css({"z-index":0});                
             }
     	});
         map.legend();
@@ -172,10 +186,28 @@ util.uiFactory = {
         }
     },
     
-
+    showContainer:function(index){
+        var ids = ['mapDiv','table','chartDiv'];
+        for(var i = 0 ; i < ids.length; i++){
+            console.log('showing container and hidding container');
+            if(i==index){
+                $('#'+ids[i]).css({"display":"block"});
+            }else{
+                $('#'+ids[i]).css({"display":"none"});
+            }
+            
+        }
+    }
 
 }
 bus.subscribe('mapDiv','draw',function(channelId,eventId,data){
     util.uiFactory.createDataMap('mapDiv',data.fills,data.data);
+},this);
+bus.subscribe('container','show',function(channelId,eventId,data){
+    util.uiFactory.showContainer(data.index);
+},this);
+bus.subscribe('chartDiv','draw',function(channelId,eventId,data){    
+    util.uiFactory.create3dPieChart('chartDiv');
+    util.uiFactory.showContainer(2);
 
 },this);

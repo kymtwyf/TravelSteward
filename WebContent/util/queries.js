@@ -16,13 +16,15 @@ util.queries = {
 			case 'analysisByCountry':{
 				// util.tools._F_Toast("Getting data from server");
 				jQuery.ajax({
-					url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/TRADATA?$select=COUN,SALEAMOU,TRAEXP&$filter=(YEAR%20eq%202013)&$format=json",
+					url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/TRADATA?$select=COUID,COUNAME,SALEAMOU,TRAEXP&$filter=(YEAR%20eq%202013)&$format=json",
 					error:function(){
 						d.reject();
-						util.tools.__F_Toast("Some error occurred when querying, please check the network and try again");
+						// util.tools.__F_Toast("Some error occurred when querying, please check the network and try again");
 					},
 					success:function(data){
 						//现在用odata取，所以用data.d.results
+						model.data["analysisByCountry"] = data.d.results;
+
 						d.resolve(util.queries.formatDataForView(sId,data.d.results));
 
 					}
@@ -59,7 +61,7 @@ util.queries = {
 					}else {
 						fillK = "0~1%";
 					}
-					data[resultSet[i].COUN] = {
+					data[resultSet[i].COUID] = {
 						fillKey:fillK,
 						cost : cost,
 						sale : resultSet[i].SALEAMOU
