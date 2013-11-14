@@ -6,6 +6,10 @@ util.tools = {
 		 var id = arr[arr.length - 1];
 		 return id;
 	},
+	splitString:function(str){
+		 var splitstr = str.split(" ")[1];
+		 return splitstr;
+	},
 	formatNumber:function(number){
 		if(jQuery.isNumeric(number)){
 			var formattedNumber=parseFloat(number); //获取小数型数据

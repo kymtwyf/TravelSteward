@@ -17,12 +17,33 @@ sap.ui.jsview("manager.masterdetail", {
 	*/ 
 	createContent : function(oController) {
 		
+		var proposal = new sap.m.ObjectAttribute("proposal",{
+			active:true,
+			press:function(){
+				console.log( util.tools.splitString(personalid.getText()));
+			}
+		});
+		var personalid = new sap.m.ObjectAttribute("personalid",{
+			active:true,
+			press:function(){
+				console.log(util.tools.splitString(this.getText()));
+			}
+		});
+		var email =  new sap.m.ObjectAttribute("email",{
+			active:true,
+			press:function(){
+				   sap.m.URLHelper.triggerEmail(util.tools.splitString(this.getText()), 
+						   						"Request "+detailOjectHeader.getTitle(), 
+						   						"Dear " +  util.tools.splitString(proposal.getText())+ ",");
+			}
+		});
+		var department = new sap.m.ObjectAttribute("department",{
+			active:true,
+			press:function(){
+				console.log( util.tools.splitString(this.getText()));
+			}
+		});
 		
-		
-		var proposal = new sap.m.ObjectAttribute("proposal");
-		var personalid = new sap.m.ObjectAttribute("personalid");
-		var email =  new sap.m.ObjectAttribute("email");
-		var department = new sap.m.ObjectAttribute("department");
 	    var status =  new sap.m.ObjectStatus("status");
 	//    var secondStatus =  new sap.m.ObjectStatus("secondstatus");
 	    
@@ -143,7 +164,7 @@ sap.ui.jsview("manager.masterdetail", {
 	    });
 		
 		
-		var action =   new sap.m.Button({ 
+		var actionButton =   new sap.m.Button("actionbutton",{ 
 	          icon: "sap-icon://action",
 	          press: function(){
 	        	  actionSheet.openBy(this);
@@ -168,7 +189,7 @@ sap.ui.jsview("manager.masterdetail", {
 		var view = this;		//alias
 		var detailMasterPage = new sap.m.Page("detail_master_page", {
  			title:"Request Detail",
- 			headerContent:action,
+ 			headerContent:actionButton,
  			enableScrolling:false,
  			showNavButton: true,
  			 navButtonPress:function(){
