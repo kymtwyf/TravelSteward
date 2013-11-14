@@ -24,6 +24,40 @@ util.tools = {
                 //每隔3位添加一个   
              return formattedNumber;
 		}else return 0;
+	},
+	formatNumberToBM:function(number){
+		if(jQuery.isNumeric(number)){
+			var index = number.indexOf(".");
+			var formattedNumber=parseFloat(number);
+			if(index==-1){
+				formattedNumber=this.formatNumber(formattedNumber);
+			}else{
+				if(index>=7&&index<10) formattedNumber = this.formatNumber((formattedNumber/1000000).toFixed(2))+" M";
+				else if(index>=10) formattedNumber = this.formatNumber((formattedNumber/1000000000).toFixed(2))+" B";
+			}
+
+			console.log('formattedNumber');
+			console.log(formattedNumber);
+
+			return formattedNumber;
+		}
+	},
+
+	_F_Toast:function(message,timeDuring){//用来显示一条toast消息
+			jQuery.sap.require("sap.m.MessageToast");
+			 sap.m.MessageToast.show(message,{
+			 	duration:timeDuring?timeDuring:3000
+			 });
+	},
+	autoSetContainerSize:function(sId){
+		var width = $('#main').width();
+		var height = $('#main').height();
+		$("#"+sId).width(width*0.8);
+		$("#"+sId).height(height*0.7);
+		$("#"+sId).css({
+			"left":width*0.1,
+			//"border":"solid"
+		});
 	}
 }
 

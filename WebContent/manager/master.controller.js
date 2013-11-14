@@ -13,7 +13,11 @@ sap.ui.controller("manager.master", {
 	onBeforeShow:function(evt){
 		//in case manager approved or rejected the request So we need to get the requests from the server again
 		jQuery.ajax({
-			url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllReqs?$format=json",
+			//url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllReqs?$format=json",
+			//jsonp parameter
+			url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getReqs.xsjs",
+			dataType: "jsonp",
+			//end 
 			error:function(error){
 				console.log("Error");
 			},
@@ -32,6 +36,7 @@ sap.ui.controller("manager.master", {
 			}
 		});
 		
+		console.log("master.controller on before show");
 		var pendingButton = new sap.ui.getCore().byId("pendingbutton");
 		pendingButton.attachPress(function() {
 	    	   bus.publish("master","generatelist",{

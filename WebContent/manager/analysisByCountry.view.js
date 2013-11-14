@@ -26,7 +26,9 @@ sap.ui.jsview("manager.analysisByCountry", {
 				new sap.ui.core.HTML("mapDiv",{
 					content:"<div id='mapDiv' style='display:none'></div>"
 				}),
-
+				new sap.m.VBox("table",{
+					
+				}),
 				new sap.ui.core.HTML("chartDiv",{
 					content:"<div id='chartDiv' style='display:none'></div>"
 				})
@@ -42,7 +44,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 		});
 		
 		var btn_personizedChart = new sap.m.Button({
-	        icon: "sap-icon://pie-chart",
+	        icon: "sap-icon://globe",
 	       // press:
 		});
 		
@@ -63,15 +65,17 @@ sap.ui.jsview("manager.analysisByCountry", {
 		});
 		var btn_setTime = new sap.m.Button({
                 icon: "sap-icon://history",
-                  // press : function() {
-                	 //  	monthActionSheet.openBy(this);
+                  press : function() {
+                  	bus.publish("splitapp","toDetail","manager.analysisByCountry");
+                	  //	monthActionSheet.openBy(this);
                                    
-                  //       }        
+                        }        
         });	
 		var btn_setting = new sap.m.Button({
                 icon: "sap-icon://settings",
               	press : function() {
-                             bus.publish('mapDiv','draw',model.data.getFakeData());
+              		bus.publish("splitapp","toDetail","manager.analysis");
+                             // bus.publish('mapDiv','draw',model.data.getFakeData());
                     	}        
         });
 	    var footer = new sap.m.Bar({ 

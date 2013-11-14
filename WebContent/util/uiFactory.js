@@ -1,49 +1,55 @@
 jQuery.sap.declare("util.uiFactory");
+jQuery.sap.require('util.tools');
 
 util.uiFactory = {
 	createDataMap:function(sId,fills,data){
-        if($("#"+sId).length){
-            $("#"+sId).empty();
-        }
+        console.log('画地图的数据');
+        console.log(fills);
+        console.log(data);
+        // if($("#"+sId).length){
+        //     $("#"+sId).empty();
+           
+        // }
+        // util.tools.autoSetContainerSize(sId);
         jQuery.sap.require("model.data");
 		var map = new Datamap({
-        element: document.getElementById(sId),
-        scope:'world',
-        projection:"mercator",
-        fills:fills?fills:model.data.fakeData.fills,
-        data:data?data:model.data.fakeData.data,
-        geographyConfig: {
-            popupTemplate: function(geo, data) {
-            	currentCost = data?data.cost:0;
-            	currentSale = data?data.sale:0;
-                return null;
+            element: document.getElementById(sId),
+            scope:'world',
+            projection:"mercator",
+            fills:fills?fills:model.data.fakeData.fills,
+            data:data?data:model.data.fakeData.data,
+            geographyConfig: {
+                popupTemplate: function(geo, data) {
+                	currentCost = data?data.cost:0;
+                	currentSale = data?data.sale:0;
+                    return null;
 
+                }
+            },
+            done: function(datamap) {
+            	 
+                datamap.svg.selectAll('.datamaps-subunit').on('click', function(geo) {
+                	currentCountry = geo.properties.name
+                	// alert("clicked inner");
+                	console.log('arguments');
+                	console.log(arguments);
+                });
+                datamap.svg.selectAll('.datamaps-subunit').on('mouseleave', function(geo) {
+                	console.log("geography is");
+                	console.log(geo);//geo 有值，是上次留下的。。。
+                	currentCountry = null;
+                	currentCost = null;
+                	currentSale = null;
+                });
+                // datamap.svg.selectAll('.datamaps-subunit').on('click', function(geo) {
+                // 	currentCountry = geo.properties.name
+                //     //alert(geography.properties.name);
+                // });
+                console.log('i am changing the z-index');
+                $(".datamaps-legend").css({"z-index":0});
+
+                
             }
-        },
-        done: function(datamap) {
-        	 
-            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geo) {
-            	currentCountry = geo.properties.name
-            	// alert("clicked inner");
-            	console.log('arguments');
-            	console.log(arguments);
-            });
-            datamap.svg.selectAll('.datamaps-subunit').on('mouseleave', function(geo) {
-            	console.log("geography is");
-            	console.log(geo);//geo 有值，是上次留下的。。。
-            	currentCountry = null;
-            	currentCost = null;
-            	currentSale = null;
-            });
-            // datamap.svg.selectAll('.datamaps-subunit').on('click', function(geo) {
-            // 	currentCountry = geo.properties.name
-            //     //alert(geography.properties.name);
-            // });
-            console.log('i am changing the z-index');
-            $(".datamaps-legend").css({"z-index":0});
-
-            
-        }
     	});
         map.legend();
         map.draw();
@@ -65,10 +71,10 @@ util.uiFactory = {
 					        	title:'Country:'+(sCountry?sCountry:"unknown"),
 					            attributes:[
 						            new sap.m.ObjectAttribute({
-						              text : "Total Sale:"+(sSale?util.tools.formatNumber(sSale):0)
+						              text : "Total Sale:"+(sSale?util.tools.formatNumberToBM(sSale.toString()):0)
 						            }),
 						            new sap.m.ObjectAttribute({
-						              text : "Trip Cost:"+(sCost?util.tools.formatNumber(sCost):0)
+						              text : "Trip Cost:"+(sCost?util.tools.formatNumberToBM(sCost.toString()):0)
 						            })
 					            ]
 					        }),		        
