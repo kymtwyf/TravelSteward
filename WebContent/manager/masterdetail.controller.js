@@ -105,40 +105,25 @@ sap.ui.controller("manager.masterdetail", {
        sendMessButton.attachPress(function() {
     	   var inputMess = sap.ui.getCore().byId("inputArea").getValue();
     	   sap.ui.getCore().byId("inputArea").setValue("");
-    	   var transMess = controller.transContent(inputMess);
-    	   var list = sap.ui.getCore().byId("messList");					//refresh list immediately
-    	   controller.locMessCount++;
-    	   var feedItem = new sap.m.FeedListItem({
-    		   sender: "May Grace",
-    		   //icon: "img/important_grey.png",	//TODO
-    		   //info: "Message",
-    		   timestamp: new Date().toLocaleString(),
-    		   text: transMess,
-    		   iconDensityAware:false
-    	   });
-    	   feedItem.addStyleClass("feedItem");
-    	   list.addItem(feedItem);
-    	   controller.sendMessage(transMess);
+    	   var selected = sap.ui.getCore().byId("transSelect").getSelected();console.log(selected);
+    	   if(selected) {
+    		   controller.transContent(inputMess);
+    	   }
+    	   else {
+    		   controller.sendMessage(inputMess);
+    	   }
        });
        
        
        //handle refresh messages
        this.keepRefresh = true;												//start refresh messages
        
-       var itemTemplate = new sap.m.FeedListItem({
-    	   sender: "{FNAME}",
-    	   //icon: "img/important_grey.png",	//TODO
-    	   //info: "Message",
-    	   timestamp: "{STIME}",
-    	   text: "{CONTENT}"
-     }); 
-       
        if(controller.keepRefresh) {											//run once immediately						
 		   $.ajax({
 			   type:"get",
 			   async:false,
 			   //url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME asc&$format=json",
-			   url: "http://ld9415:8002/ta/TravelAnalysis/xsjs/getChat.xsjs?reqId="+controller.reqId,
+			   url: "http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getChat.xsjs?reqId="+controller.reqId,
 			   dataType:"jsonp",
 			   data: {
 				   time: new Date().toLocaleTimeString()				//ensure not use cache
@@ -146,10 +131,16 @@ sap.ui.controller("manager.masterdetail", {
 			   success:function(res){ //console.log(res.d.results.length);
 				   for(;controller.locMessCount < res.d.results.length;controller.locMessCount++) {
 					   var list = sap.ui.getCore().byId("messList");
+					   var imgSrc = null;
+					   if(res.d.results[controller.locMessCount].FNAME == "May Grace") {
+						   imgSrc = "img/p1.jpg";
+					   }
+					   else {
+						   imgSrc = "img/p2.jpg";
+					   }
 					   list.addItem(new sap.m.FeedListItem({
 			    		   sender: res.d.results[controller.locMessCount].FNAME,
-			    		   //icon: "img/important_grey.png",	//TODO
-			    		   //info: "Message",
+			    		   icon: imgSrc,
 			    		   timestamp: res.d.results[controller.locMessCount].STIME,
 			    		   text: res.d.results[controller.locMessCount].CONTENT
 			    	   }));
@@ -168,7 +159,7 @@ sap.ui.controller("manager.masterdetail", {
     			   async:false,
 //    			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME asc&$format=json",
 //    			   dataType:"json",
-    			   url: "http://ld9415:8002/ta/TravelAnalysis/xsjs/getChat.xsjs?reqId="+controller.reqId,
+    			   url: "http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getChat.xsjs?reqId="+controller.reqId,
     			   dataType:"jsonp",
     			   data: {
     				   time: new Date().toLocaleTimeString()				//ensure not use cache
@@ -176,9 +167,16 @@ sap.ui.controller("manager.masterdetail", {
     			   success:function(res){ 
     				   for(;controller.locMessCount < res.d.results.length;controller.locMessCount++) {
     					   var list = sap.ui.getCore().byId("messList");
+    					   var imgSrc = null;
+    					   if(res.d.results[controller.locMessCount].FNAME == "May Grace") {
+    						   imgSrc = "img/p1.jpg";
+    					   }
+    					   else {
+    						   imgSrc = "img/p2.jpg";
+    					   }
     					   list.addItem(new sap.m.FeedListItem({
     			    		   sender: res.d.results[controller.locMessCount].FNAME,
-    			    		   //icon: "img/important_grey.png",	//TODO
+    			    		   icon:imgSrc,
     			    		   //info: "Message",
     			    		   timestamp: res.d.results[controller.locMessCount].STIME,
     			    		   text: res.d.results[controller.locMessCount].CONTENT
@@ -203,35 +201,52 @@ sap.ui.controller("manager.masterdetail", {
 	
 	refreshInterval: 3000,													//millsecond
 	
+	transCont: null,
+	
 	transContent: function(cont) {
-		var transCont = null;
+		var controller = this;
 		$.ajax({
 			   type:"get",
 			   async:false,													//must be synchronized
 			   url:"http://openapi.baidu.com/public/2.0/bmt/translate",
-			   dataType:"json",
+			   dataType:"jsonp",
+			   //jsonp:"callback",
 			   data: {
 				   from: "zh",												//language choose
 				   to: "en",
 				   client_id: "0UFMGl3prDszMBjSYF1bbw6D",					//baidu api key
 				   q: cont
 			   },	
-			   success:function(json){
-				  transCont = cont+"("+json.trans_result[0].dst+")";
+			   success:function(json){console.log(json);
+				  var transCont = cont+"("+json.trans_result[0].dst+")";
+				  controller.sendMessage(transCont);
 			  },
 			  error:function(){
-				  alert('Fail to translate with baidu API!');
+				  console.log('Fail to translate with baidu API!');
 			  }
 		});
-		return transCont;
+		
 	},
 	
 	sendMessage: function(transCont) {
+		this.locMessCount++;
+		  var list = sap.ui.getCore().byId("messList");					//refresh list immediately
+  	   var feedItem = new sap.m.FeedListItem({
+  		   sender: "May Grace",
+  		   icon: "img/p1.jpg",
+  		   //info: "Message",
+  		   timestamp: new Date().toLocaleString(),
+  		   text: transCont,
+  		   iconDensityAware:false
+  	   });
+  	   feedItem.addStyleClass("feedItem");
+  	   list.addItem(feedItem);
 		$.ajax({
 			   type:"get",
 			   async:true,													//asynchron is ok
-			   url:"http://ld9415:8002/ta/TravelAnalysis/xsjs/insertChat.xsjs",
-			   dataType:"json",
+			   url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/insertChat.xsjs",
+			   dataType:"jsonp",
+			   //jsonp:"callback",
 			   data: {
 				   reqId: this.reqId,
 				   from: 18,
@@ -243,7 +258,7 @@ sap.ui.controller("manager.masterdetail", {
 				  //console.log("SendMessage "+this.reqId+" "+18+" "+81+" "+time+" "+transCont);
 			  },
 			  error:function(){
-				  alert('Fail to send message to HANA server!');
+				  //alert('Fail to send message to HANA server!');
 			  }
 		 });
     }
