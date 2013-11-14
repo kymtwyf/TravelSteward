@@ -37,33 +37,35 @@ sap.ui.jsview("manager.master", {
 				    items : []
 				};
 			var model = new sap.ui.model.json.JSONModel(requestItems);
-			console.log("in generate");
 			if(requestdata.filter == "all"){
 				//filter is all & init this view -> will show all the items in the list
-				for(var i = 0; i<requestdata.content.length; i++ ){
-					requestItems.items[i] = [];
-					requestItems.items[i].title = "Request No."+requestdata.content[i].REQID;
-					requestItems.items[i].number = requestdata.content[i].PLEXP;
-					requestItems.items[i].numberUnit =  "RMB";
+				var i = 0;
+				for(var j = requestdata.content.length-1; j>=0; j-- ){
 						
-					if(requestdata.content[i].STATUS =="Approved")
-						requestItems.items[i].state = "Success";
-					else if (requestdata.content[i].STATUS =="Pending")
-					   	requestItems.items[i].state = "Warning";
-					 else requestItems.items[i].state = "Error";
+						requestItems.items[i] = [];
+						requestItems.items[i].title = "Request No."+requestdata.content[j].REQID;
+						requestItems.items[i].number = requestdata.content[j].PLEXP;
+						requestItems.items[i].numberUnit =  "RMB";
 						
-					requestItems.items[i].proposal =  requestdata.content[i].PNAME;
-					requestItems.items[i].destination = requestdata.content[i].DESCOUN+"/"+requestdata.content[i].DESREG;
-					requestItems.items[i].time =  requestdata.content[i].TDATE +"~"+requestdata.content[i].BDATE;
-					requestItems.items[i].status =  requestdata.content[i].STATUS;
+						if(requestdata.content[j].STATUS =="Approved")
+							requestItems.items[i].state = "Success";
+					    else if (requestdata.content[j].STATUS =="Pending")
+					    	requestItems.items[i].state = "Warning";
+					    else requestItems.items[i].state = "Error";
 						
-					requestItems.items[i].prio =  requestdata.content[i].PRIO;
-				}
+						requestItems.items[i].proposal =  requestdata.content[j].PNAME;
+						requestItems.items[i].destination = requestdata.content[j].DESCOUN+"/"+requestdata.content[j].DESREG;
+						requestItems.items[i].time =  requestdata.content[j].TDATE +"~"+requestdata.content[j].BDATE;
+						requestItems.items[i].status =  requestdata.content[j].STATUS;
+						
+						requestItems.items[i].prio =  requestdata.content[j].PRIO;
+						i++;
+					}
 			}	
 			else if(requestdata.filter == "pending"){
 				//filter is pending -> will show all the pending items in the list	
 				var i = 0;
-				for(var j = 0; j<requestdata.content.length; j++ ){
+				for(var j = requestdata.content.length-1; j>=0; j-- ){
 					
 					if(requestdata.content[j].STATUS =="Pending"){
 						
@@ -92,7 +94,7 @@ sap.ui.jsview("manager.master", {
 			 else if(requestdata.filter == "approved"){
 				//filter is approved -> will show all the approved items in the list
 					var i = 0;
-					for(var j = 0; j<requestdata.content.length; j++ ){
+					for(var j = requestdata.content.length-1; j>=0; j--  ){
 						
 						if(requestdata.content[j].STATUS =="Approved"){
 							
@@ -121,7 +123,7 @@ sap.ui.jsview("manager.master", {
 			 else if(requestdata.filter == "rejected"){
 				//filter is rejected -> will show all the rejected items in the list
 					var i = 0;
-					for(var j = 0; j<requestdata.content.length; j++ ){
+					for(var j = requestdata.content.length-1; j>=0; j-- ){
 						
 						if(requestdata.content[j].STATUS =="Rejected"){
 							

@@ -5,9 +5,19 @@ sap.ui.controller("manager.master", {
 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 * @memberOf manager.master
 */
-	onInit: function() {
+//	onInit: function() {
+//
+//	},
+	
+	
+	onBeforeShow:function(evt){
+		//in case manager approved or rejected the request So we need to get the requests from the server again
 		jQuery.ajax({
-			url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllReqs?$format=json",
+			//url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllReqs?$format=json",
+			//jsonp parameter
+			url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getReqs.xsjs",
+			dataType: "jsonp",
+			//end 
 			error:function(error){
 				console.log("Error");
 			},
@@ -26,16 +36,9 @@ sap.ui.controller("manager.master", {
 			}
 		});
 		
-	},
-	
-	
-	onBeforeShow:function(evt){
-			
 		console.log("master.controller on before show");
-		
 		var pendingButton = new sap.ui.getCore().byId("pendingbutton");
 		pendingButton.attachPress(function() {
-			console.log("press pending button");
 	    	   bus.publish("master","generatelist",{
 		  			content:model.data["request"].content,
 		  			filter:"pending"

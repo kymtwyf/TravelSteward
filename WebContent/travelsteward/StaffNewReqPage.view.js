@@ -45,7 +45,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			        	        new sap.m.DateTimeInput("toDate", {
 			        	        	type: sap.m.DateTimeInputType.Date,
 			        	        	displayFormat: 'y/M/d',
-			        	        	value: "2013-11-25"
+			        	        	value: "2013-11-26"
 			        	        }),
 			        	        new sap.m.HBox({
 				    	           }),
@@ -55,7 +55,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			    	           new sap.m.DateTimeInput("backDate", {
 			    	        	   type: sap.m.DateTimeInputType.Date,
 			    	        	   displayFormat: 'y/M/d',
-			    	        	   value: "2013-12-05"
+			    	        	   value: "2013-12-01"
 			    	           }),
 			    	           new sap.m.HBox({
 			    	           }),
@@ -121,8 +121,8 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 	        	    	          }),
 	        	    	          new sap.m.Select("backWay", {
 	        	    	        	  items:[
-	        	    	        	         new sap.ui.core.Item({text: "Flight"}),
 	        	    	        	         new sap.ui.core.Item({text: "Train"}),
+	        	    	        	         new sap.ui.core.Item({text: "Flight"}),
 	        	    	        	         ]
 	        	    	       }),
 	        	    	       new sap.m.HBox({
@@ -155,7 +155,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			    	           }),
 			    	           new sap.m.Input({
 			    	        	   type: sap.m.InputType.Number,
-			    	        	   value: "5000"
+			    	        	   value: "8000"
 			    	           }),
 			    	           new sap.m.HBox({
 			    	           }),
