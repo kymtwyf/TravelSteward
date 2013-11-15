@@ -121,6 +121,7 @@ sap.ui.jsview("manager.masterdetail", {
 			    	        	   vertical: true,
 			    	        	   height: "260px",
 			    	        	   content: new sap.m.List("messList", {
+			    	        		   //inset: true;
 							        }),
 	
 			    	           }),
