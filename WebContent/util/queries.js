@@ -24,9 +24,9 @@ util.queries = {
 					},
 					success:function(data){
 						//现在用odata取，所以用data.d.results
-						model.data["analysisByCountry"] = data.d.results;
-
-						d.resolve(util.queries.formatDataForView(sId,data.d.results));
+						
+						//console.log('woyhijindsifisdfjsdjf');
+						d.resolve(data.d.results);//;autil.queries.formatDataForView(sId,data.d.results));
 
 					}
 				})
@@ -40,6 +40,8 @@ util.queries = {
 	},
 
 	formatDataForView:function(sId,resultSet){
+		console.log("formatting data");
+		console.log(resultSet);
 		switch(sId){
 			case 'analysisByCountry':{
 				var fills = model.data.colorMapping;

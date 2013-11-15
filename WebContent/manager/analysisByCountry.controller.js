@@ -6,6 +6,7 @@ sap.ui.controller("manager.analysisByCountry", {
 * @memberOf manager.analysisByCountry
 */
 	onInit: function() {
+		
 		console.log('analysisBycountry ON INIT');
 
 		jQuery.sap.require('model.data');
@@ -39,12 +40,16 @@ sap.ui.controller("manager.analysisByCountry", {
 		console.log($('#mapDiv'));
 		console.log($("#analysisByCountry").height());
 		console.log($("#analysisByCountry").width());
+	
 		if(!model.data['analysisByCountry']){
 			jQuery.when(util.queries.getDataForView('analysisByCountry'))
 			.done(function(data){
+				model.data['analysisByCountry'] = data;
 					// bus.publish('mapDiv','draw',data);
-					bus.publish("data","ready",data);
-
+				//console.log(util.queries.formatDataForView(sId,data));
+					bus.publish("data","ready",util.queries.formatDataForView("analysisByCountry",data));
+					
+					
 					//Owen
 			})
 				// map = bus.publish('mapDiv','draw',model.data['analysisByCountry']);
@@ -122,8 +127,12 @@ sap.ui.controller("manager.analysisByCountry", {
 
 	},
 	onDataReady:function(channelId,eventId,data){
+		jQuery.sap.require('model.data');
 		bus.publish('mapDiv','draw',data);
-
+	//	console.log(data);
+	//	console.log("here is on data ready:");
+	//	console.log(model.data['analysisByCountry']);
+		
 	},
 	
 

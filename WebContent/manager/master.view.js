@@ -36,7 +36,7 @@ sap.ui.jsview("manager.master", {
 			var requestItems = {
 				    items : []
 				};
-			var model = new sap.ui.model.json.JSONModel(requestItems);
+			var requestModel= new sap.ui.model.json.JSONModel(requestItems);
 			if(requestdata.filter == "all"){
 				//filter is all & init this view -> will show all the items in the list
 				var i = 0;
@@ -151,7 +151,7 @@ sap.ui.jsview("manager.master", {
 				}//finish generate questitems in different situtatons
 			
 			
-			requestList.setModel(model);
+			requestList.setModel(requestModel);
 			
 			var objectItemTemplate = new sap.m.ObjectListItem({
 				type: sap.m.ListType.Active,

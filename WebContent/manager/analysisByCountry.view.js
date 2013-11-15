@@ -18,7 +18,25 @@ sap.ui.jsview("manager.analysisByCountry", {
 	createContent : function(oController) {
 		jQuery.sap.require("util.uiFactory");
 
-		var objectheader = util.uiFactory.getAnalysisObjectHeader();		
+		var objectheader = util.uiFactory.getAnalysisObjectHeader();	
+		
+		var tableChart = new sap.m.Table("tableChart",{
+			columns: [
+				        new sap.m.Column({
+				          header: new sap.m.Label({text: "Country"})
+				        }),
+				        new sap.m.Column({
+				          header: new sap.m.Label({text: "Cost"})
+				        }),
+				        new sap.m.Column({
+				          header: new sap.m.Label({text: "Sales"})
+				        })
+				     ]
+		});
+		
+		
+		
+		
 
 		var content = new sap.m.VBox("main",{
 			items:[
@@ -26,8 +44,9 @@ sap.ui.jsview("manager.analysisByCountry", {
 				new sap.ui.core.HTML("mapDiv",{
 					content:"<div id='mapDiv' style='display:none'></div>"
 				}),
-				new sap.m.VBox("table",{
-
+				new sap.m.ScrollContainer("tablescrollcontiner",{
+					horizontal: false,
+					vertical: true
 				}),
 				new sap.ui.core.HTML("chartDiv",{
 					content:"<div id='chartDiv' style='display:none'></div>"
@@ -47,6 +66,8 @@ sap.ui.jsview("manager.analysisByCountry", {
 	        icon: "sap-icon://globe",
 	       press:function(){
 	       	//再次点这个地图的时候肯定已经画好了地图。
+	    	   sap.ui.getCore().byId('tablescrollcontiner').removeAllContent();
+	    	   sap.ui.getCore().byId('tablescrollcontiner').setHeight("0px");
 		       bus.publish('container','show',{
 		       		index:0
 		       });
@@ -56,13 +77,20 @@ sap.ui.jsview("manager.analysisByCountry", {
 		var btn_tableChart = new sap.m.Button({
 	        icon: "sap-icon://table-chart",
 	       press:function(){
-
+	    	   var tableScrollContiner = sap.ui.getCore().byId('tablescrollcontiner');
+	    	   tableScrollContiner.setHeight("550px");
+	    	   tableScrollContiner.removeAllContent();
+	    	   tableScrollContiner.addContent(tableChart);
+	   		   bus.publish('tableChart','draw', model.data['analysisByCountry']);
+	    	   //bus.publish('tableChart','draw');
 	       }
 		});
 		
 		var btn_barChart = new sap.m.Button({
 	        icon: "sap-icon://bar-chart",
 	       	press:function(){
+	       		sap.ui.getCore().byId('tablescrollcontiner').removeAllContent();
+	       		sap.ui.getCore().byId('tablescrollcontiner').setHeight("0px");
 	       		bus.publish('chartDiv','draw');
 	        }
 		});
