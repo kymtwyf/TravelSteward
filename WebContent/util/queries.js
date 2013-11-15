@@ -16,7 +16,8 @@ util.queries = {
 			case 'analysisByCountry':{
 				// util.tools._F_Toast("Getting data from server");
 				jQuery.ajax({
-					url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/TRADATA?$select=COUID,COUNAME,SALEAMOU,TRAEXP&$filter=(YEAR%20eq%202013)&$format=json",
+					url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getWorldSaleAndTraExp.xsjs?callback=123&year=2013",
+					dataType: "jsonp",
 					error:function(){
 						d.reject();
 						// util.tools.__F_Toast("Some error occurred when querying, please check the network and try again");
@@ -25,9 +26,9 @@ util.queries = {
 						//现在用odata取，所以用data.d.results
 
 						console.log('get the data!!!!!!!!!!');
-						model.data["analysisByCountry"] = data.d.results;
-
-						d.resolve(util.queries.formatDataForView(sId,data.d.results));
+						
+						//console.log('woyhijindsifisdfjsdjf');
+						d.resolve(data.d.results);//;autil.queries.formatDataForView(sId,data.d.results));
 
 					}
 				})
@@ -41,6 +42,8 @@ util.queries = {
 	},
 
 	formatDataForView:function(sId,resultSet){
+		console.log("formatting data");
+		console.log(resultSet);
 		switch(sId){
 			case 'analysisByCountry':{
 				var fills = model.data.colorMapping;

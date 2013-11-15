@@ -18,7 +18,25 @@ sap.ui.jsview("manager.analysisByCountry", {
 	createContent : function(oController) {
 		jQuery.sap.require("util.uiFactory");
 
-		var objectheader = util.uiFactory.getAnalysisObjectHeader();		
+		var objectheader = util.uiFactory.getAnalysisObjectHeader();	
+		
+		var tableChart = new sap.m.Table("tableChart",{
+			columns: [
+				        new sap.m.Column({
+				          header: new sap.m.Label({text: "Country"})
+				        }),
+				        new sap.m.Column({
+				          header: new sap.m.Label({text: "Cost"})
+				        }),
+				        new sap.m.Column({
+				          header: new sap.m.Label({text: "Sales"})
+				        })
+				     ]
+		});
+		
+		
+		
+		
 
 		var content = new sap.m.VBox("main",{
 			items:[
@@ -26,9 +44,8 @@ sap.ui.jsview("manager.analysisByCountry", {
 				new sap.ui.core.HTML("mapDiv",{
 					content:"<div id='mapDiv' style='display:none'></div>"
 				}),
-				new sap.m.VBox("table",{
-
-				}),
+				new sap.m.VBox("tablevbox"),
+				
 				new sap.ui.core.HTML("chartDiv",{
 					content:"<div id='chartDiv' style='display:none'></div>"
 				})
@@ -56,7 +73,11 @@ sap.ui.jsview("manager.analysisByCountry", {
 		var btn_tableChart = new sap.m.Button({
 	        icon: "sap-icon://table-chart",
 	       press:function(){
-
+	    	   var vbox = sap.ui.getCore().byId('tablevbox');
+	    	   vbox.removeAllItems();
+	    	   vbox.addItem(tableChart);
+	   		   bus.publish('tableChart','draw', model.data['analysisByCountry']);
+	    	   //bus.publish('tableChart','draw');
 	       }
 		});
 		
@@ -101,6 +122,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 	
 		var page = new sap.m.Page("analysisByCountry",{
 			title: "Title2",
+			enableScrolling:false,
 			footer:footer,
 			content: [content]
 		});
