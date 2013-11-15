@@ -23,6 +23,8 @@ util.queries = {
 					},
 					success:function(data){
 						//现在用odata取，所以用data.d.results
+
+						console.log('get the data!!!!!!!!!!');
 						model.data["analysisByCountry"] = data.d.results;
 
 						d.resolve(util.queries.formatDataForView(sId,data.d.results));

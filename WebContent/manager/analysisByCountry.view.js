@@ -83,8 +83,15 @@ sap.ui.jsview("manager.analysisByCountry", {
 		var btn_setting = new sap.m.Button({
                 icon: "sap-icon://settings",
               	press : function() {
-              		bus.publish("splitapp","toDetail","manager.analysis");
+              		bus.publish("splitapp","toDetail","manager.analysisByPerson");
                              // bus.publish('mapDiv','draw',model.data.getFakeData());
+                             bus.publish("analysisHeader","update",{
+								title:"Total Cost",
+								description:"in Year 2013",
+								total:"12345232457",
+								currency:'EUR',
+								budget:"1234.0"
+							});
                     	}        
         });
 	    var footer = new sap.m.Bar({ 

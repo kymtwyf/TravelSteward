@@ -14,6 +14,11 @@ util.uiFactory = {
         chart.valueField = "TRAEXP";
         chart.titleField = "COUNAME";
         chart.dataProvider = chartData;
+        chart.depth3D = 15;
+        chart.angle = 30;
+        chart.outlineColor = "#FFFFFF";
+        chart.outlineAlpha = 0.8;
+        chart.outlineThickness = 2;
         chart.write("chartDiv");
 
 
@@ -111,10 +116,7 @@ util.uiFactory = {
         return this.mapPopover;
 	},
     getAnalysisObjectHeader:function(){
-        var tmp = sap.ui.getCore().byId("analysisHeader");
-        if(tmp){
-            return tmp;
-        }else{
+       
             var objectStatus = new sap.m.ObjectStatus({
             text : "In Budget",
             state : "Success"
@@ -122,7 +124,7 @@ util.uiFactory = {
             var attribute = new sap.m.ObjectAttribute({
               text : "Description"
             });
-            var objectheader = new sap.m.ObjectHeader("analysisHeader",{            
+            var objectheader = new sap.m.ObjectHeader({            
                   title:"This Year",
                   number : 0,
                   numberUnit : "USD",
@@ -183,7 +185,7 @@ util.uiFactory = {
                 }
             },this);
             return objectheader;
-        }
+        
     },
     
     showContainer:function(index){
