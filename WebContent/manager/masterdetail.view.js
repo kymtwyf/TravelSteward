@@ -65,13 +65,23 @@ sap.ui.jsview("manager.masterdetail", {
             label: "Reason"
         });
 		var leaveDate = new sap.m.DisplayListItem("leavedate",{
-            label: "Leave Date"
+			type: sap.m.ListType.Active, 
+            label: "Leave Date",
+            press: function(oControlEvent){
+                var splitapp = sap.ui.getCore().byId('splitApp');
+              	splitapp.toDetail("manager.AnalysisByMonth");
+    		} 	
         });
 		var leaveWay = new sap.m.DisplayListItem("leaveway",{
             label: "Transportation"
         });
 		var returnDate = new sap.m.DisplayListItem("returndate",{
-            label: "Return Date"
+			type: sap.m.ListType.Active, 
+            label: "Return Date",
+            press: function(oControlEvent){
+                var splitapp = sap.ui.getCore().byId('splitApp');
+              	splitapp.toDetail("manager.AnalysisByMonth");
+    		} 	
         });
 		var returnWay = new sap.m.DisplayListItem("returnway",{
             label: "Transportation"

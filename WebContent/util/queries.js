@@ -30,9 +30,28 @@ util.queries = {
 
 					}
 				})
-
+				
 				break;
-			}
+			};
+			case 'analysisBymonth':{
+				// util.tools._F_Toast("Getting data from server");
+				jQuery.ajax({
+					url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getMons.xsjs?year=2013&depa=Sale",
+					dataType: "jsonp",
+					error:function(){
+						d.reject();
+						// util.tools.__F_Toast("Some error occurred when querying, please check the network and try again");
+					},
+					success:function(data){
+						//现在用odata取，所以用data.d.results
+						//console.log('woyhijindsifisdfjsdjf');
+						d.resolve(data.d.results);//;autil.queries.formatDataForView(sId,data.d.results));
+
+					}
+				})
+				
+				break;
+			};
 		}
 
 		return d.promise();

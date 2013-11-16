@@ -18,6 +18,61 @@ util.uiFactory = {
 
 
     },
+    createChartByMonth: function(sId,data){
+    	var chartData = model.data['analysisBymonth'];
+    	    // SERIAL CHART  
+    	    var chart = new AmCharts.AmSerialChart();
+    	    chart.dataProvider = chartData;
+    	    chart.categoryField = "MON";
+    	    chart.startDuration = 2;
+
+    	    // AXES
+    	    // category
+    	    var categoryAxis = chart.categoryAxis;
+    	    categoryAxis.gridPosition = "start";
+
+    	    // value
+    	    var valueAxis = new AmCharts.ValueAxis();
+    	    valueAxis.axisAlpha = 0;
+    	    chart.addValueAxis(valueAxis);
+
+    	    // GRAPHS
+    	    // column graph
+    	    var graph1 = new AmCharts.AmGraph();
+    	    graph1.type = "column";
+    	    graph1.title = "Sale Amount";
+    	    graph1.lineColor = "#a668d5";
+    	    graph1.valueField = "AMOU";
+    	    graph1.lineAlpha = 1;
+    	    graph1.fillAlphas = 1;
+    	    graph1.dashLengthField = "dashLengthColumn";
+    	    graph1.alphaField = "alpha";
+    	    graph1.balloonText = "<span style='font-size:13px;'>[[title]] in [[category]]:<b>[[value]]</b> [[additional]]</span>";
+    	    chart.addGraph(graph1);
+    	    
+    	    // line
+    	    var graph2 = new AmCharts.AmGraph();
+    	    graph2.type = "line";
+    	    graph2.title = "Cost Amount";
+    	    graph2.lineColor = "#fcd202";
+    	    graph2.valueField = "AMOU";
+    	    graph2.lineThickness = 10;
+    	    graph2.bullet = "round";
+    	    graph2.bulletBorderThickness = 3;
+    	    graph2.bulletBorderColor = "#fcd202";
+    	    graph2.bulletBorderAlpha = 1;
+    	    graph2.bulletColor = "#ffffff";
+    	    graph2.dashLengthField = "dashLengthLine";
+    	    graph2.balloonText = "<span style='font-size:13px;'>[[title]] in [[category]]:<b>[[value]]</b> [[additional]]</span>";
+    	    chart.addGraph(graph2);
+    	    
+    	    // LEGEND                
+    	    var legend = new AmCharts.AmLegend();
+    	    legend.useGraphSettings = true;
+    	    chart.addLegend(legend);
+
+        chart.write(sId);
+    },
 	createDataMap:function(sId,fills,data){
         console.log('画地图的数据');
         console.log(fills);
@@ -110,8 +165,8 @@ util.uiFactory = {
 
         return this.mapPopover;
 	},
-    getAnalysisObjectHeader:function(){
-        var tmp = sap.ui.getCore().byId("analysisHeader");
+    getAnalysisObjectHeader:function(id){
+        var tmp = sap.ui.getCore().byId(id);
         if(tmp){
             return tmp;
         }else{
@@ -122,7 +177,7 @@ util.uiFactory = {
             var attribute = new sap.m.ObjectAttribute({
               text : "Description"
             });
-            var objectheader = new sap.m.ObjectHeader("analysisHeader",{            
+            var objectheader = new sap.m.ObjectHeader(id,{            
                   title:"This Year",
                   number : 0,
                   numberUnit : "USD",
@@ -303,5 +358,7 @@ bus.subscribe('container','show',function(channelId,eventId,data){
 bus.subscribe('chartDiv','draw',function(channelId,eventId,data){    
     util.uiFactory.create3dPieChart('chartDiv');
     util.uiFactory.showContainer(2);
-
+},this);
+bus.subscribe('chartDivByMonth','draw',function(channelId,eventId,data){    
+    util.uiFactory.createChartByMonth('chartDivByMonth');
 },this);

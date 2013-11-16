@@ -18,7 +18,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 	createContent : function(oController) {
 		jQuery.sap.require("util.uiFactory");
 
-		var objectheader = util.uiFactory.getAnalysisObjectHeader();	
+		var objectheader = util.uiFactory.getAnalysisObjectHeader("analysisHeaderByCountry");	
 		
 		var tableChart = new sap.m.Table("tableChart",{
 			columns: [
@@ -135,7 +135,6 @@ sap.ui.jsview("manager.analysisByCountry", {
 	    });
 	
 		var page = new sap.m.Page("analysisByCountry",{
-			title: "Title2",
 			enableScrolling:false,
 			customHeader: customerHeader,
 			footer:footer,

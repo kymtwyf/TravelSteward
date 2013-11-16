@@ -32,8 +32,8 @@ sap.ui.jsview("manager.app", {
 		this.app.addMasterPage(sap.ui.jsview("manager.masterdetail", "manager.masterdetail"));
 		console.log('analysisBycountry added加载');
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByCountry", "manager.analysisByCountry"));
-
-
+		this.app.addDetailPage(sap.ui.jsview("manager.AnalysisByMonth", "manager.AnalysisByMonth"));
+		
 		this.app.toDetail("manager.analysisByCountry");
 
 		this.app.toMaster("manager.master");
