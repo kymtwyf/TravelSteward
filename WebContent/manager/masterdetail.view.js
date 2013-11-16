@@ -137,6 +137,21 @@ sap.ui.jsview("manager.masterdetail", {
 		detailIconTabBar.setExpandable(false);
 		detailIconTabBar.addStyleClass("detailIconTabBar");
 		
+		function changeStatusToServer(reqID,status){
+			jQuery.ajax({
+				url:"http://ld9415:8002/ta/TravelAnalysis/xsjs/updateReq.xsjs?reqId="+reqID+"&status="+status ,
+				dataType: "jsonp",
+				//end 
+				error:function(error){
+					console.log("change status error!");
+				},
+				success:function(data){
+					console.log(reqID+status+"change status success!!!!!!");
+				}
+			});
+			
+		}
+		
 		var rejectedButton = new sap.m.Button({
 		      icon: "sap-icon://decline",
 	          type: "Reject",
@@ -144,6 +159,7 @@ sap.ui.jsview("manager.masterdetail", {
 		      press:function(){
 		    	 status.setText("Rejected");
 		    	 status.setState("Error");
+		    	 changeStatusToServer( util.tools.getRequireID(detailOjectHeader.getTitle()),status.getText());
 		      }
 		      
 		});
@@ -154,6 +170,7 @@ sap.ui.jsview("manager.masterdetail", {
 		      press:function(){
 		    	 status.setText("Approved");
 		    	 status.setState("Success");
+		    	 changeStatusToServer( util.tools.getRequireID(detailOjectHeader.getTitle()),status.getText());
 		      }
 		      
 		});

@@ -34,10 +34,6 @@ sap.ui.jsview("manager.analysisByCountry", {
 				     ]
 		});
 		
-		
-		
-		
-
 		var content = new sap.m.VBox("main",{
 			items:[
 				objectheader,
@@ -115,6 +111,24 @@ sap.ui.jsview("manager.analysisByCountry", {
                              // bus.publish('mapDiv','draw',model.data.getFakeData());
                     	}        
         });
+		
+		var btn_menu = new sap.m.Button({
+            icon: "sap-icon://menu2",
+          	press : function() {
+          		var splitapp = sap.ui.getCore().byId('splitApp');
+          		splitapp.showMaster("manager.master");
+                	}        
+    });
+		
+		var headerTitle = new sap.m.Label({
+			text: "Analysis By Country"
+		});
+		
+		var customerHeader = new sap.m.Bar({ 
+            contentLeft: [btn_menu],
+            contentMiddle:[headerTitle]
+	    });
+		
 	    var footer = new sap.m.Bar({ 
             contentLeft: [sgBtn_chartType],
             contentRight:[btn_setTime,btn_setting]
@@ -123,10 +137,10 @@ sap.ui.jsview("manager.analysisByCountry", {
 		var page = new sap.m.Page("analysisByCountry",{
 			title: "Title2",
 			enableScrolling:false,
+			customHeader: customerHeader,
 			footer:footer,
 			content: [content]
 		});
-
 		return page;
 	}
 

@@ -18,7 +18,7 @@ sap.ui.jsview("manager.app", {
 		this.setDisplayBlock(true);
 
 		// create app
-		this.app = new sap.m.SplitApp({
+		this.app = new sap.m.SplitApp("splitApp",{
 			mode:"HideMode",
 			afterDetailNavigate: function () {
 				this.hideMaster();
