@@ -12,22 +12,22 @@ sap.ui.jsview("manager.analysisByReason", {
 	* @memberOf manager.analysisByReason
 	*/ 
 	createContent : function(oController) {
-		var btn_menu = new sap.m.Button({
-            icon: "sap-icon://menu2",
-          	press : function() {
-          		var splitapp = sap.ui.getCore().byId('splitApp');
-          		splitapp.showMaster("manager.master");
-                	}        
-    });
-		
-		var headerTitle = new sap.m.Label({
-			text: "Analysis By Reason"
-		});
-		
-		var customerHeader = new sap.m.Bar({ 
-            contentLeft: [btn_menu],
-            contentMiddle:[headerTitle]
-	    });
+//		var btn_menu = new sap.m.Button({
+//            icon: "sap-icon://menu2",
+//          	press : function() {
+//          		var splitapp = sap.ui.getCore().byId('splitApp');
+//          		splitapp.showMaster("manager.master");
+//                	}        
+//    });
+//		
+//		var headerTitle = new sap.m.Label({
+//			text: "Analysis By Reason"
+//		});
+//		
+//		var customerHeader = new sap.m.Bar({ 
+//            contentLeft: [btn_menu],
+//            contentMiddle:[headerTitle]
+//	    });
 		
 		
 		var objectheader = new sap.m.ObjectHeader("oheaderByReason",{
@@ -89,9 +89,8 @@ sap.ui.jsview("manager.analysisByReason", {
 	    });	
 		
 		var page = new sap.m.Page("analysisByReason",{
-			title:"Analysis By Month",
+			title:"Analysis By Reason",
 			enableScrolling:false,
-			customHeader: customerHeader,
 			content: [content],
 			footer:footer
 		});

@@ -12,22 +12,22 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 	* @memberOf manager.AnalysisByMonth
 	*/ 
 	createContent : function(oController) {
-		var btn_menu = new sap.m.Button({
-            icon: "sap-icon://menu2",
-          	press : function() {
-          		var splitapp = sap.ui.getCore().byId('splitApp');
-          		splitapp.showMaster("manager.master");
-                	}        
-    });
-		
-		var headerTitle = new sap.m.Label({
-			text: "Analysis By Month"
-		});
-		
-		var customerHeader = new sap.m.Bar({ 
-            contentLeft: [btn_menu],
-            contentMiddle:[headerTitle]
-	    });
+//		var btn_menu = new sap.m.Button({
+//            icon: "sap-icon://menu2",
+//          	press : function() {
+//          		var splitapp = sap.ui.getCore().byId('splitApp');
+//          		splitapp.showMaster("manager.master");
+//                	}        
+//    });
+//		
+//		var headerTitle = new sap.m.Label({
+//			text: "Analysis By Month"
+//		});
+//		
+//		var customerHeader = new sap.m.Bar({ 
+//            contentLeft: [btn_menu],
+//            contentMiddle:[headerTitle]
+//	    });
 		
 		
 		var objectheader = new sap.m.ObjectHeader("oheaderByMonth",{
@@ -91,7 +91,7 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 		var page = new sap.m.Page("analysisByMonth",{
 			title:"Analysis By Month",
 			enableScrolling:false,
-			customHeader: customerHeader,
+			//customHeader: customerHeader,
 			content: [content],
 			footer:footer
 		});
