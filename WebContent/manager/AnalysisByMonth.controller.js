@@ -7,12 +7,7 @@ sap.ui.controller("manager.AnalysisByMonth", {
 */
 	onInit: function() {
 		
-		if(!model.data['analysisBymonth']){
-			jQuery.when(util.queries.getDataForView('analysisBymonth'))
-			.done(function(data){
-				    model.data['analysisBymonth'] = data;
-			});
-		}
+		
 	},
 /**
 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
@@ -29,6 +24,14 @@ sap.ui.controller("manager.AnalysisByMonth", {
 * @memberOf manager.AnalysisByMonth
 */
 	onAfterRendering: function() {
+		if(!model.data['analysisBymonth']){
+			jQuery.when(util.queries.getDataForView('analysisBymonth'))
+			.done(function(data){
+				    model.data['analysisBymonth'] = data;
+					bus.publish('chartDivByMonth','draw');
+			});
+		}
+		else
 		bus.publish('chartDivByMonth','draw');
 	},
 

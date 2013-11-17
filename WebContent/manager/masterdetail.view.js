@@ -52,20 +52,22 @@ sap.ui.jsview("manager.masterdetail", {
 		      firstStatus : status
 		});
 		var destinationCountry = new sap.m.DisplayListItem("destinationcountry",{
-			type: sap.m.ListType.Active, 
+			type: sap.m.ListType.Navigation, 
             label: "Country",
             press: function(oControlEvent){
 				alert("Hey Man! You can add an event here");
 			}
         });
 		var destinationCity = new sap.m.DisplayListItem("destinationcity",{
+			type: sap.m.ListType.Navigation,
             label: "City"
         });
 		var reason = new sap.m.DisplayListItem("reason",{
+			type: sap.m.ListType.Navigation,
             label: "Reason"
         });
 		var leaveDate = new sap.m.DisplayListItem("leavedate",{
-			type: sap.m.ListType.Active, 
+			type: sap.m.ListType.Navigation, 
             label: "Leave Date",
             press: function(oControlEvent){
                 var splitapp = sap.ui.getCore().byId('splitApp');
@@ -76,7 +78,7 @@ sap.ui.jsview("manager.masterdetail", {
             label: "Transportation"
         });
 		var returnDate = new sap.m.DisplayListItem("returndate",{
-			type: sap.m.ListType.Active, 
+			type: sap.m.ListType.Navigation, 
             label: "Return Date",
             press: function(oControlEvent){
                 var splitapp = sap.ui.getCore().byId('splitApp');

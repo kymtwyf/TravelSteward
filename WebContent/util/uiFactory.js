@@ -15,63 +15,141 @@ util.uiFactory = {
         chart.titleField = "COUNAME";
         chart.dataProvider = chartData;
         chart.write("chartDiv");
-
-
     },
     createChartByMonth: function(sId,data){
     	var chartData = model.data['analysisBymonth'];
-    	    // SERIAL CHART  
-    	    var chart = new AmCharts.AmSerialChart();
-    	    chart.dataProvider = chartData;
-    	    chart.categoryField = "MON";
-    	    chart.startDuration = 2;
+    	var Data = [];
+    	var sumAmount = 0;
+    	for(var i = 0; i<chartData.length; i++){
+    		var DataItem = {
+        			MONTH : null,
+        			MONTHNAME : null,
+        			BUDGET : null,
+        			SALEAMOUNT: null,
+        			OPEN: null,
+        			CLOSE: null
+        	};
+    		DataItem.MONTH = chartData[i].MON;
+    		DataItem.BUDGET = chartData[i].BUDG;
+    		DataItem.SALEAMOUNT = chartData[i].TRAEXP;
+    		DataItem.OPEN = sumAmount.toFixed(2);
+    		console.log(sumAmount);
+    		sumAmount = sumAmount + DataItem.SALEAMOUNT;
+    		
+    		DataItem.CLOSE = sumAmount.toFixed(2) ;
+    		console.log(sumAmount);
+    		switch (i) {
+            case 0:
+            	DataItem.MONTHNAME = "January";
+                break;
+            case 1:
+            	DataItem.MONTHNAME = "February";
+                break;
+            case 2:
+            	DataItem.MONTHNAME = "March";
+                break;
+            case 3:
+            	DataItem.MONTHNAME = "April";
+                break;
+            case 4:
+            	DataItem.MONTHNAME = "May";
+                break;
+            case 5:
+            	DataItem.MONTHNAME = "June";
+                break;
+            case 6:
+            	DataItem.MONTHNAME = "July";
+                break;
+            case 7:
+            	DataItem.MONTHNAME = "August";
+                break;
+            case 8:
+            	DataItem.MONTHNAME = "September";
+                break;
+            case 9:
+            	DataItem.MONTHNAME = "Octomber";
+                break;
+    		
+    		};
+    		Data[i]=DataItem;
+    	}
+    	var temp = sumAmount + 25676799.79;
+    	var DataItem11={
+    			MONTH : 11,
+    			MONTHNAME : "November",
+    			BUDGET: 339149417 ,
+    			SALEAMOUNT: 25676799.79,
+    			OPEN: sumAmount.toFixed(2),
+    			CLOSE: temp.toFixed(2),
+    			"dashLengthColumn": 5,
+    		    "alpha": 0.2,
+    	};
+		
+    	Data[10]=DataItem11;
 
+    	sumAmount = temp;
+    	temp = sumAmount + 25676799.79;
+    	var DataItem12={
+    			MONTH : 12,
+    			MONTHNAME : "December",
+    			BUDGET: 339149417 ,
+    			SALEAMOUNT: 25676799.79,
+    			OPEN: sumAmount.toFixed(2),
+    			CLOSE: temp.toFixed(2),
+    			"dashLengthColumn": 5,
+    		    "alpha": 0.2,
+    	};
+    	Data[11]=DataItem12;
+    	
+    	console.log(Data);
+    	
+    	console.log(">>>>>>>>>>>>>>>>>>>>>chartByMonth<<<<<<<<<<<<<<<<<<<<<<<");
+    	var  chart = new AmCharts.AmSerialChart();
+    	    chart.dataProvider = Data;
+    	    chart.categoryField = "MONTH";
+    	    chart.columnWidth = 0.6;
+    	    chart.startDuration = 3;
+    	    
     	    // AXES
-    	    // category
+    	    // Category
     	    var categoryAxis = chart.categoryAxis;
+    	    categoryAxis.gridAlpha = 0.1;
+    	    categoryAxis.axisAlpha = 0;
     	    categoryAxis.gridPosition = "start";
-
-    	    // value
+    	    
+    	    // Value
     	    var valueAxis = new AmCharts.ValueAxis();
+    	    valueAxis.gridAlpha = 0.1;
     	    valueAxis.axisAlpha = 0;
     	    chart.addValueAxis(valueAxis);
-
-    	    // GRAPHS
-    	    // column graph
-    	    var graph1 = new AmCharts.AmGraph();
-    	    graph1.type = "column";
-    	    graph1.title = "Sale Amount";
-    	    graph1.lineColor = "#a668d5";
-    	    graph1.valueField = "AMOU";
-    	    graph1.lineAlpha = 1;
-    	    graph1.fillAlphas = 1;
-    	    graph1.dashLengthField = "dashLengthColumn";
-    	    graph1.alphaField = "alpha";
-    	    graph1.balloonText = "<span style='font-size:13px;'>[[title]] in [[category]]:<b>[[value]]</b> [[additional]]</span>";
-    	    chart.addGraph(graph1);
     	    
-    	    // line
-    	    var graph2 = new AmCharts.AmGraph();
-    	    graph2.type = "line";
-    	    graph2.title = "Cost Amount";
-    	    graph2.lineColor = "#fcd202";
-    	    graph2.valueField = "AMOU";
-    	    graph2.lineThickness = 10;
-    	    graph2.bullet = "round";
-    	    graph2.bulletBorderThickness = 3;
-    	    graph2.bulletBorderColor = "#fcd202";
-    	    graph2.bulletBorderAlpha = 1;
-    	    graph2.bulletColor = "#ffffff";
-    	    graph2.dashLengthField = "dashLengthLine";
-    	    graph2.balloonText = "<span style='font-size:13px;'>[[title]] in [[category]]:<b>[[value]]</b> [[additional]]</span>";
-    	    chart.addGraph(graph2);
+    	    // GRAPH                          
+    	    var graph = new AmCharts.AmGraph();
+    	    graph.valueField = "CLOSE";
+    	    graph.openField = "OPEN";
+    	    graph.type = "column";
+    	    graph.lineAlpha = 1;
+    	    graph.lineColor = "#1c8ceb";
+    	    graph.fillAlphas = 0.8;
+    	    graph.dashLengthField = "dashLengthColumn";
+    	    graph.alphaField = "alpha";
+    	    graph.balloonText = "<span style='color:#1c8ceb'>[[MONTHNAME]]</span><br><span style='font-size:15px;'><b>[[SALEAMOUNT]]RMB</b></span>";
+    	    graph.labelText = "￥[[CLOSE]]";
+    	    chart.addGraph(graph);
     	    
-    	    // LEGEND                
-    	    var legend = new AmCharts.AmLegend();
-    	    legend.useGraphSettings = true;
-    	    chart.addLegend(legend);
-
-        chart.write(sId);
+    	    // Trend lines used for connectors
+    	    var trendLine = new AmCharts.TrendLine();
+    	    trendLine.initialCategory = "1";
+    	    trendLine.finalCategory = "12";
+    	    trendLine.initialValue = 339149417;
+    	    trendLine.finalValue = 339149417;
+    	    trendLine.lineColor = "#000000";
+    	    trendLine.dashLength = 10;
+    	    trendLine.lineThickness = 3;
+    	    chart.addTrendLine(trendLine);   
+    	    
+    	    // WRITE    
+             chart.write(sId);
     },
 	createDataMap:function(sId,fills,data){
         console.log('画地图的数据');
