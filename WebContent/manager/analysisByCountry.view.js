@@ -18,7 +18,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 	createContent : function(oController) {
 		jQuery.sap.require("util.uiFactory");
 
-		var objectheader = util.uiFactory.getAnalysisObjectHeader();	
+		var objectheader = util.uiFactory.getAnalysisObjectHeader("analysisHeaderByCountry");	
 		
 		var tableChart = new sap.m.Table("tableChart",{
 			columns: [
@@ -34,18 +34,16 @@ sap.ui.jsview("manager.analysisByCountry", {
 				     ]
 		});
 		
-		
-		
-		
-
 		var content = new sap.m.VBox("main",{
 			items:[
 				objectheader,
 				new sap.ui.core.HTML("mapDiv",{
 					content:"<div id='mapDiv' style='display:none'></div>"
 				}),
-				new sap.m.VBox("tablevbox"),
-				
+				new sap.m.ScrollContainer("tablescrollcontiner",{
+					horizontal: false,
+					vertical: true
+				}),
 				new sap.ui.core.HTML("chartDiv",{
 					content:"<div id='chartDiv' style='display:none'></div>"
 				})
@@ -64,6 +62,8 @@ sap.ui.jsview("manager.analysisByCountry", {
 	        icon: "sap-icon://globe",
 	       press:function(){
 	       	//再次点这个地图的时候肯定已经画好了地图。
+	    	   sap.ui.getCore().byId('tablescrollcontiner').removeAllContent();
+	    	   sap.ui.getCore().byId('tablescrollcontiner').setHeight("0px");
 		       bus.publish('container','show',{
 		       		index:0
 		       });
@@ -73,9 +73,10 @@ sap.ui.jsview("manager.analysisByCountry", {
 		var btn_tableChart = new sap.m.Button({
 	        icon: "sap-icon://table-chart",
 	       press:function(){
-	    	   var vbox = sap.ui.getCore().byId('tablevbox');
-	    	   vbox.removeAllItems();
-	    	   vbox.addItem(tableChart);
+	    	   var tableScrollContiner = sap.ui.getCore().byId('tablescrollcontiner');
+	    	   tableScrollContiner.setHeight("550px");
+	    	   tableScrollContiner.removeAllContent();
+	    	   tableScrollContiner.addContent(tableChart);
 	   		   bus.publish('tableChart','draw', model.data['analysisByCountry']);
 	    	   //bus.publish('tableChart','draw');
 	       }
@@ -84,6 +85,8 @@ sap.ui.jsview("manager.analysisByCountry", {
 		var btn_barChart = new sap.m.Button({
 	        icon: "sap-icon://pie-chart",
 	       	press:function(){
+	       		sap.ui.getCore().byId('tablescrollcontiner').removeAllContent();
+	       		sap.ui.getCore().byId('tablescrollcontiner').setHeight("0px");
 	       		bus.publish('chartDiv','draw');
 	        }
 		});
@@ -115,18 +118,35 @@ sap.ui.jsview("manager.analysisByCountry", {
 							});
                     	}        
         });
+		
+		var btn_menu = new sap.m.Button({
+            icon: "sap-icon://menu2",
+          	press : function() {
+          		var splitapp = sap.ui.getCore().byId('splitApp');
+          		splitapp.showMaster("manager.master");
+                	}        
+    });
+		
+		var headerTitle = new sap.m.Label({
+			text: "Analysis By Country"
+		});
+		
+		var customerHeader = new sap.m.Bar({ 
+            contentLeft: [btn_menu],
+            contentMiddle:[headerTitle]
+	    });
+		
 	    var footer = new sap.m.Bar({ 
             contentLeft: [sgBtn_chartType],
             contentRight:[btn_setTime,btn_setting]
 	    });
 	
 		var page = new sap.m.Page("analysisByCountry",{
-			title: "Title2",
 			enableScrolling:false,
+			customHeader: customerHeader,
 			footer:footer,
 			content: [content]
 		});
-
 		return page;
 	}
 

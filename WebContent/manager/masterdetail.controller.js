@@ -105,7 +105,7 @@ sap.ui.controller("manager.masterdetail", {
        sendMessButton.attachPress(function() {
     	   var inputMess = sap.ui.getCore().byId("inputArea").getValue();
     	   sap.ui.getCore().byId("inputArea").setValue("");
-    	   var selected = sap.ui.getCore().byId("transSelect").getSelected();console.log(selected);
+    	   var selected = sap.ui.getCore().byId("transSelect").getSelected();//console.log(selected);
     	   if(selected) {
     		   controller.transContent(inputMess);
     	   }
@@ -117,6 +117,7 @@ sap.ui.controller("manager.masterdetail", {
        
        //handle refresh messages
        this.keepRefresh = true;												//start refresh messages
+       
        
        if(controller.keepRefresh) {											//run once immediately						
 		   $.ajax({
@@ -138,13 +139,17 @@ sap.ui.controller("manager.masterdetail", {
 					   else {
 						   imgSrc = "img/p2.jpg";
 					   }
-					   list.addItem(new sap.m.FeedListItem({
+					   var feedItem = new sap.m.FeedListItem({
 			    		   sender: res.d.results[controller.locMessCount].FNAME,
-			    		   icon: imgSrc,
+			    		   icon:imgSrc,
+			    		   //info: "Message",
 			    		   timestamp: res.d.results[controller.locMessCount].STIME,
 			    		   text: res.d.results[controller.locMessCount].CONTENT
-			    	   }));
+			    	   });
+					   feedItem.addStyleClass("feedItem");
+					   list.insertItem(feedItem, 0);
 				   }
+				   //console.log(list.getBinding("items"));
 			  },
 			  error:function(){
 				  alert('Fail to get messages from HANA server!');
@@ -152,43 +157,49 @@ sap.ui.controller("manager.masterdetail", {
 		 });
 	   }		
        
-       setInterval(function() {												//set timer
-    	   if(controller.keepRefresh) {									
-    		   $.ajax({
-    			   type:"get",
-    			   async:false,
-//    			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME asc&$format=json",
-//    			   dataType:"json",
-    			   url: "http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getChat.xsjs?reqId="+controller.reqId,
-    			   dataType:"jsonp",
-    			   data: {
-    				   time: new Date().toLocaleTimeString()				//ensure not use cache
-    			   },
-    			   success:function(res){ 
-    				   for(;controller.locMessCount < res.d.results.length;controller.locMessCount++) {
-    					   var list = sap.ui.getCore().byId("messList");
-    					   var imgSrc = null;
-    					   if(res.d.results[controller.locMessCount].FNAME == "May Grace") {
-    						   imgSrc = "img/p1.jpg";
-    					   }
-    					   else {
-    						   imgSrc = "img/p2.jpg";
-    					   }
-    					   list.addItem(new sap.m.FeedListItem({
-    			    		   sender: res.d.results[controller.locMessCount].FNAME,
-    			    		   icon:imgSrc,
-    			    		   //info: "Message",
-    			    		   timestamp: res.d.results[controller.locMessCount].STIME,
-    			    		   text: res.d.results[controller.locMessCount].CONTENT
-    			    	   }));
-    				   }
-    			  },
-    			  error:function(){
-    				  alert('Fail to get messages from HANA server!');
-    			  }
-    		 });
-    	   }																//endif keepRefresh
-		}, controller.refreshInterval); 
+       if(!this.startRefresh) {
+    	   setInterval(function() {												//set timer
+        	   if(controller.keepRefresh) {									
+        		   $.ajax({
+        			   type:"get",
+        			   async:false,
+//        			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME asc&$format=json",
+//        			   dataType:"json",
+        			   url: "http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getChat.xsjs?reqId="+controller.reqId,
+        			   dataType:"jsonp",
+        			   data: {
+        				   time: new Date().toLocaleTimeString()				//ensure not use cache
+        			   },
+        			   success:function(res){ 
+        				   for(;controller.locMessCount < res.d.results.length;controller.locMessCount++) {
+        					   var list = sap.ui.getCore().byId("messList");
+        					   var imgSrc = null;
+        					   if(res.d.results[controller.locMessCount].FNAME == "May Grace") {
+        						   imgSrc = "img/p1.jpg";
+        					   }
+        					   else {
+        						   imgSrc = "img/p2.jpg";
+        					   }
+        					   var feedItem = new sap.m.FeedListItem({
+        			    		   sender: res.d.results[controller.locMessCount].FNAME,
+        			    		   icon:imgSrc,
+        			    		   //info: "Message",
+        			    		   timestamp: res.d.results[controller.locMessCount].STIME,
+        			    		   text: res.d.results[controller.locMessCount].CONTENT
+        			    	   });
+        					   feedItem.addStyleClass("feedItem");
+        					   list.insertItem(feedItem, 0);
+        				   }
+        			  },
+        			  error:function(){
+        				  alert('Fail to get messages from HANA server!');
+        			  }
+        		 });
+        	   }																//endif keepRefresh
+    		}, controller.refreshInterval); 
+    	   this.startRefresh = true;
+       	}
+       
        
      },
     
@@ -202,6 +213,8 @@ sap.ui.controller("manager.masterdetail", {
 	refreshInterval: 3000,													//millsecond
 	
 	transCont: null,
+	
+	startRefresh: false,
 	
 	transContent: function(cont) {
 		var controller = this;
@@ -240,7 +253,7 @@ sap.ui.controller("manager.masterdetail", {
   		   iconDensityAware:false
   	   });
   	   feedItem.addStyleClass("feedItem");
-  	   list.addItem(feedItem);
+  	   list.insertItem(feedItem, 0);
 		$.ajax({
 			   type:"get",
 			   async:true,													//asynchron is ok

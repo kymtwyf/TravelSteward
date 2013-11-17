@@ -72,13 +72,23 @@ sap.ui.jsview("manager.masterdetail", {
             label: "Reason"
         });
 		var leaveDate = new sap.m.DisplayListItem("leavedate",{
-            label: "Leave Date"
+			type: sap.m.ListType.Active, 
+            label: "Leave Date",
+            press: function(oControlEvent){
+                var splitapp = sap.ui.getCore().byId('splitApp');
+              	splitapp.toDetail("manager.AnalysisByMonth");
+    		} 	
         });
 		var leaveWay = new sap.m.DisplayListItem("leaveway",{
             label: "Transportation"
         });
 		var returnDate = new sap.m.DisplayListItem("returndate",{
-            label: "Return Date"
+			type: sap.m.ListType.Active, 
+            label: "Return Date",
+            press: function(oControlEvent){
+                var splitapp = sap.ui.getCore().byId('splitApp');
+              	splitapp.toDetail("manager.AnalysisByMonth");
+    		} 	
         });
 		var returnWay = new sap.m.DisplayListItem("returnway",{
             label: "Transportation"
@@ -128,6 +138,7 @@ sap.ui.jsview("manager.masterdetail", {
 			    	        	   vertical: true,
 			    	        	   height: "260px",
 			    	        	   content: new sap.m.List("messList", {
+			    	        		   //inset: true;
 							        }),
 	
 			    	           }),
@@ -144,6 +155,21 @@ sap.ui.jsview("manager.masterdetail", {
 		detailIconTabBar.setExpandable(false);
 		detailIconTabBar.addStyleClass("detailIconTabBar");
 		
+		function changeStatusToServer(reqID,status){
+			jQuery.ajax({
+				url:"http://ld9415:8002/ta/TravelAnalysis/xsjs/updateReq.xsjs?reqId="+reqID+"&status="+status ,
+				dataType: "jsonp",
+				//end 
+				error:function(error){
+					console.log("change status error!");
+				},
+				success:function(data){
+					console.log(reqID+status+"change status success!!!!!!");
+				}
+			});
+			
+		}
+		
 		var rejectedButton = new sap.m.Button({
 		      icon: "sap-icon://decline",
 	          type: "Reject",
@@ -151,6 +177,7 @@ sap.ui.jsview("manager.masterdetail", {
 		      press:function(){
 		    	 status.setText("Rejected");
 		    	 status.setState("Error");
+		    	 changeStatusToServer( util.tools.getRequireID(detailOjectHeader.getTitle()),status.getText());
 		      }
 		      
 		});
@@ -161,6 +188,7 @@ sap.ui.jsview("manager.masterdetail", {
 		      press:function(){
 		    	 status.setText("Approved");
 		    	 status.setState("Success");
+		    	 changeStatusToServer( util.tools.getRequireID(detailOjectHeader.getTitle()),status.getText());
 		      }
 		      
 		});

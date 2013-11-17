@@ -6,6 +6,26 @@ sap.ui.controller("manager.analysisByCountry", {
 * @memberOf manager.analysisByCountry
 */
 	onInit: function() {
+		//set a timer 
+		var refreshInterval = 5000;
+	     setInterval(function() {												//set timer	
+	    		   $.ajax({
+	    			   type:"get",
+	    			   async:false,
+	    			   url: "http://ld9415:8002/ta/TravelAnalysis/xsjs/pendingCount.xsjs", 
+	    			   dataType:"jsonp",
+	    			   data: {
+	    				   time: new Date().toLocaleTimeString()				//ensure not use cache
+	    			   },
+	    			   success:function(res){ 
+	    				 //////
+	    			   },	
+	    			  error:function(){
+	    				  alert('Fail to get count');
+	    			  },
+	    		 });
+	    	   }, refreshInterval);   											//endif keepRefresh
+				
 		
 		console.log('analysisBycountry ON INIT');
 

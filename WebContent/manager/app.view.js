@@ -18,7 +18,7 @@ sap.ui.jsview("manager.app", {
 		this.setDisplayBlock(true);
 
 		// create app
-		this.app = new sap.m.SplitApp({
+		this.app = new sap.m.SplitApp("splitApp",{
 			mode:"HideMode",
 			afterDetailNavigate: function () {
 				this.hideMaster();
@@ -36,6 +36,7 @@ sap.ui.jsview("manager.app", {
 
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByCountry", "manager.analysisByCountry"));
 		
+		this.app.addDetailPage(sap.ui.jsview("manager.AnalysisByMonth", "manager.AnalysisByMonth"));
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByCity", "manager.analysisByCity"));
 		
 		this.app.toDetail("manager.analysisByCountry");
