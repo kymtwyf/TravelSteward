@@ -151,7 +151,68 @@ util.uiFactory = {
     	    // WRITE    
              chart.write(sId);
     },
-	createDataMap:function(sId,fills,data){
+    
+    
+    createChartByReason:function(sId,data){
+    	var chartData = model.data['analysisByReason'];
+    	console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    	console.log(chartData);
+    	console.log(sId);
+    	
+    	 var chart = new AmCharts.AmRadarChart();
+    	    chart.dataProvider = chartData;
+    	    chart.categoryField = "REA";
+    	    chart.startDuration = 3;
+    	       	    
+    	    // VALUE AXIS
+    	    var valueAxis = new AmCharts.ValueAxis();
+    	    valueAxis.gridType = "circles";
+    	    valueAxis.fillAlpha = 0.05;
+    	    valueAxis.fillColor = "#000000";
+    	    valueAxis.axisAlpha = 0.2;
+    	    valueAxis.gridAlpha = 0;
+    	    valueAxis.fontWeight = "bold";
+    	    valueAxis.minimum = 0;
+    	    chart.addValueAxis(valueAxis);
+    	    
+    	    // GRAPH
+    	    var graph = new AmCharts.AmGraph();
+    	    graph.lineColor = "#000000";
+    	    graph.fillAlphas = 0.4;
+    	    graph.bullet = "round";
+    	    graph.valueField = "AMOU";
+    	    graph.balloonText = "Cost on [[category]]: ￥[[AMOU]] ";
+    	    chart.addGraph(graph);
+    	    
+    	    // GUIDES
+    	    // blue fill
+    	    var guide = new AmCharts.Guide();
+    	    guide.angle = 225;
+    	    guide.tickLength = 0;
+    	    guide.toAngle = 315;
+    	    guide.value = 0;
+    	    guide.toValue = 14;
+    	    guide.fillColor = "#0066CC";
+    	    guide.fillAlpha = 0.6;
+    	    valueAxis.addGuide(guide);
+    	    
+    	    // red fill
+    	    guide = new AmCharts.Guide();
+    	    guide.angle = 45;
+    	    guide.tickLength = 0;
+    	    guide.toAngle = 135;
+    	    guide.value = 0;
+    	    guide.toValue = 14;
+    	    guide.fillColor = "#000000";
+    	    guide.fillAlpha = 0.6;
+    	    valueAxis.addGuide(guide);
+    	    
+    	    // WRITE                
+    	    chart.write(sId);
+    	
+    	
+    },
+    createDataMap:function(sId,fills,data){
         console.log('画地图的数据');
         console.log(fills);
         console.log(data);
@@ -439,4 +500,7 @@ bus.subscribe('chartDiv','draw',function(channelId,eventId,data){
 },this);
 bus.subscribe('chartDivByMonth','draw',function(channelId,eventId,data){    
     util.uiFactory.createChartByMonth('chartDivByMonth');
+},this);
+bus.subscribe('chartDivByReason','draw',function(channelId,eventId,data){    
+    util.uiFactory.createChartByReason('chartDivByReason');
 },this);

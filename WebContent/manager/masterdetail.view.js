@@ -64,7 +64,11 @@ sap.ui.jsview("manager.masterdetail", {
         });
 		var reason = new sap.m.DisplayListItem("reason",{
 			type: sap.m.ListType.Navigation,
-            label: "Reason"
+            label: "Reason",
+            press: function(oControlEvent){
+                var splitapp = sap.ui.getCore().byId('splitApp');
+              	splitapp.toDetail("manager.analysisByReason");
+    		} 	
         });
 		var leaveDate = new sap.m.DisplayListItem("leavedate",{
 			type: sap.m.ListType.Navigation, 
