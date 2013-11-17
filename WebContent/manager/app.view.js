@@ -36,6 +36,8 @@ sap.ui.jsview("manager.app", {
 
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByCountry", "manager.analysisByCountry"));
 		
+		this.app.addDetailPage(sap.ui.jsview("manager.analysisByCity", "manager.analysisByCity"));
+		
 		this.app.toDetail("manager.analysisByCountry");
 
 		this.app.toMaster("manager.master");
@@ -53,6 +55,7 @@ sap.ui.jsview("manager.app", {
 		}
 		
 		function toDetail(channelId,eventId,pageId){
+			console.log(pageId);
 			if(sap.ui.getCore().byId(pageId)){
 				this.app.toDetail(pageId);
 			}

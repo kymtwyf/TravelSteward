@@ -82,7 +82,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 		});
 		
 		var btn_barChart = new sap.m.Button({
-	        icon: "sap-icon://bar-chart",
+	        icon: "sap-icon://pie-chart",
 	       	press:function(){
 	       		bus.publish('chartDiv','draw');
 	        }

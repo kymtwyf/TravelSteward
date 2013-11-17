@@ -59,7 +59,14 @@ sap.ui.jsview("manager.masterdetail", {
 			}
         });
 		var destinationCity = new sap.m.DisplayListItem("destinationcity",{
-            label: "City"
+			type: sap.m.ListType.Active,             
+            label: "City",
+             press: function(oControlEvent){
+				//alert("Hey Man! You can add an event here");
+				console.log('pressed');
+          		bus.publish("splitapp","toDetail","manager.analysisByCity");
+
+			}
         });
 		var reason = new sap.m.DisplayListItem("reason",{
             label: "Reason"

@@ -15,7 +15,43 @@ sap.ui.controller("manager.analysisByPerson", {
 * @memberOf manager.analysisByPerson
 */
 	onBeforeRendering: function() {
-		util.tools.autoSetContainerSize('ByPerson-mapDiv');
+		var screenWidth = 1024;
+		var screenHeight = $(window).height();
+		$('#ByPerson-mapDiv').css({
+			"width":0.9*screenWidth,
+			"height":0.7*screenHeight,
+			"left":0.05*screenWidth,
+			"display":"block",
+
+		});
+		$('#ByPerson-table').css({
+			"width":0.9*screenWidth,
+			"height":0.7*screenHeight,
+			"left":0.05*screenWidth,
+			"display":"none",
+			
+		});
+		$('#ByPerson-chartDiv').css({
+			"width":0.9*screenWidth,
+			"height":0.7*screenHeight,
+			"left":0.05*screenWidth,
+			"display":"none",
+			
+		});
+		bus.subscribe('analysisByPerson','show',function(channelId,eventId,index){
+
+				var ids = ['ByPerson-mapDiv','ByPerson-table','ByPerson-chartDiv'];
+        		for(var i = 0 ; i < ids.length; i++){
+		            console.log('showing container and hidding container');
+		            if(i==index){
+		                $('#'+ids[i]).css({"display":"block"});
+		            }else{
+		                $('#'+ids[i]).css({"display":"none"});
+	            }            
+        	}
+		},this);	
+
+		// util.tools.autoSetContainerSize('ByPerson-mapDiv');
 	},
 
 /**

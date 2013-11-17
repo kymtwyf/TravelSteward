@@ -103,6 +103,7 @@ sap.ui.controller("manager.analysisByCountry", {
 			// "height":"650px",
 		});
 		util.tools.autoSetContainerSize('mapDiv');
+		util.tools.autoSetContainerSize('tablevbox');
 		util.tools.autoSetContainerSize('chartDiv');
 		mapContainer.css({
 			"display":"block",

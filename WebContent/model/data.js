@@ -67,7 +67,9 @@ model.data = {
 		// console.log(fills);
 		// console.log(data);
 	},///FAKE
-
+	analysisByCity:{
+		
+	}
 
 
 

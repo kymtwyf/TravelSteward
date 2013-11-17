@@ -20,16 +20,18 @@ sap.ui.jsview("manager.analysisByPerson", {
 			items:[
 				objectheader,
 				new sap.ui.core.HTML("ByPerson-mapDiv",{
-					content:"<div id='mapDiv' style='display:none'></div>"
+					content:"<div id='ByPerson-main' style='display:none'></div>"
 				}),
 				new sap.m.VBox("ByPerson-table",{
 
 				}),
 				new sap.ui.core.HTML("ByPerson-chartDiv",{
-					content:"<div id='chartDiv' style='display:none'></div>"
+					content:"<div id='ByPerson-chartDiv' style='display:none'></div>"
 				})
 			]
 		});
+
+		
  		return new sap.m.Page({
 			title: "Title",
 			content: [
