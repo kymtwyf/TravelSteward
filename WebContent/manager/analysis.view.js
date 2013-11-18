@@ -25,7 +25,7 @@ sap.ui.jsview("manager.analysis", {
         });
         var objectheader = new sap.m.ObjectHeader({            
               title:"Total Trip Cost",
-              number : 0,
+              number : "607,422,422.99",
               numberUnit : "RMB",
               firstStatus : objectStatus,
               attributes:attribute

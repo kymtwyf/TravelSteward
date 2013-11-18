@@ -32,6 +32,7 @@ sap.ui.jsview("manager.app", {
 		this.app.addMasterPage(sap.ui.jsview("manager.masterdetail", "manager.masterdetail"));
 		console.log('analysisBycountry added加载');
 		
+		// this.app.addDetailPage(sap.ui.jsview("manager.analysis", "manager.analysis"));
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByPerson", "manager.analysisByPerson"));
 
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByCountry", "manager.analysisByCountry"));
@@ -41,7 +42,7 @@ sap.ui.jsview("manager.app", {
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByReason", "manager.analysisByReason"));
 
 		
-		this.app.toDetail("manager.analysisByCountry");
+		this.app.toDetail("manager.analysis");
 
 		this.app.toMaster("manager.master");
 		
@@ -57,10 +58,18 @@ sap.ui.jsview("manager.app", {
 			this.app.backMaster("manager.master");
 		}
 		
-		function toDetail(channelId,eventId,pageId){
+		function toDetail(channelId,eventId,data){
+			var pageId = data.pageId;
+			var transitionName = data.transition;
+
 			console.log(pageId);
 			if(sap.ui.getCore().byId(pageId)){
-				this.app.toDetail(pageId);
+				if(transitionName){
+					this.app.toDetail(pageId,transitionName);
+				}else{
+					this.app.toDetail(pageId);
+				}
+
 			}
 		}
 		function backDetail(channelId,eventId,pageId){

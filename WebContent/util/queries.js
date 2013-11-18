@@ -38,7 +38,7 @@ util.queries = {
 			case 'analysisBymonth':{
 				// util.tools._F_Toast("Getting data from server");
 				jQuery.ajax({
-					url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getDepaBudget.xsjs?callback=123&year=2013&depa=Sale",
+					url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getDepaBudget.xsjs?callback=123&year=2013&depa=销售部",
 					dataType: "jsonp",
 					error:function(){
 						d.reject();
@@ -57,7 +57,7 @@ util.queries = {
 			case 'analysisByReason':{
 				// util.tools._F_Toast("Getting data from server");
 				jQuery.ajax({
-					url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getReas.xsjs?year=2013&depa=Sale",
+					url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getReas.xsjs?year=2013&depa=销售部",
 					dataType: "jsonp",
 					error:function(){
 						d.reject();
