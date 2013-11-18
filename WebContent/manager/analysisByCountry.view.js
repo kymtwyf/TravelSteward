@@ -23,13 +23,13 @@ sap.ui.jsview("manager.analysisByCountry", {
 		var tableChart = new sap.m.Table("tableChart",{
 			columns: [
 				        new sap.m.Column({
-				          header: new sap.m.Label({text: "Country"})
+				          header: new sap.m.Label({text: "国家"})
 				        }),
 				        new sap.m.Column({
-				          header: new sap.m.Label({text: "Cost"})
+				          header: new sap.m.Label({text: "支出"})
 				        }),
 				        new sap.m.Column({
-				          header: new sap.m.Label({text: "Sales"})
+				          header: new sap.m.Label({text: "销售额"})
 				        })
 				     ]
 		});
@@ -51,8 +51,8 @@ sap.ui.jsview("manager.analysisByCountry", {
 		});
 		//for test
 		bus.publish("analysisHeader","update",{
-			title:"Total Cost",
-			description:"in Year 2013",
+			title:"总支出",
+			description:"2013年内",
 			total:"123457",
 			currency:'EUR',
 			budget:"1234.0"
@@ -125,7 +125,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 	    });
 	
 		var page = new sap.m.Page("analysisByCountry",{
-			title:"Analysis By Country",
+			title:"出差费用分析（按国家)",
 			enableScrolling:false,
 			footer:footer,
 			content: [content]

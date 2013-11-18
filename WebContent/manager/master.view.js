@@ -20,7 +20,7 @@ sap.ui.jsview("manager.master", {
 		jQuery.sap.require("util.tools");
 		
 		var searchField =  new sap.m.SearchField({
-            placeholder: "Search ..."
+            placeholder: "搜索 ..."
         });
 		var searchBar = new sap.m.Bar({
 		    contentMiddle: [searchField]
@@ -43,7 +43,7 @@ sap.ui.jsview("manager.master", {
 				for(var j = requestdata.content.length-1; j>=0; j-- ){
 						
 						requestItems.items[i] = [];
-						requestItems.items[i].title = "Request No."+requestdata.content[j].REQID;
+						requestItems.items[i].title = " No."+requestdata.content[j].REQID;
 						requestItems.items[i].number = requestdata.content[j].PLEXP;
 						requestItems.items[i].numberUnit =  "RMB";
 						
@@ -70,7 +70,7 @@ sap.ui.jsview("manager.master", {
 					if(requestdata.content[j].STATUS =="Pending"){
 						
 						requestItems.items[i] = [];
-						requestItems.items[i].title = "Request No."+requestdata.content[j].REQID;
+						requestItems.items[i].title = " No."+requestdata.content[j].REQID;
 						requestItems.items[i].number = requestdata.content[j].PLEXP;
 						requestItems.items[i].numberUnit =  "RMB";
 						
@@ -99,7 +99,7 @@ sap.ui.jsview("manager.master", {
 						if(requestdata.content[j].STATUS =="Approved"){
 							
 							requestItems.items[i] = [];
-							requestItems.items[i].title = "Request No."+requestdata.content[j].REQID;
+							requestItems.items[i].title = " No."+requestdata.content[j].REQID;
 							requestItems.items[i].number = requestdata.content[j].PLEXP;
 							requestItems.items[i].numberUnit =  "RMB";
 							
@@ -128,7 +128,7 @@ sap.ui.jsview("manager.master", {
 						if(requestdata.content[j].STATUS =="Rejected"){
 							
 							requestItems.items[i] = [];
-							requestItems.items[i].title = "Request No."+requestdata.content[j].REQID;
+							requestItems.items[i].title = " No."+requestdata.content[j].REQID;
 							requestItems.items[i].number = requestdata.content[j].PLEXP;
 							requestItems.items[i].numberUnit =  "RMB";
 							
@@ -184,10 +184,10 @@ sap.ui.jsview("manager.master", {
 			   var prio = oContext.getProperty("prio");
 			   var str;
 			   if(prio == 1)
-				   str = "Pending";
+				   str = "待处理";
 			   else if( prio ==2 )
-				   str = "Rejected";
-			   else str = "Approved";
+				   str = "拒绝";
+			   else str = "批准";
 			   return {
 			     key: str, // group by first letter of last name
 			     text: str
@@ -205,19 +205,19 @@ sap.ui.jsview("manager.master", {
 		bus.subscribe("master","generatelist",generateList,this);
 		
 		var pendingButton =  new sap.m.Button("pendingbutton",{
-		  	  text: "Pending"
+		  	  text: "待处理"
 		});
 		
 		var approvedButton =  new sap.m.Button("approvedbutton",{
-	  	      text: "Approved"
+	  	      text: "批准"
 	    });
 		
 		var rejectedButton =  new sap.m.Button("rejectedbutton",{
-	  	      text: "Rejected"
+	  	      text: "拒绝"
 	    });
 		
 		var allButton =  new sap.m.Button("allbutton",{
-	  	      text: "All"
+	  	      text: "所有"
 	    });
 		
 		var filterActionSheet = new sap.m.ActionSheet({
@@ -237,7 +237,7 @@ sap.ui.jsview("manager.master", {
 		});
 		
  		var listMasterPage = new sap.m.Page("list_master_page", {
- 			title:"Travel requests",
+ 			title:"出差请求",
  			subHeader:searchBar,
  			content:[requestList],
  			footer:masterFooter

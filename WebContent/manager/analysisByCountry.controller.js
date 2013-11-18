@@ -7,16 +7,42 @@ sap.ui.controller("manager.analysisByCountry", {
 */
 	onInit: function() {
 		//set a timer 
+		var flag = false;
 		var refreshInterval = 5000;
 		var btn_message = sap.ui.getCore().byId('btn_message');
 		var app = sap.ui.getCore().byId('splitApp');
 		btn_message.attachPress(function() {
 			btn_message.setType("Default");
 			app.showMaster("manager.master");
-			bus.publish("time","start",false);
+			flag = true;
+			
+			jQuery.ajax({
+				//url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllReqs?$format=json",
+				//jsonp parameter
+				url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getReqs.xsjs",
+				dataType: "jsonp",
+				//end 
+				error:function(error){
+					console.log("Error");
+				},
+				success:function(data){
+					console.log("aaaaaaaaaaaaaaaaa");
+					var id;
+					for(var i = 0; i<data.d.results.length ; i++ ){
+						id = data.d.results[i].REQID;
+						model.data["request"] = new Object();
+						model.data["request"].content = data.d.results;
+					}
+					
+					bus.publish("master","generatelist",{
+						content:model.data["request"].content,
+						filter:"all"
+					});
+				}
+			});
 	    });
+		
 		function startTiming(channelID,eventID,start){
-		if(start = true){
 		     setInterval(function() {												//set timer	
 		    		   $.ajax({
 		    			   type:"get",
@@ -27,8 +53,8 @@ sap.ui.controller("manager.analysisByCountry", {
 		    				   time: new Date().toLocaleTimeString()				//ensure not use cache
 		    			   },
 		    			   success:function(res){ 
-		    				   
-		    				   if(res.count!=0)
+		    				   console.log("flag："+ flag + res.count);
+		    				   if((res.count!=0)&&(flag== false))
 		    					   btn_message.setType("Reject");
 		    				   else 
 		    					   btn_message.setType("Default");
@@ -37,8 +63,7 @@ sap.ui.controller("manager.analysisByCountry", {
 		    				  alert('Fail to get count');
 		    			  },
 		    		 });
-		    	   }, refreshInterval); 
-		     }  											//endif keepRefresh
+		    	   }, refreshInterval); 								//endif keepRefresh
 			
 		}
 		bus.subscribe("time","start",startTiming,this);
@@ -71,7 +96,7 @@ sap.ui.controller("manager.analysisByCountry", {
 //
 //	},
 	onBeforeShow:function(evt){
-		bus.publish("time","start",true);
+		bus.publish("time","start");
 		console.log('analysisByCountry onbeforeshow');
 		console.log($('#mapDiv'));
 		console.log($("#analysisByCountry").height());
