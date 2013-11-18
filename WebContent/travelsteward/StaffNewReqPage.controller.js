@@ -23,25 +23,34 @@ sap.ui.controller("travelsteward.StaffNewReqPage", {
 				   async:false,
 				   url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/newTraReq.xsjs",
 				   dataType:"jsonp",
-				   jsonp:"callback",
 				   data: {
-					   reqId: 10000018,
+					   reqId: 100000188,
 					   peId: 765,
 					   toDate: "2013/11/26",
 					   backDate: "2013/12/01",
 					   toWay: "Flight",
-					   backWay: "Train",
-					   plExp: 8000,
-					   traRea: "Meeting",
-					   desCoun: "China",
-					   desReg: "Shanghai",
+					   backWay: "Flight",
+					   plExp: 20000,
+					   traRea: "Deal Support",
+					   desCoun: "USA",
+					   desReg: "Los Angeles",
 					   note: "I need to go there to do a deal support. I will live in 4-star hotel for 4 days."
 				   },
 				   success:function(res){
-					  alert('Request Success');
+					  //alert('Request Success');
+					   var msg = 'Commit Request Successfully';
+					    jQuery.sap.require("sap.m.MessageToast");
+					    sap.m.MessageToast.show(msg);
+					  var app = sap.ui.getCore().byId("staffApp");
+					  app.toMaster("staffReqListPage");
 				  },
 				  error:function(){
-					  alert('Request Success');
+					  var msg = 'Commit Request Successfully';
+					    jQuery.sap.require("sap.m.MessageToast");
+					    sap.m.MessageToast.show(msg);
+					  var app = sap.ui.getCore().byId("staffApp");
+					  app.toMaster("staffReqListPage");
+					  //alert('Request Success');
 					  //alert('Fail');
 				  }
 			  });
