@@ -32,7 +32,10 @@ sap.ui.controller("manager.AnalysisByMonth", {
 					sap.m.MessageToast.show("检索用时 "+spendTime/1000+" 秒",{
 					 	duration:2000
 					 });
+					console.log(data);
 				    model.data['analysisBymonth'] = data;
+				    console.log("============ ==");
+				    console.log(model.data['analysisBymonth']);
 					bus.publish('chartDivByMonth','draw');
 			});
 		}

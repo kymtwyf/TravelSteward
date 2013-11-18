@@ -25,6 +25,8 @@ util.uiFactory = {
     	var chartData = model.data['analysisBymonth'];
     	var Data = [];
     	var sumAmount = 0;
+    	console.log("shithsithishishiwishihfdsfj");
+    	console.log(chartData);
     	for(var i = 0; i<chartData.length; i++){
     		var DataItem = {
         			MONTH : null,
