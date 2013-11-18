@@ -39,3 +39,15 @@
 	padding-right:45px
 }
 
+.sapMShellCentralBox {
+	width: 1024px;
+	margin-left: -512px;
+	left: 50%;
+	background: url(/TravelSteward/img/273304_h_ergb_s_gl.jpg);
+}
+
+.bgImage {
+	background: url(/TravelSteward/img/p1.jpg);
+
+}
+

@@ -54,7 +54,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			    	           }),
 			    	           new sap.m.DateTimeInput("backDate", {
 			    	        	   type: sap.m.DateTimeInputType.Date,
-			    	        	   displayFormat: 'y/M/d',
+			    	        	   displayFormat: 'y/MM/dd',
 			    	        	   value: "2013-12-01"
 			    	           }),
 			    	           new sap.m.HBox({
@@ -66,11 +66,9 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			    	        	   items:[
 			    	        	   new sap.m.Select("desCoun", {
 				    	        	   items: [
-							            	    new sap.ui.core.Item({text: "China"}),
+							            	    new sap.ui.core.Item({text: "USA"}),
 							            	    new sap.ui.core.Item({text: "Germany"}),
-							            	    new sap.ui.core.Item({key: "item3", text: "Item 3"}),
-							            	    new sap.ui.core.Item({text: "Item 4"}),
-							            	    new sap.ui.core.Item({text: "Item 5"})
+							            	    new sap.ui.core.Item({text: "China"})
 							            	  ],
 //							           selectedKey: "item3"
 				    	           }),
@@ -78,8 +76,9 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 				    	           }),
 				    	           new sap.m.Select("desReg", {
 				    	        	   items: [
-							            	    new sap.ui.core.Item({text:"Shanghai"}),
-							            	    new sap.ui.core.Item({text:"Beijing"})
+							            	    new sap.ui.core.Item({text:"Los Angeles"}),
+							            	    new sap.ui.core.Item({text:"Washington D.C"}),
+							            	    new sap.ui.core.Item({text:"New York"})
 							            	  ],
 				    	           }),
 			    	        	   ] 
@@ -98,7 +97,8 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			    	           }),
 			    	           new sap.m.Select("traRea", {
 			    	        	   items: [
-						            	    new sap.ui.core.Item({text: "Support"}),
+						            	    new sap.ui.core.Item({text: "Deal Support"}),
+						            	    new sap.ui.core.Item({text: "Customer Engagement"}),
 						            	    new sap.ui.core.Item({text: "Meeting"}),
 						            	  ],
 			    	           }),
@@ -121,8 +121,8 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 	        	    	          }),
 	        	    	          new sap.m.Select("backWay", {
 	        	    	        	  items:[
-	        	    	        	         new sap.ui.core.Item({text: "Train"}),
 	        	    	        	         new sap.ui.core.Item({text: "Flight"}),
+	        	    	        	         new sap.ui.core.Item({text: "Train"}),
 	        	    	        	         ]
 	        	    	       }),
 	        	    	       new sap.m.HBox({
@@ -155,7 +155,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			    	           }),
 			    	           new sap.m.Input({
 			    	        	   type: sap.m.InputType.Number,
-			    	        	   value: "8000"
+			    	        	   value: "20000"
 			    	           }),
 			    	           new sap.m.HBox({
 			    	           }),
@@ -163,7 +163,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			    	        	   text:"Note"
 			    	           }),
 			    	           new sap.m.TextArea({
-			    	        	   value: "I need to go there to do a deal support. I will live in 4-star hotel for 4 days.",
+			    	        	   value: "I need to go there for deal support. I will live in 4-star hotel for 4 days.",
 			    	        	   rows: 4 
 			    	           }),
 			    	           new sap.ui.commons.Title({ // this starts a new group
