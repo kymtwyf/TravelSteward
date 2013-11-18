@@ -47,9 +47,9 @@ sap.ui.jsview("manager.master", {
 						requestItems.items[i].number = requestdata.content[j].PLEXP;
 						requestItems.items[i].numberUnit =  "RMB";
 						
-						if(requestdata.content[j].STATUS =="Approved")
+						if(requestdata.content[j].STATUS =="批准")
 							requestItems.items[i].state = "Success";
-					    else if (requestdata.content[j].STATUS =="Pending")
+					    else if (requestdata.content[j].STATUS =="待处理")
 					    	requestItems.items[i].state = "Warning";
 					    else requestItems.items[i].state = "Error";
 						
@@ -74,9 +74,9 @@ sap.ui.jsview("manager.master", {
 						requestItems.items[i].number = requestdata.content[j].PLEXP;
 						requestItems.items[i].numberUnit =  "RMB";
 						
-						if(requestdata.content[j].STATUS =="Approved")
+						if(requestdata.content[j].STATUS =="批准")
 							requestItems.items[i].state = "Success";
-					    else if (requestdata.content[j].STATUS =="Pending")
+					    else if (requestdata.content[j].STATUS =="待处理")
 					    	requestItems.items[i].state = "Warning";
 					    else requestItems.items[i].state = "Error";
 						
@@ -103,9 +103,9 @@ sap.ui.jsview("manager.master", {
 							requestItems.items[i].number = requestdata.content[j].PLEXP;
 							requestItems.items[i].numberUnit =  "RMB";
 							
-							if(requestdata.content[j].STATUS =="Approved")
+							if(requestdata.content[j].STATUS =="批准")
 								requestItems.items[i].state = "Success";
-						    else if (requestdata.content[j].STATUS =="Pending")
+						    else if (requestdata.content[j].STATUS =="待处理")
 						    	requestItems.items[i].state = "Warning";
 						    else requestItems.items[i].state = "Error";
 							
@@ -132,9 +132,9 @@ sap.ui.jsview("manager.master", {
 							requestItems.items[i].number = requestdata.content[j].PLEXP;
 							requestItems.items[i].numberUnit =  "RMB";
 							
-							if(requestdata.content[j].STATUS =="Approved")
+							if(requestdata.content[j].STATUS =="批准")
 								requestItems.items[i].state = "Success";
-						    else if (requestdata.content[j].STATUS =="Pending")
+						    else if (requestdata.content[j].STATUS =="待处理")
 						    	requestItems.items[i].state = "Warning";
 						    else requestItems.items[i].state = "Error";
 							
