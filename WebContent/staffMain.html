@@ -10,6 +10,14 @@
 		</script>
 		<!-- only load the mobile lib "sap.m" and the "sap_mvi" theme -->
 		<script>
+		var bus = sap.ui.getCore().getEventBus();
+		
+		sap.ui.localResources("travelsteward");
+		sap.ui.localResources("model");
+		jQuery.sap.require("model.data");
+
+		
+		
 				sap.ui.localResources("travelsteward");
 				var app = new sap.m.SplitApp("staffApp");
 				var listPage = sap.ui.view({id:"staffReqListPage", viewName:"travelsteward.StaffReqListPage", type:sap.ui.core.mvc.ViewType.JS});

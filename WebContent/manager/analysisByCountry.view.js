@@ -96,6 +96,12 @@ sap.ui.jsview("manager.analysisByCountry", {
 			selectedButton:btn_personizedChart
 
 		});
+		
+		var btn_message = new sap.m.Button("btn_message",{
+			icon: "sap-icon://email",
+            //type: "Reject",
+            //text: "Reject",
+          });
 		var btn_setTime = new sap.m.Button({
                 icon: "sap-icon://history",
                   press : function() {
@@ -112,10 +118,10 @@ sap.ui.jsview("manager.analysisByCountry", {
                     	}        
         });
 		
-	
+		
 	    var footer = new sap.m.Bar({ 
             contentLeft: [sgBtn_chartType],
-            contentRight:[btn_setTime,btn_setting]
+            contentRight:[btn_message,btn_setTime,btn_setting]
 	    });
 	
 		var page = new sap.m.Page("analysisByCountry",{
