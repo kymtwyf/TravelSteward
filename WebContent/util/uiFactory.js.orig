@@ -128,6 +128,23 @@ util.uiFactory = {
     	    valueAxis.axisAlpha = 0;
     	    chart.addValueAxis(valueAxis);
     	    
+<<<<<<< HEAD
+    	    // line
+    	    var graph2 = new AmCharts.AmGraph();
+    	    graph2.type = "line";
+    	    graph2.title = "Cost Amount";
+    	    graph2.lineColor = "#fcd202";
+    	    graph2.valueField = "AMOU";
+    	    graph2.lineThickness = 20;
+    	    graph2.bullet = "round";
+    	    graph2.bulletBorderThickness = 3;
+    	    graph2.bulletBorderColor = "#fcd202";
+    	    graph2.bulletBorderAlpha = 1;
+    	    graph2.bulletColor = "#ffffff";
+    	    graph2.dashLengthField = "dashLengthLine";
+    	    graph2.balloonText = "<span style='font-size:13px;'>[[title]] in [[category]]:<b>[[value]]</b> [[additional]]</span>";
+    	    chart.addGraph(graph2);
+=======
     	    // GRAPH                          
     	    var graph = new AmCharts.AmGraph();
     	    graph.valueField = "CLOSE";
@@ -141,6 +158,7 @@ util.uiFactory = {
     	    graph.balloonText = "<span style='color:#1c8ceb'>[[MONTHNAME]]</span><br><span style='font-size:15px;'><b>[[SALEAMOUNT]]RMB</b></span>";
     	    graph.labelText = "￥[[CLOSE]]";
     	    chart.addGraph(graph);
+>>>>>>> 9d620585b78613ace2945098e46de2c997d6526d
     	    
     	    // Trend lines used for connectors
     	    var trendLine = new AmCharts.TrendLine();

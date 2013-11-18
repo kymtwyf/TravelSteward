@@ -37,9 +37,12 @@ sap.ui.jsview("manager.app", {
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByCountry", "manager.analysisByCountry"));
 		
 		this.app.addDetailPage(sap.ui.jsview("manager.AnalysisByMonth", "manager.AnalysisByMonth"));
+<<<<<<< HEAD
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByCity", "manager.analysisByCity"));
+=======
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByReason", "manager.analysisByReason"));
 
+>>>>>>> 9d620585b78613ace2945098e46de2c997d6526d
 		
 		this.app.toDetail("manager.analysisByCountry");
 

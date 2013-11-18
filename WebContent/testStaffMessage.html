@@ -13,9 +13,16 @@
 <body>
 	<!--  <form action="http://ld9415:8002/ta/TravelAnalysis/xsjs/insertChat.xsjs" method="get">-->
 		<input id="reqId" name="reqId" type="text" value="10000000">
+		<br />
 		<input id="from" name="from" type="text" value="81">
+		<br />
 		<input id="to" name="to" type="text" value="18">
-		<input id="content" name="content" x-webkit-speech lang="zh-CN" />
+		<br />
+		<select id="content" name="content">
+			<option value ="我在美国发展了一个很重要的新客户">我在美国发展了一个很重要的新客户</option>
+  			<option value ="好的，我会注意">好的，我会注意</option>
+		</select>
+		<br />
 		<input type="submit" value="Send" onclick="send()">
 </body>
 <script>
@@ -23,8 +30,8 @@ var send = function() {
 $.ajax({
 	   type:"get",
 	   async:true,													//asynchron is ok
-	   url:"http://ld9415:8002/ta/TravelAnalysis/xsjs/insertChat.xsjs",
-	   dataType:"json",
+	   url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/insertChat.xsjs",
+	   dataType:"jsonp",
 	   data: {
 		   reqId: $("#reqId").val(),
 		   from: $("#from").val(),
@@ -33,9 +40,11 @@ $.ajax({
 		   content: $("#content").val()
 	   },
 	   success:function(transCont){
+		   alert("succ");
 		  //console.log("SendMessage "+this.reqId+" "+18+" "+81+" "+time+" "+transCont);
 	  },
 	  error:function(){
+		  alert("fail");
 		  //alert('Fail to send message to HANA server!');
 	  }
 });

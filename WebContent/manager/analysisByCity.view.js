@@ -1,74 +1,56 @@
-sap.ui.jsview("manager.analysis", {
+sap.ui.jsview("manager.analysisByCity", {
 
 	/** Specifies the Controller belonging to this View. 
 	* In the case that it is not implemented, or that "null" is returned, this View does not have a Controller.
-	* @memberOf manager.analysis
+	* @memberOf manager.analysisByCity
 	*/ 
 	getControllerName : function() {
-		return "manager.analysis";
+		return "manager.analysisByCity";
 	},
 
 	/** Is initially called once after the Controller has been instantiated. It is the place where the UI is constructed. 
 	* Since the Controller is given to this method, its event handlers can be attached right away. 
-	* @memberOf manager.analysis
+	* @memberOf manager.analysisByCity
 	*/ 
 	createContent : function(oController) {
-		jQuery.sap.require('util.uiFactory');
-		//这个用来写analysis by department 每个部门预算和实际之间的关系
-		// var objectheader = util.uiFactory.getAnalysisObjectHeader("analysisByDepartment");
+		// var objectheader = util.uiFactory.getAnalysisObjectHeader();
 		var objectStatus = new sap.m.ObjectStatus({
-	        text : "In Budget",
-	        state : "Success"
+	        text : "Overspend",
+	        state : "Warning"
         });
         var attribute = new sap.m.ObjectAttribute({
-          text : "Year 2013"
+          text : "40,127 times in total"
+        });
+        var attribute2 = new sap.m.ObjectAttribute({
+          text : "with 1,752,346 receipts"
         });
         var objectheader = new sap.m.ObjectHeader({            
-              title:"Total Trip Cost",
-              number : 0,
+              title:"Total Cost in America",
+              number : "240,632,500.48",
               numberUnit : "RMB",
               firstStatus : objectStatus,
-              attributes:attribute
+              attributes:[attribute,attribute2]
         });
 		var content = new sap.m.VBox({
 			items:[
 				objectheader,
-				new sap.ui.core.HTML("analysisByDepartment_chart",{
-					content:"<div id='analysisByDepartment_chart' style='width: 70%; height: 600px;position:relative;left:5%;top 100px'></div>"
+				new sap.ui.core.HTML("analysisByCity-mapDiv",{
+					content:"<div id='analysisByCity-mapDiv' style='display:none'></div>"
+				}),
+				new sap.m.VBox("analysisByCity-tablevbox"),
+				
+				new sap.ui.core.HTML("analysisByCity-chartDiv",{
+					content:"<div id='analysisByCity-chartDiv' style='display:none'></div>"
 				})
-				// new sap.m.HBox("analysisByDepartment-mapDiv",{
-				// 	items:[
-				// 	new sap.ui.core.HTML({
-				// 		content:"<div id='analysisByDepartment_1' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
-				// 	}),
-				// 	new sap.ui.core.HTML({
-				// 		content:"<div id='analysisByDepartment_2' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
-				// 	}),
-				// 	new sap.ui.core.HTML({
-				// 		content:"<div id='analysisByDepartment_3' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
-				// 	}),
-				// 	new sap.ui.core.HTML({
-				// 		content:"<div id='analysisByDepartment_4' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
-				// 	}),
-				// 	new sap.ui.core.HTML({
-				// 		content:"<div id='analysisByDepartment_5' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
-				// 	}),
-				// 	new sap.ui.core.HTML({
-				// 		content:"<div id='analysisByDepartment_6' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
-				// 	}),
-				// 	new sap.ui.core.HTML({
-				// 		content:"<div id='analysisByDepartment_7' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
-				// 	}),
-				// 	new sap.ui.core.HTML({
-				// 		content:"<div id='analysisByDepartment_8' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
-				// 	})
-				// 	]
-				// })				
 			]
 		});
 		var btn_personizedChart = new sap.m.Button({
 	        icon: "sap-icon://globe",
 	       press:function(){
+	       	//再次点这个地图的时候肯定已经画好了地图。
+		       // bus.publish('container','show',{
+		       // 		index:0
+		       // });
 	       }
 		});
 		
@@ -98,7 +80,7 @@ sap.ui.jsview("manager.analysis", {
 		var btn_setTime = new sap.m.Button({
                 icon: "sap-icon://history",
                   press : function() {
-                  	// bus.publish("splitapp","toDetail","manager.analysisByCountry");
+                  	bus.publish("splitapp","toDetail","manager.analysisByCountry");
                 	  //	monthActionSheet.openBy(this);
                                    
                         }        
@@ -106,7 +88,7 @@ sap.ui.jsview("manager.analysis", {
 		var btn_setting = new sap.m.Button({
                 icon: "sap-icon://settings",
               	press : function() {
-              			// bus.publish("splitapp","toDetail","manager.analysisByPerson");
+              			bus.publish("splitapp","toDetail","manager.analysisByPerson");
                 	}        
         });
 	    var footer = new sap.m.Bar({ 
@@ -114,13 +96,12 @@ sap.ui.jsview("manager.analysis", {
             contentRight:[btn_setTime,btn_setting]
 	    });
  		return new sap.m.Page({
-			title: "Travel Steward",
+			title: "Title !!!",
 			content: [
 				content,				
 			],
 			footer:footer
 		});
-		
 	}
 
 });

@@ -58,6 +58,11 @@ util.tools = {
 			"left":width*0.1,
 			//"border":"solid"
 		});
+
+		console.log('width is');
+		console.log($("#"+sId).width());
+		console.log($("#"+sId).width());
+		
 	}
 }
 

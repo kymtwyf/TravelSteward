@@ -96,12 +96,6 @@ sap.ui.jsview("manager.analysisByCountry", {
 			selectedButton:btn_personizedChart
 
 		});
-		
-		var btn_message = new sap.m.Button("btn_message",{
-			icon: "sap-icon://email",
-            //type: "Reject",
-            //text: "Reject",
-          });
 		var btn_setTime = new sap.m.Button({
                 icon: "sap-icon://history",
                   press : function() {
@@ -115,13 +109,40 @@ sap.ui.jsview("manager.analysisByCountry", {
               	press : function() {
               		bus.publish("splitapp","toDetail","manager.analysis");
                              // bus.publish('mapDiv','draw',model.data.getFakeData());
+                             bus.publish("analysisHeader","update",{
+								title:"Total Cost",
+								description:"in Year 2013",
+								total:"12345232457",
+								currency:'EUR',
+								budget:"1234.0"
+							});
                     	}        
         });
 		
+<<<<<<< HEAD
+		var btn_menu = new sap.m.Button({
+            icon: "sap-icon://menu2",
+          	press : function() {
+          		var splitapp = sap.ui.getCore().byId('splitApp');
+          		splitapp.showMaster("manager.master");
+                	}        
+    	});
 		
+		var headerTitle = new sap.m.Label({
+			text: "Analysis By Country"
+		});
+		
+		var customerHeader = new sap.m.Bar({ 
+            contentLeft: [btn_menu],
+            contentMiddle:[headerTitle]
+	    });
+		
+=======
+	
+>>>>>>> 9d620585b78613ace2945098e46de2c997d6526d
 	    var footer = new sap.m.Bar({ 
             contentLeft: [sgBtn_chartType],
-            contentRight:[btn_message,btn_setTime,btn_setting]
+            contentRight:[btn_setTime,btn_setting]
 	    });
 	
 		var page = new sap.m.Page("analysisByCountry",{

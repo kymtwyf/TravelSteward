@@ -1,14 +1,14 @@
 jQuery.sap.declare("model.data");
 
 model.data = {
-	numberBase:"2000,000,000",//设置了1亿为基准100M,60M,20M,10M,1M
+	numberBase:"200000000",//设置了1亿为基准100M,60M,20M,10M,1M
 	colorMapping:{
-		">100%":"RGB(183,44,52)",
-		"80%~100%":"RGB(204,25,25)",
-		"20%~80%":"RGB(204,25,25)",
-		"1%~20%":"RGB(237,220,78)",
-		"0~1%":"RGB(119,255,51)",
-		defaultFill: '#EDDC4E'
+		">100%":"RGB(254,62,50)",
+		"80%~100%":"RGB(251,246,106)",
+		"20%~80%":"RGB(119,255,51)",
+		"1%~20%":"RGB(253,254,213)",
+		"0~1%":"RGB(255,255,255)",
+		defaultFill: 'RGBA(93,209,249,0.3)'
 	},
 
 	///Fake 
@@ -67,7 +67,9 @@ model.data = {
 		// console.log(fills);
 		// console.log(data);
 	},///FAKE
-
+	analysisByCity:{
+		
+	}
 
 
 

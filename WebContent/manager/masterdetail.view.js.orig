@@ -59,7 +59,8 @@ sap.ui.jsview("manager.masterdetail", {
 			}
         });
 		var destinationCity = new sap.m.DisplayListItem("destinationcity",{
-			type: sap.m.ListType.Navigation,
+<<<<<<< HEAD
+			type: sap.m.ListType.Active,             
             label: "City",
              press: function(oControlEvent){
 				//alert("Hey Man! You can add an event here");
@@ -67,6 +68,10 @@ sap.ui.jsview("manager.masterdetail", {
           		bus.publish("splitapp","toDetail","manager.analysisByCity");
 
 			}
+=======
+			type: sap.m.ListType.Navigation,
+            label: "City"
+>>>>>>> 9d620585b78613ace2945098e46de2c997d6526d
         });
 		var reason = new sap.m.DisplayListItem("reason",{
 			type: sap.m.ListType.Navigation,
@@ -162,7 +167,7 @@ sap.ui.jsview("manager.masterdetail", {
 		
 		function changeStatusToServer(reqID,status){
 			jQuery.ajax({
-				url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/updateReq.xsjs?reqId="+reqID+"&status="+status ,
+				url:"http://ld9415:8002/ta/TravelAnalysis/xsjs/updateReq.xsjs?reqId="+reqID+"&status="+status ,
 				dataType: "jsonp",
 				//end 
 				error:function(error){
@@ -220,7 +225,7 @@ sap.ui.jsview("manager.masterdetail", {
 			             ],
 			contentRight:[
 			              new sap.m.Button("sendMessButton", {
-			            	  icon: "sap-icon://response",
+			            	  icon: "sap-icon://email",
 			            	  visible: false
 			              })
 			             ]
