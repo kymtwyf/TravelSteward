@@ -52,14 +52,14 @@ sap.ui.jsview("manager.masterdetail", {
 		      firstStatus : status
 		});
 		var destinationCountry = new sap.m.DisplayListItem("destinationcountry",{
-			type: sap.m.ListType.Active, 
+			type: sap.m.ListType.Navigation, 
             label: "Country",
             press: function(oControlEvent){
 				alert("Hey Man! You can add an event here");
 			}
         });
 		var destinationCity = new sap.m.DisplayListItem("destinationcity",{
-			type: sap.m.ListType.Active,             
+			type: sap.m.ListType.Navigation,
             label: "City",
              press: function(oControlEvent){
 				//alert("Hey Man! You can add an event here");
@@ -69,10 +69,15 @@ sap.ui.jsview("manager.masterdetail", {
 			}
         });
 		var reason = new sap.m.DisplayListItem("reason",{
-            label: "Reason"
+			type: sap.m.ListType.Navigation,
+            label: "Reason",
+            press: function(oControlEvent){
+                var splitapp = sap.ui.getCore().byId('splitApp');
+              	splitapp.toDetail("manager.analysisByReason");
+    		} 	
         });
 		var leaveDate = new sap.m.DisplayListItem("leavedate",{
-			type: sap.m.ListType.Active, 
+			type: sap.m.ListType.Navigation, 
             label: "Leave Date",
             press: function(oControlEvent){
                 var splitapp = sap.ui.getCore().byId('splitApp');
@@ -83,7 +88,7 @@ sap.ui.jsview("manager.masterdetail", {
             label: "Transportation"
         });
 		var returnDate = new sap.m.DisplayListItem("returndate",{
-			type: sap.m.ListType.Active, 
+			type: sap.m.ListType.Navigation, 
             label: "Return Date",
             press: function(oControlEvent){
                 var splitapp = sap.ui.getCore().byId('splitApp');
@@ -225,7 +230,7 @@ sap.ui.jsview("manager.masterdetail", {
 		var detailMasterPage = new sap.m.Page("detail_master_page", {
  			title:"Request Detail",
  			headerContent:actionButton,
- 			enableScrolling:false,
+// 			enableScrolling:false,
  			showNavButton: true,
  			 navButtonPress:function(){
  				view.getController().keepRefresh = false;				//stop refresh messages

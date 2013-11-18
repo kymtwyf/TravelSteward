@@ -109,41 +109,18 @@ sap.ui.jsview("manager.analysisByCountry", {
               	press : function() {
               		bus.publish("splitapp","toDetail","manager.analysis");
                              // bus.publish('mapDiv','draw',model.data.getFakeData());
-                             bus.publish("analysisHeader","update",{
-								title:"Total Cost",
-								description:"in Year 2013",
-								total:"12345232457",
-								currency:'EUR',
-								budget:"1234.0"
-							});
                     	}        
         });
 		
-		var btn_menu = new sap.m.Button({
-            icon: "sap-icon://menu2",
-          	press : function() {
-          		var splitapp = sap.ui.getCore().byId('splitApp');
-          		splitapp.showMaster("manager.master");
-                	}        
-    	});
-		
-		var headerTitle = new sap.m.Label({
-			text: "Analysis By Country"
-		});
-		
-		var customerHeader = new sap.m.Bar({ 
-            contentLeft: [btn_menu],
-            contentMiddle:[headerTitle]
-	    });
-		
+	
 	    var footer = new sap.m.Bar({ 
             contentLeft: [sgBtn_chartType],
             contentRight:[btn_setTime,btn_setting]
 	    });
 	
 		var page = new sap.m.Page("analysisByCountry",{
+			title:"Analysis By Country",
 			enableScrolling:false,
-			customHeader: customerHeader,
 			footer:footer,
 			content: [content]
 		});

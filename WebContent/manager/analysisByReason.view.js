@@ -1,15 +1,15 @@
-sap.ui.jsview("manager.AnalysisByMonth", {
+sap.ui.jsview("manager.analysisByReason", {
 
 	/** Specifies the Controller belonging to this View. 
 	* In the case that it is not implemented, or that "null" is returned, this View does not have a Controller.
-	* @memberOf manager.AnalysisByMonth
+	* @memberOf manager.AnalysisByReason
 	*/ 
 	getControllerName : function() {
-		return "manager.AnalysisByMonth";
+		return "manager.analysisByReason";
 	},
 	/** Is initially called once after the Controller has been instantiated. It is the place where the UI is constructed. 
 	* Since the Controller is given to this method, its event handlers can be attached right away. 
-	* @memberOf manager.AnalysisByMonth
+	* @memberOf manager.analysisByReason
 	*/ 
 	createContent : function(oController) {
 //		var btn_menu = new sap.m.Button({
@@ -21,7 +21,7 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 //    });
 //		
 //		var headerTitle = new sap.m.Label({
-//			text: "Analysis By Month"
+//			text: "Analysis By Reason"
 //		});
 //		
 //		var customerHeader = new sap.m.Bar({ 
@@ -30,14 +30,14 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 //	    });
 		
 		
-		var objectheader = new sap.m.ObjectHeader("oheaderByMonth",{
-			title:"Cost in different Months",
+		var objectheader = new sap.m.ObjectHeader("oheaderByReason",{
+			title:"Cost in different Reasons",
 			 attributes : [
-							new sap.m.ObjectAttribute("descriptionbyMonth",{
+							new sap.m.ObjectAttribute("descriptionByReason",{
 								text:"description"
 							})
 			               	],
-		     firstStatus : new sap.m.ObjectStatus("statusbyMonth",{
+		     firstStatus : new sap.m.ObjectStatus("statusByReason",{
 		    	 			text:"OK",
 		    	 			state:"Error"
 		     }),
@@ -46,11 +46,11 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 		});
 		
 		
-		var content = new sap.m.VBox("mainByMonth",{
+		var content = new sap.m.VBox("mainByReason",{
 			items:[
 				objectheader,
-				new sap.ui.core.HTML("chartDivByMonth",{
-					content:"<div id='chartDivByMonth' style='width: 100%; height: 540px;'></div>"
+				new sap.ui.core.HTML("chartDivByReason",{
+					content:"<div id='chartDivByReason' style='width: 100%; height: 540px;'></div>"
 				})
 			]
 		});
@@ -70,7 +70,7 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 //	        }
 		});
 		
-		var sgBtn_chartType = new sap.m.SegmentedButton("sgBtnByMonth",{
+		var sgBtn_chartType = new sap.m.SegmentedButton("sgBtnByReason",{
 			buttons:[btn_waterfallChart,btn_tableChart],
 			selectedButton:btn_waterfallChart
 
@@ -88,10 +88,9 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 	          contentRight:[btn_setTime,btn_setting]
 	    });	
 		
-		var page = new sap.m.Page("analysisByMonth",{
-			title:"Analysis By Month",
+		var page = new sap.m.Page("analysisByReason",{
+			title:"Analysis By Reason",
 			enableScrolling:false,
-			//customHeader: customerHeader,
 			content: [content],
 			footer:footer
 		});
