@@ -162,7 +162,7 @@ sap.ui.jsview("manager.masterdetail", {
 		
 		function changeStatusToServer(reqID,status){
 			jQuery.ajax({
-				url:"http://ld9415:8002/ta/TravelAnalysis/xsjs/updateReq.xsjs?reqId="+reqID+"&status="+status ,
+				url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/updateReq.xsjs?reqId="+reqID+"&status="+status ,
 				dataType: "jsonp",
 				//end 
 				error:function(error){

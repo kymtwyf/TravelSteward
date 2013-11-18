@@ -12,7 +12,7 @@ sap.ui.controller("manager.analysisByCountry", {
 	    		   $.ajax({
 	    			   type:"get",
 	    			   async:false,
-	    			   url: "http://ld9415:8002/ta/TravelAnalysis/xsjs/pendingCount.xsjs", 
+	    			   url: "http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/pendingCount.xsjs", 
 	    			   dataType:"jsonp",
 	    			   data: {
 	    				   time: new Date().toLocaleTimeString()				//ensure not use cache
