@@ -27,6 +27,11 @@ sap.ui.controller("manager.AnalysisByMonth", {
 		if(!model.data['analysisBymonth']){
 			jQuery.when(util.queries.getDataForView('analysisBymonth'))
 			.done(function(data){
+					var spendTime = data.spendTime;
+					jQuery.sap.require("sap.m.MessageToast");
+					sap.m.MessageToast.show("检索用时 "+spendTime/1000+" 秒",{
+					 	duration:2000
+					 });
 				    model.data['analysisBymonth'] = data;
 					bus.publish('chartDivByMonth','draw');
 			});

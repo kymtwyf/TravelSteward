@@ -55,7 +55,7 @@ sap.ui.jsview("manager.masterdetail", {
 			type: sap.m.ListType.Navigation, 
             label: "Country",
             press: function(oControlEvent){
-          		bus.publish("splitapp","toDetail",{pageId:"manager.analysisByCity"});
+          		bus.publish("splitapp","toDetail",{pageId:"manager.analysisByCountry"});
 				// alert("Hey Man! You can add an event here");
 			}
         });

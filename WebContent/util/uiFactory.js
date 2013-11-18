@@ -299,6 +299,8 @@ util.uiFactory = {
 			            text: "ViewDetail",
 			            icon: "sap-icon://drill-down",
 			            press:function(){
+                            // mapPopover.close();
+                            bus.publish('popover','close');
                             bus.publish("splitapp","toDetail",{pageId:"manager.analysisByCity",transition:"fade"});
 			            }
 	            	})
@@ -306,7 +308,9 @@ util.uiFactory = {
 
                 
         });
-
+        bus.subscribe('popover','close',function(){
+            this.mapPopover.close();
+        },this)
         return this.mapPopover;
 	},
     getAnalysisObjectHeader:function(id){

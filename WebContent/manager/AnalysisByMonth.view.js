@@ -90,7 +90,7 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 		
 		var page = new sap.m.Page("analysisByMonth",{
 			title:"Analysis By Month",
-			enableScrolling:false,
+			// enableScrolling:false,
 			//customHeader: customerHeader,
 			content: [content],
 			footer:footer

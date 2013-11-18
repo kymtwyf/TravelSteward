@@ -24,7 +24,7 @@ sap.ui.controller("travelsteward.StaffNewReqPage", {
 				   url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/newTraReq.xsjs",
 				   dataType:"jsonp",
 				   data: {
-					   reqId: 100000188,
+					   reqId: 10000188,
 					   peId: 765,
 					   toDate: "2013/11/26",
 					   backDate: "2013/12/01",
