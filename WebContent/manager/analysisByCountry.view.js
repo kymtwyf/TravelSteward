@@ -51,11 +51,11 @@ sap.ui.jsview("manager.analysisByCountry", {
 		});
 		//for test
 		bus.publish("analysisHeader","update",{
-			title:"总支出",
-			description:"2013年内",
-			total:"123457",
-			currency:'EUR',
-			budget:"1234.0"
+			title:"差旅总支出",
+			description:"2013年",
+			total:"670278320.76",
+			currency:'RMB',
+			budget:"730278320"
 		});
 		
 		var btn_personizedChart = new sap.m.Button({

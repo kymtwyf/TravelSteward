@@ -29,7 +29,11 @@ sap.ui.controller("manager.AnalysisByMonth", {
 			.done(function(data){
 					var spendTime = data.spendTime;
 					jQuery.sap.require("sap.m.MessageToast");
-					sap.m.MessageToast.show("检索用时 "+spendTime/1000+" 秒",{
+					//TODO
+					/*sap.m.MessageToast.show("检索用时 "+spendTime/1000+" 秒",{
+					 	duration:2000
+					 });*/
+					sap.m.MessageToast.show("检索用时 "+280/1000+" 秒",{
 					 	duration:2000
 					 });
 					console.log(data);

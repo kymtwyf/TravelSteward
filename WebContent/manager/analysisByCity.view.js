@@ -15,14 +15,14 @@ sap.ui.jsview("manager.analysisByCity", {
 	createContent : function(oController) {
 		// var objectheader = util.uiFactory.getAnalysisObjectHeader();
 		var objectStatus = new sap.m.ObjectStatus({
-	        text : "Overspend",
+	        text : "超出预算",
 	        state : "Warning"
         });
         var attribute = new sap.m.ObjectAttribute({
-          text : "40,127 times in total"
+          text : "40,127次出差"
         });
         var attribute2 = new sap.m.ObjectAttribute({
-          text : "with 1,752,346 receipts"
+          text : "1,752,346张发票"
         });
         var objectheader = new sap.m.ObjectHeader({            
               title:"Total Cost in America",

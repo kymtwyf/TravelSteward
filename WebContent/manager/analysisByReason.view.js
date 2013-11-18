@@ -31,17 +31,17 @@ sap.ui.jsview("manager.analysisByReason", {
 		
 		
 		var objectheader = new sap.m.ObjectHeader({
-			title:"Cost in different Reasons",
+			title:"销售部差旅支出",
 			 attributes : [
 							new sap.m.ObjectAttribute("descriptionByReason",{
-								text:"description"
+								text:"2013年"
 							})
 			               	],
 		     firstStatus : new sap.m.ObjectStatus("statusByReason",{
 		    	 			text:"OK",
 		    	 			state:"Error"
 		     }),
-		     number:"123,233.00",
+		     number:"282,570,965.94",
 		     numberUnit:"RMB"
 		});
 		

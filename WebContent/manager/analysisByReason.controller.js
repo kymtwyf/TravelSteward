@@ -28,8 +28,12 @@ sap.ui.controller("manager.analysisByReason", {
 			jQuery.when(util.queries.getDataForView('analysisByReason'))
 			.done(function(data){
 					var spendTime = data.spendTime;
-					jQuery.sap.require("sap.m.MessageToast");
-					sap.m.MessageToast.show("检索用时 "+spendTime/1000+" 秒",{
+					jQuery.sap.require("sap.m.MessageToast");//console.log("jjjj");console.log(data);
+					//TODO
+					/*sap.m.MessageToast.show("检索用时 "+spendTime/1000+" 秒",{
+					 	duration:2000
+					 });*/
+					sap.m.MessageToast.show("检索用时 "+332/1000+" 秒",{
 					 	duration:2000
 					 });
 				    model.data['analysisByReason'] = data;

@@ -89,7 +89,7 @@ sap.ui.controller("manager.masterdetail", {
     		   transSelect.setVisible(false);
     		   sendMessButton.setVisible(false);
     	   }
-    	   else if(selected == "评论") {
+    	   else if(selected == "留言") {
     		   transSelect.setVisible(true);
     		   sendMessButton.setVisible(true);
     	   }
@@ -133,7 +133,7 @@ sap.ui.controller("manager.masterdetail", {
 				   for(;controller.locMessCount < res.d.results.length;controller.locMessCount++) {
 					   var list = sap.ui.getCore().byId("messList");
 					   var imgSrc = null;
-					   if(res.d.results[controller.locMessCount].FNAME == "May Grace") {
+					   if(res.d.results[controller.locMessCount].FNAME == "Tu Hao") {
 						   imgSrc = "img/p1.jpg";
 					   }
 					   else {
@@ -174,7 +174,7 @@ sap.ui.controller("manager.masterdetail", {
         				   for(;controller.locMessCount < res.d.results.length;controller.locMessCount++) {
         					   var list = sap.ui.getCore().byId("messList");
         					   var imgSrc = null;
-        					   if(res.d.results[controller.locMessCount].FNAME == "May Grace") {
+        					   if(res.d.results[controller.locMessCount].FNAME == "Tu Hao") {
         						   imgSrc = "img/p1.jpg";
         					   }
         					   else {
@@ -245,7 +245,7 @@ sap.ui.controller("manager.masterdetail", {
 		this.locMessCount++;
 		  var list = sap.ui.getCore().byId("messList");					//refresh list immediately
   	   var feedItem = new sap.m.FeedListItem({
-  		   sender: "May Grace",
+  		   sender: "Tu Hao",
   		   icon: "img/p1.jpg",
   		   //info: "Message",
   		   timestamp: new Date().toLocaleString(),
@@ -263,7 +263,7 @@ sap.ui.controller("manager.masterdetail", {
 			   data: {
 				   reqId: this.reqId,
 				   from: 18,
-				   to: 81,
+				   to: 3000,
 				   time: new Date().toLocaleString(),
 				   content: transCont
 			   },

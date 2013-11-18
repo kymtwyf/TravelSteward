@@ -379,7 +379,7 @@ util.uiFactory = {
                         }
                         case false: {
                             objectStatus.setText("低于预算");
-                            objectStatus.setStatus("Success");
+                            objectStatus.setState("Success");
                             break;
                         }
                     }

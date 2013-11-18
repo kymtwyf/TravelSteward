@@ -138,14 +138,14 @@ sap.ui.jsview("manager.masterdetail", {
 			    }),
 			    new sap.m.IconTabFilter({
 			      icon: "sap-icon://comment",
-			      text: "评论",
+			      text: "留言",
 			    	  content:[ 
 			    	           new sap.m.ScrollContainer({
 			    	        	   horizontal: false,
 			    	        	   vertical: true,
 			    	        	   height: "260px",
 			    	        	   content: new sap.m.List("messList", {
-			    	        		   //inset: true;
+			    	        		   noDataText: "无留言"
 							        }),
 	
 			    	           }),
@@ -182,7 +182,7 @@ sap.ui.jsview("manager.masterdetail", {
 	          type: "Reject",
 		      text: "拒绝",
 		      press:function(){
-		    	 status.setText("Rejected");
+		    	 status.setText("拒绝");
 		    	 status.setState("Error");
 		    	 changeStatusToServer( util.tools.getRequireID(detailOjectHeader.getTitle()),status.getText());
 		      }
@@ -193,7 +193,7 @@ sap.ui.jsview("manager.masterdetail", {
               type: "Accept",
 		      text: "批准",
 		      press:function(){
-		    	 status.setText("Approved");
+		    	 status.setText("批准");
 		    	 status.setState("Success");
 		    	 changeStatusToServer( util.tools.getRequireID(detailOjectHeader.getTitle()),status.getText());
 		      }

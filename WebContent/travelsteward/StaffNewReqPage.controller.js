@@ -25,7 +25,7 @@ sap.ui.controller("travelsteward.StaffNewReqPage", {
 				   dataType:"jsonp",
 				   data: {
 					   reqId: 10000188,
-					   peId: 81,
+					   peId: 3000,
 					   toDate: "2013/11/26",
 					   backDate: "2013/12/01",
 					   toWay: "飞机",
@@ -34,7 +34,7 @@ sap.ui.controller("travelsteward.StaffNewReqPage", {
 					   traRea: "销售",
 					   desCoun: "美国",
 					   desReg: "洛杉矶",
-					   note: "我需要去和客户签一份订单，我会在洛杉矶4星的酒店住四天。"
+					   note: "我需要去和客户谈一笔生意，我会在洛杉矶4星的酒店住四天。"
 				   },
 				   success:function(res){
 					  //alert('Request Success');

@@ -31,17 +31,17 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 		
 		
 		var objectheader = new sap.m.ObjectHeader("oheaderByMonth",{
-			title:"Cost in different Months",
+			title:"销售部差旅支出",
 			 attributes : [
 							new sap.m.ObjectAttribute("descriptionbyMonth",{
-								text:"description"
+								text:"2013年"
 							})
 			               	],
 		     firstStatus : new sap.m.ObjectStatus("statusbyMonth",{
 		    	 			text:"OK",
 		    	 			state:"Error"
 		     }),
-		     number:"123,233.00",
+		     number:"282,570,965.94",
 		     numberUnit:"RMB"
 		});
 		
