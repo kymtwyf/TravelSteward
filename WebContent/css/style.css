@@ -48,10 +48,17 @@
 
 .bgImage {
 	background: url(/TravelSteward/img/p1.jpg);
-
 }
 .sapMText,.sapMOH .sapMObjectAttributeDiv,.sapMObjStatus,.sapUiBody,.sapMBar-CTX.sapMPageHeader .sapMLabel,
 .sapMDialog-CTX .sapMBar-CTX .sapMLabel,.sapMListTbl .sapMText, .sapMListTbl .sapMLabel,.sapMObjLTitle,.sapMBtn{
 	font-family: Microsoft YaHei,Arial,Helvetica,sans-serif;
 }
 
+
+.sapMOH {
+font-family: Microsoft YaHei,Helvetica,sans-serif;
+}
+
+.sapMObjectAttributeDiv {
+	font-family: Microsoft YaHei,Helvetica,sans-serif;
+}
