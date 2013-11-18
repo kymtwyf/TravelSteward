@@ -52,26 +52,42 @@ sap.ui.jsview("manager.masterdetail", {
 		      firstStatus : status
 		});
 		var destinationCountry = new sap.m.DisplayListItem("destinationcountry",{
-			type: sap.m.ListType.Active, 
+			type: sap.m.ListType.Navigation, 
             label: "Country",
             press: function(oControlEvent){
 				alert("Hey Man! You can add an event here");
 			}
         });
 		var destinationCity = new sap.m.DisplayListItem("destinationcity",{
+			type: sap.m.ListType.Navigation,
             label: "City"
         });
 		var reason = new sap.m.DisplayListItem("reason",{
-            label: "Reason"
+			type: sap.m.ListType.Navigation,
+            label: "Reason",
+            press: function(oControlEvent){
+                var splitapp = sap.ui.getCore().byId('splitApp');
+              	splitapp.toDetail("manager.analysisByReason");
+    		} 	
         });
 		var leaveDate = new sap.m.DisplayListItem("leavedate",{
-            label: "Leave Date"
+			type: sap.m.ListType.Navigation, 
+            label: "Leave Date",
+            press: function(oControlEvent){
+                var splitapp = sap.ui.getCore().byId('splitApp');
+              	splitapp.toDetail("manager.AnalysisByMonth");
+    		} 	
         });
 		var leaveWay = new sap.m.DisplayListItem("leaveway",{
             label: "Transportation"
         });
 		var returnDate = new sap.m.DisplayListItem("returndate",{
-            label: "Return Date"
+			type: sap.m.ListType.Navigation, 
+            label: "Return Date",
+            press: function(oControlEvent){
+                var splitapp = sap.ui.getCore().byId('splitApp');
+              	splitapp.toDetail("manager.AnalysisByMonth");
+    		} 	
         });
 		var returnWay = new sap.m.DisplayListItem("returnway",{
             label: "Transportation"
@@ -138,6 +154,21 @@ sap.ui.jsview("manager.masterdetail", {
 		detailIconTabBar.setExpandable(false);
 		detailIconTabBar.addStyleClass("detailIconTabBar");
 		
+		function changeStatusToServer(reqID,status){
+			jQuery.ajax({
+				url:"http://ld9415:8002/ta/TravelAnalysis/xsjs/updateReq.xsjs?reqId="+reqID+"&status="+status ,
+				dataType: "jsonp",
+				//end 
+				error:function(error){
+					console.log("change status error!");
+				},
+				success:function(data){
+					console.log(reqID+status+"change status success!!!!!!");
+				}
+			});
+			
+		}
+		
 		var rejectedButton = new sap.m.Button({
 		      icon: "sap-icon://decline",
 	          type: "Reject",
@@ -145,6 +176,7 @@ sap.ui.jsview("manager.masterdetail", {
 		      press:function(){
 		    	 status.setText("Rejected");
 		    	 status.setState("Error");
+		    	 changeStatusToServer( util.tools.getRequireID(detailOjectHeader.getTitle()),status.getText());
 		      }
 		      
 		});
@@ -155,6 +187,7 @@ sap.ui.jsview("manager.masterdetail", {
 		      press:function(){
 		    	 status.setText("Approved");
 		    	 status.setState("Success");
+		    	 changeStatusToServer( util.tools.getRequireID(detailOjectHeader.getTitle()),status.getText());
 		      }
 		      
 		});

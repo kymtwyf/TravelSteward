@@ -18,7 +18,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 	createContent : function(oController) {
 		jQuery.sap.require("util.uiFactory");
 
-		var objectheader = util.uiFactory.getAnalysisObjectHeader();	
+		var objectheader = util.uiFactory.getAnalysisObjectHeader("analysisHeaderByCountry");	
 		
 		var tableChart = new sap.m.Table("tableChart",{
 			columns: [
@@ -34,10 +34,6 @@ sap.ui.jsview("manager.analysisByCountry", {
 				     ]
 		});
 		
-		
-		
-		
-
 		var content = new sap.m.VBox("main",{
 			items:[
 				objectheader,
@@ -115,18 +111,19 @@ sap.ui.jsview("manager.analysisByCountry", {
                              // bus.publish('mapDiv','draw',model.data.getFakeData());
                     	}        
         });
+		
+	
 	    var footer = new sap.m.Bar({ 
             contentLeft: [sgBtn_chartType],
             contentRight:[btn_setTime,btn_setting]
 	    });
 	
 		var page = new sap.m.Page("analysisByCountry",{
-			title: "Title2",
+			title:"Analysis By Country",
 			enableScrolling:false,
 			footer:footer,
 			content: [content]
 		});
-
 		return page;
 	}
 

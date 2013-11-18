@@ -15,10 +15,204 @@ util.uiFactory = {
         chart.titleField = "COUNAME";
         chart.dataProvider = chartData;
         chart.write("chartDiv");
-
-
     },
-	createDataMap:function(sId,fills,data){
+    createChartByMonth: function(sId,data){
+    	var chartData = model.data['analysisBymonth'];
+    	var Data = [];
+    	var sumAmount = 0;
+    	for(var i = 0; i<chartData.length; i++){
+    		var DataItem = {
+        			MONTH : null,
+        			MONTHNAME : null,
+        			BUDGET : null,
+        			SALEAMOUNT: null,
+        			OPEN: null,
+        			CLOSE: null
+        	};
+    		DataItem.MONTH = chartData[i].MON;
+    		DataItem.BUDGET = chartData[i].BUDG;
+    		DataItem.SALEAMOUNT = chartData[i].TRAEXP;
+    		DataItem.OPEN = sumAmount.toFixed(2);
+    		console.log(sumAmount);
+    		sumAmount = sumAmount + DataItem.SALEAMOUNT;
+    		
+    		DataItem.CLOSE = sumAmount.toFixed(2) ;
+    		console.log(sumAmount);
+    		switch (i) {
+            case 0:
+            	DataItem.MONTHNAME = "January";
+                break;
+            case 1:
+            	DataItem.MONTHNAME = "February";
+                break;
+            case 2:
+            	DataItem.MONTHNAME = "March";
+                break;
+            case 3:
+            	DataItem.MONTHNAME = "April";
+                break;
+            case 4:
+            	DataItem.MONTHNAME = "May";
+                break;
+            case 5:
+            	DataItem.MONTHNAME = "June";
+                break;
+            case 6:
+            	DataItem.MONTHNAME = "July";
+                break;
+            case 7:
+            	DataItem.MONTHNAME = "August";
+                break;
+            case 8:
+            	DataItem.MONTHNAME = "September";
+                break;
+            case 9:
+            	DataItem.MONTHNAME = "Octomber";
+                break;
+    		
+    		};
+    		Data[i]=DataItem;
+    	}
+    	var temp = sumAmount + 25676799.79;
+    	var DataItem11={
+    			MONTH : 11,
+    			MONTHNAME : "November",
+    			BUDGET: 339149417 ,
+    			SALEAMOUNT: 25676799.79,
+    			OPEN: sumAmount.toFixed(2),
+    			CLOSE: temp.toFixed(2),
+    			"dashLengthColumn": 5,
+    		    "alpha": 0.2,
+    	};
+		
+    	Data[10]=DataItem11;
+
+    	sumAmount = temp;
+    	temp = sumAmount + 25676799.79;
+    	var DataItem12={
+    			MONTH : 12,
+    			MONTHNAME : "December",
+    			BUDGET: 339149417 ,
+    			SALEAMOUNT: 25676799.79,
+    			OPEN: sumAmount.toFixed(2),
+    			CLOSE: temp.toFixed(2),
+    			"dashLengthColumn": 5,
+    		    "alpha": 0.2,
+    	};
+    	Data[11]=DataItem12;
+    	
+    	console.log(Data);
+    	
+    	console.log(">>>>>>>>>>>>>>>>>>>>>chartByMonth<<<<<<<<<<<<<<<<<<<<<<<");
+    	var  chart = new AmCharts.AmSerialChart();
+    	    chart.dataProvider = Data;
+    	    chart.categoryField = "MONTH";
+    	    chart.columnWidth = 0.6;
+    	    chart.startDuration = 3;
+    	    
+    	    // AXES
+    	    // Category
+    	    var categoryAxis = chart.categoryAxis;
+    	    categoryAxis.gridAlpha = 0.1;
+    	    categoryAxis.axisAlpha = 0;
+    	    categoryAxis.gridPosition = "start";
+    	    
+    	    // Value
+    	    var valueAxis = new AmCharts.ValueAxis();
+    	    valueAxis.gridAlpha = 0.1;
+    	    valueAxis.axisAlpha = 0;
+    	    chart.addValueAxis(valueAxis);
+    	    
+    	    // GRAPH                          
+    	    var graph = new AmCharts.AmGraph();
+    	    graph.valueField = "CLOSE";
+    	    graph.openField = "OPEN";
+    	    graph.type = "column";
+    	    graph.lineAlpha = 1;
+    	    graph.lineColor = "#1c8ceb";
+    	    graph.fillAlphas = 0.8;
+    	    graph.dashLengthField = "dashLengthColumn";
+    	    graph.alphaField = "alpha";
+    	    graph.balloonText = "<span style='color:#1c8ceb'>[[MONTHNAME]]</span><br><span style='font-size:15px;'><b>[[SALEAMOUNT]]RMB</b></span>";
+    	    graph.labelText = "￥[[CLOSE]]";
+    	    chart.addGraph(graph);
+    	    
+    	    // Trend lines used for connectors
+    	    var trendLine = new AmCharts.TrendLine();
+    	    trendLine.initialCategory = "1";
+    	    trendLine.finalCategory = "12";
+    	    trendLine.initialValue = 339149417;
+    	    trendLine.finalValue = 339149417;
+    	    trendLine.lineColor = "#000000";
+    	    trendLine.dashLength = 10;
+    	    trendLine.lineThickness = 3;
+    	    chart.addTrendLine(trendLine);   
+    	    
+    	    // WRITE    
+             chart.write(sId);
+    },
+    
+    
+    createChartByReason:function(sId,data){
+    	var chartData = model.data['analysisByReason'];
+    	console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    	console.log(chartData);
+    	console.log(sId);
+    	
+    	 var chart = new AmCharts.AmRadarChart();
+    	    chart.dataProvider = chartData;
+    	    chart.categoryField = "REA";
+    	    chart.startDuration = 3;
+    	       	    
+    	    // VALUE AXIS
+    	    var valueAxis = new AmCharts.ValueAxis();
+    	    valueAxis.gridType = "circles";
+    	    valueAxis.fillAlpha = 0.05;
+    	    valueAxis.fillColor = "#000000";
+    	    valueAxis.axisAlpha = 0.2;
+    	    valueAxis.gridAlpha = 0;
+    	    valueAxis.fontWeight = "bold";
+    	    valueAxis.minimum = 0;
+    	    chart.addValueAxis(valueAxis);
+    	    
+    	    // GRAPH
+    	    var graph = new AmCharts.AmGraph();
+    	    graph.lineColor = "#000000";
+    	    graph.fillAlphas = 0.4;
+    	    graph.bullet = "round";
+    	    graph.valueField = "AMOU";
+    	    graph.balloonText = "Cost on [[category]]: ￥[[AMOU]] ";
+    	    chart.addGraph(graph);
+    	    
+    	    // GUIDES
+    	    // blue fill
+    	    var guide = new AmCharts.Guide();
+    	    guide.angle = 225;
+    	    guide.tickLength = 0;
+    	    guide.toAngle = 315;
+    	    guide.value = 0;
+    	    guide.toValue = 14;
+    	    guide.fillColor = "#0066CC";
+    	    guide.fillAlpha = 0.6;
+    	    valueAxis.addGuide(guide);
+    	    
+    	    // red fill
+    	    guide = new AmCharts.Guide();
+    	    guide.angle = 45;
+    	    guide.tickLength = 0;
+    	    guide.toAngle = 135;
+    	    guide.value = 0;
+    	    guide.toValue = 14;
+    	    guide.fillColor = "#000000";
+    	    guide.fillAlpha = 0.6;
+    	    valueAxis.addGuide(guide);
+    	    
+    	    // WRITE                
+    	    chart.write(sId);
+    	
+    	
+    },
+    createDataMap:function(sId,fills,data){
         console.log('画地图的数据');
         console.log(fills);
         console.log(data);
@@ -110,8 +304,8 @@ util.uiFactory = {
 
         return this.mapPopover;
 	},
-    getAnalysisObjectHeader:function(){
-        var tmp = sap.ui.getCore().byId("analysisHeader");
+    getAnalysisObjectHeader:function(id){
+        var tmp = sap.ui.getCore().byId(id);
         if(tmp){
             return tmp;
         }else{
@@ -122,7 +316,7 @@ util.uiFactory = {
             var attribute = new sap.m.ObjectAttribute({
               text : "Description"
             });
-            var objectheader = new sap.m.ObjectHeader("analysisHeader",{            
+            var objectheader = new sap.m.ObjectHeader(id,{            
                   title:"This Year",
                   number : 0,
                   numberUnit : "USD",
@@ -303,5 +497,10 @@ bus.subscribe('container','show',function(channelId,eventId,data){
 bus.subscribe('chartDiv','draw',function(channelId,eventId,data){    
     util.uiFactory.create3dPieChart('chartDiv');
     util.uiFactory.showContainer(2);
-
+},this);
+bus.subscribe('chartDivByMonth','draw',function(channelId,eventId,data){    
+    util.uiFactory.createChartByMonth('chartDivByMonth');
+},this);
+bus.subscribe('chartDivByReason','draw',function(channelId,eventId,data){    
+    util.uiFactory.createChartByReason('chartDivByReason');
 },this);
