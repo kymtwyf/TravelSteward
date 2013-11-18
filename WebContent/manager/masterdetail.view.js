@@ -221,7 +221,7 @@ sap.ui.jsview("manager.masterdetail", {
 			             ],
 			contentRight:[
 			              new sap.m.Button("sendMessButton", {
-			            	  icon: "sap-icon://email",
+			            	  icon: "sap-icon://response",
 			            	  visible: false
 			              })
 			             ]

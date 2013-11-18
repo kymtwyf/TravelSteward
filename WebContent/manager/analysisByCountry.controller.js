@@ -8,25 +8,40 @@ sap.ui.controller("manager.analysisByCountry", {
 	onInit: function() {
 		//set a timer 
 		var refreshInterval = 5000;
-	     setInterval(function() {												//set timer	
-	    		   $.ajax({
-	    			   type:"get",
-	    			   async:false,
-	    			   url: "http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/pendingCount.xsjs", 
-	    			   dataType:"jsonp",
-	    			   data: {
-	    				   time: new Date().toLocaleTimeString()				//ensure not use cache
-	    			   },
-	    			   success:function(res){ 
-	    				 //////
-	    			   },	
-	    			  error:function(){
-	    				  alert('Fail to get count');
-	    			  },
-	    		 });
-	    	   }, refreshInterval);   											//endif keepRefresh
-				
-		
+		var btn_message = sap.ui.getCore().byId('btn_message');
+		var app = sap.ui.getCore().byId('splitApp');
+		btn_message.attachPress(function() {
+			btn_message.setType("Default");
+			app.showMaster("manager.master");
+			bus.publish("time","start",false);
+	    });
+		function startTiming(channelID,eventID,start){
+		if(start = true){
+		     setInterval(function() {												//set timer	
+		    		   $.ajax({
+		    			   type:"get",
+		    			   async:false,
+		    			   url: "http://ld9415:8002/ta/TravelAnalysis/xsjs/pendingCount.xsjs", 
+		    			   dataType:"jsonp",
+		    			   data: {
+		    				   time: new Date().toLocaleTimeString()				//ensure not use cache
+		    			   },
+		    			   success:function(res){ 
+		    				   
+		    				   if(res.count!=0)
+		    					   btn_message.setType("Reject");
+		    				   else 
+		    					   btn_message.setType("Default");
+		    			   },	
+		    			  error:function(){
+		    				  alert('Fail to get count');
+		    			  },
+		    		 });
+		    	   }, refreshInterval); 
+		     }  											//endif keepRefresh
+			
+		}
+		bus.subscribe("time","start",startTiming,this);
 		console.log('analysisBycountry ON INIT');
 
 		jQuery.sap.require('model.data');
@@ -56,6 +71,7 @@ sap.ui.controller("manager.analysisByCountry", {
 //
 //	},
 	onBeforeShow:function(evt){
+		bus.publish("time","start",true);
 		console.log('analysisByCountry onbeforeshow');
 		console.log($('#mapDiv'));
 		console.log($("#analysisByCountry").height());
