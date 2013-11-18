@@ -299,14 +299,18 @@ util.uiFactory = {
 			            text: "ViewDetail",
 			            icon: "sap-icon://drill-down",
 			            press:function(){
-                            bus.publish("splitapp","toDetail","manager.analysisByCity");
+                            // mapPopover.close();
+                            bus.publish('popover','close');
+                            bus.publish("splitapp","toDetail",{pageId:"manager.analysisByCity",transition:"fade"});
 			            }
 	            	})
                 }) 
 
                 
         });
-
+        bus.subscribe('popover','close',function(){
+            this.mapPopover.close();
+        },this)
         return this.mapPopover;
 	},
     getAnalysisObjectHeader:function(id){

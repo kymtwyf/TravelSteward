@@ -39,6 +39,12 @@ sap.ui.controller("manager.analysis", {
 			dataType: "jsonp",
 			success:function(data){
 				console.log('get the data!!!!!!!!!!');
+				var spendTime = data.spendTime;
+				jQuery.sap.require("sap.m.MessageToast");
+				sap.m.MessageToast.show("检索用时 "+spendTime/1000+" 秒",{
+				 	duration:2000
+				 });
+				// console.log(sdata.spendTime)
 				model.data['analysisByDepartment'] = data;
 				bus.publish('bullet','draw');
 				//d.resolve(data.d.results);//;autil.queries.formatDataForView(sId,data.d.results));
@@ -70,6 +76,9 @@ sap.ui.controller("manager.analysis", {
 			}else {
 				cell["color"] = "#04D215";
 			}
+			cell.realSpend = cell.realSpend*100;
+			cell.estimate = cell.estimate*100;
+			console.log(cell);
 			realData.push(cell);
 		}
 		for(var i = 0 ; i < realData.length ; i ++){
@@ -98,24 +107,28 @@ sap.ui.controller("manager.analysis", {
 		    var categoryAxis = chart.categoryAxis;
 		    categoryAxis.labelRotation = 45; // this line makes category values to be rotated
 		    categoryAxis.gridAlpha = 0;
-		    categoryAxis.fillAlpha = 1;
-		    categoryAxis.fillColor = "#FAFAFA";
-		    categoryAxis.gridPosition = "start";
+		    // categoryAxis.fillAlpha = 1;
+		    // categoryAxis.fillColor = "#FAFAFA";
+		    // categoryAxis.gridPosition = "start";
+		    categoryAxis.fontSize = 15;
+
 		    
 		    // value
 		    var valueAxis = new AmCharts.ValueAxis();
 		    valueAxis.stackType = "regular";
 		    valueAxis.dashLength = 5;
 		    valueAxis.axisAlpha = 0;
-		    valueAxis.maximum = 1.2;
+		    valueAxis.maximum = 120;
 		    valueAxis.minimum = 0;
+		    valueAxis.fontSize = 12;
+		    valueAxis.unit = "%";
 		    chart.addValueAxis(valueAxis);
 		    
 		    // GRAPH
 		    var graph = new AmCharts.AmGraph();
 		    graph.valueField = "realSpend";
 		    graph.colorField = "color";
-		    graph.balloonText = "<b>[[category]]: [[value]]</b>";
+		    graph.balloonText = "<b>[[category]]: [[value]]%</b>";
 		    graph.type = "column";
 		    graph.columnWidth = 0.6;
 		    graph.lineAlpha = 0;
@@ -125,6 +138,7 @@ sap.ui.controller("manager.analysis", {
 
 		    graph = new AmCharts.AmGraph();
 		    graph.valueField = "estimate";
+		    graph.balloonText = "<b>剩余预计: [[value]]%</b>";
 		    graph.type = "column";
 		    graph.lineAlpha = 0;
 		    graph.fillAlphas = 0.5;

@@ -104,7 +104,11 @@ sap.ui.jsview("manager.analysisByCity", {
             contentRight:[btn_message,btn_setTime,btn_setting]
 	    });
  		return new sap.m.Page({
+<<<<<<< HEAD
+			title: "Analysis by Region",
+=======
 			title: "出差费用分析（按城市)",
+>>>>>>> bac88f12ab22abc72d791c2d04c6010b78fda0c4
 			content: [
 				content,				
 			],

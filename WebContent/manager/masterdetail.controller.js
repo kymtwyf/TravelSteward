@@ -60,19 +60,19 @@ sap.ui.controller("manager.masterdetail", {
         		    returnDate.setValue(requestdata[i].BDATE);
         		    returnWay.setValue(requestdata[i].BWAY);
         		    
-        			if(requestdata[i].STATUS =="Approved"){
+        			if(requestdata[i].STATUS =="批准"){
             		   	actionButton.setVisible(false);
             		   	status.setState("Success");
         			}
         				
-        		    else if (requestdata[i].STATUS =="Pending")
+        		    else if (requestdata[i].STATUS =="待处理")
         		    	status.setState("Warning");
         		    else {
         		    	actionButton.setVisible(false);
         		    	status.setState("Error");
         		    }
         			
-        			detailOjectHeader.setTitle("NO."+id);
+        			detailOjectHeader.setTitle("No."+id);
         			detailOjectHeader.setNumber(requestdata[i].PLEXP);
         			detailOjectHeader.setNumberUnit("RMB");
         		}

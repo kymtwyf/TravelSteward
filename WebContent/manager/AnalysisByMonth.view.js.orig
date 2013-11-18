@@ -95,8 +95,13 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 	    });	
 		
 		var page = new sap.m.Page("analysisByMonth",{
-			title:"出差费用分析（按月份)",
+<<<<<<< HEAD
+			title:"Analysis By Month",
 			// enableScrolling:false,
+=======
+			title:"出差费用分析（按月份)",
+			enableScrolling:false,
+>>>>>>> bac88f12ab22abc72d791c2d04c6010b78fda0c4
 			//customHeader: customerHeader,
 			content: [content],
 			footer:footer
