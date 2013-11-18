@@ -41,10 +41,10 @@ sap.ui.jsview("travelsteward.StaffReqListPage", {
 				    else requestItems.items[i].state = "Error";
 					
 					requestItems.items[i].status =  requestdata[j].STATUS;
-					
+					requestItems.items[i].createdtime =  "Created on "+requestdata[j].TDATE;
 					requestItems.items[i].prio =  requestdata[j].PRIO;
+
 			     	i++;
-			
 			}
 			requestList.setModel(requestModel);
 
@@ -56,9 +56,9 @@ sap.ui.jsview("travelsteward.StaffReqListPage", {
 				number:"{number}",
 				numberUnit:"{numberUnit}",
 				attributes : [
-				    new sap.m.ObjectAttribute({
-			        //      text : "{createdTime}"					///// be decided later
-				    })
+						new sap.m.ObjectAttribute({
+							 text : "{createdtime}"
+						})
 				],
 				firstStatus : 
 					new sap.m.ObjectStatus({
