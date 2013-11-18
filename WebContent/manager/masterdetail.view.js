@@ -191,7 +191,7 @@ sap.ui.jsview("manager.masterdetail", {
 		var detailMasterPage = new sap.m.Page("detail_master_page", {
  			title:"Request Detail",
  			headerContent:actionButton,
- 			enableScrolling:false,
+// 			enableScrolling:false,
  			showNavButton: true,
  			 navButtonPress:function(){
  				view.getController().keepRefresh = false;				//stop refresh messages
