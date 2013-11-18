@@ -40,10 +40,15 @@ sap.ui.jsview("manager.analysisByCountry", {
 				new sap.ui.core.HTML("mapDiv",{
 					content:"<div id='mapDiv' style='display:none'></div>"
 				}),
+<<<<<<< HEAD
+				new sap.m.VBox("tablevbox"),
+				
+=======
 				new sap.m.ScrollContainer("tablescrollcontiner",{
 					horizontal: false,
 					vertical: true
 				}),
+>>>>>>> 98b5aaa0dc6df58c9fa7040718b329f2e26cf760
 				new sap.ui.core.HTML("chartDiv",{
 					content:"<div id='chartDiv' style='display:none'></div>"
 				})
@@ -107,7 +112,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 		var btn_setting = new sap.m.Button({
                 icon: "sap-icon://settings",
               	press : function() {
-              		bus.publish("splitapp","toDetail","manager.analysis");
+              		bus.publish("splitapp","toDetail","manager.analysisByPerson");
                              // bus.publish('mapDiv','draw',model.data.getFakeData());
                              bus.publish("analysisHeader","update",{
 								title:"Total Cost",
@@ -125,7 +130,7 @@ sap.ui.jsview("manager.analysisByCountry", {
           		var splitapp = sap.ui.getCore().byId('splitApp');
           		splitapp.showMaster("manager.master");
                 	}        
-    	});
+    });
 		
 		var headerTitle = new sap.m.Label({
 			text: "Analysis By Country"

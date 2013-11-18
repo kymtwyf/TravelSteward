@@ -61,7 +61,7 @@ util.uiFactory = {
     	    graph2.title = "Cost Amount";
     	    graph2.lineColor = "#fcd202";
     	    graph2.valueField = "AMOU";
-    	    graph2.lineThickness = 20;
+    	    graph2.lineThickness = 10;
     	    graph2.bullet = "round";
     	    graph2.bulletBorderThickness = 3;
     	    graph2.bulletBorderColor = "#fcd202";
@@ -170,11 +170,16 @@ util.uiFactory = {
 
         return this.mapPopover;
 	},
+<<<<<<< HEAD
+    getAnalysisObjectHeader:function(){
+       
+=======
     getAnalysisObjectHeader:function(id){
         var tmp = sap.ui.getCore().byId(id);
         if(tmp){
             return tmp;
         }else{
+>>>>>>> 98b5aaa0dc6df58c9fa7040718b329f2e26cf760
             var objectStatus = new sap.m.ObjectStatus({
             text : "In Budget",
             state : "Success"
@@ -182,7 +187,11 @@ util.uiFactory = {
             var attribute = new sap.m.ObjectAttribute({
               text : "Description"
             });
+<<<<<<< HEAD
+            var objectheader = new sap.m.ObjectHeader({            
+=======
             var objectheader = new sap.m.ObjectHeader(id,{            
+>>>>>>> 98b5aaa0dc6df58c9fa7040718b329f2e26cf760
                   title:"This Year",
                   number : 0,
                   numberUnit : "USD",
@@ -244,7 +253,6 @@ util.uiFactory = {
             },this);
             return objectheader;
         
-        }
     },
     
     showContainer:function(index){

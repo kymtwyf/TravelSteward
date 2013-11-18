@@ -13,7 +13,24 @@ sap.ui.jsview("manager.analysisByCity", {
 	* @memberOf manager.analysisByCity
 	*/ 
 	createContent : function(oController) {
-		var objectheader = util.uiFactory.getAnalysisObjectHeader();
+		// var objectheader = util.uiFactory.getAnalysisObjectHeader();
+		var objectStatus = new sap.m.ObjectStatus({
+	        text : "Overspend",
+	        state : "Warning"
+        });
+        var attribute = new sap.m.ObjectAttribute({
+          text : "40,127 times in total"
+        });
+        var attribute2 = new sap.m.ObjectAttribute({
+          text : "with 1,752,346 receipts"
+        });
+        var objectheader = new sap.m.ObjectHeader({            
+              title:"Total Cost in America",
+              number : "240,632,500.48",
+              numberUnit : "RMB",
+              firstStatus : objectStatus,
+              attributes:[attribute,attribute2]
+        });
 		var content = new sap.m.VBox({
 			items:[
 				objectheader,
@@ -71,15 +88,7 @@ sap.ui.jsview("manager.analysisByCity", {
 		var btn_setting = new sap.m.Button({
                 icon: "sap-icon://settings",
               	press : function() {
-              		bus.publish("splitapp","toDetail","manager.analysisByPerson");
-                             // bus.publish('mapDiv','draw',model.data.getFakeData());
-       //                       bus.publish("analysisHeader","update",{
-							// 	title:"Total Cost",
-							// 	description:"in Year 2013",
-							// 	total:"12345232457",
-							// 	currency:'EUR',
-							// 	budget:"1234.0"
-							// });
+              			bus.publish("splitapp","toDetail","manager.analysisByPerson");
                 	}        
         });
 	    var footer = new sap.m.Bar({ 

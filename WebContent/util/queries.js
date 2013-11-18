@@ -74,6 +74,8 @@ util.queries = {
 					console.log(cost);
 					console.log('numberBase');
 					console.log(model.data.numberBase);
+					// var numberB = parseFloat(model.data.numberBase);
+					// console.log('numberB: '+numberB);
 					if(cost>model.data.numberBase){
 						fillK = ">100%";
 					}else if(cost/model.data.numberBase >0.8){

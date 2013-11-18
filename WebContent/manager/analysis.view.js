@@ -13,57 +13,114 @@ sap.ui.jsview("manager.analysis", {
 	* @memberOf manager.analysis
 	*/ 
 	createContent : function(oController) {
-		
-		
-		
-		var logoutBtn = new sap.m.Button({
-	        icon: "sap-icon://log",
-	       // press:
-		});
-		
-		var objectStatue = new sap.m.ObjectStatus({
-            text : "In Stock",
-            state : "Success"
+		jQuery.sap.require('util.uiFactory');
+		//这个用来写analysis by department 每个部门预算和实际之间的关系
+		// var objectheader = util.uiFactory.getAnalysisObjectHeader("analysisByDepartment");
+		var objectStatus = new sap.m.ObjectStatus({
+	        text : "In Budget",
+	        state : "Success"
         });
-		
-		var objectheader = new sap.m.ObjectHeader("ObjectHeader",{			
-			  title:"Title of OH",
-		      number : 0,
-		      numberUnit : "USD",
-			 firstStatus : objectStatue
-		 });
-		bus.subscribe("ObjectHeader","update",oController.updateObjectHeader,this);/*number,numberunit,objectheader*/
-		
-		
-		var mailButton = new sap.m.Button({
-	        icon: "sap-icon://email",
-	       // press:
+        var attribute = new sap.m.ObjectAttribute({
+          text : "Year 2013"
+        });
+        var objectheader = new sap.m.ObjectHeader({            
+              title:"Total Trip Cost",
+              number : 0,
+              numberUnit : "RMB",
+              firstStatus : objectStatus,
+              attributes:attribute
+        });
+		var content = new sap.m.VBox({
+			items:[
+				objectheader,
+				new sap.ui.core.HTML("analysisByDepartment_chart",{
+					content:"<div id='analysisByDepartment_chart' style='width: 70%; height: 600px;position:relative;left:5%;top 100px'></div>"
+				})
+				// new sap.m.HBox("analysisByDepartment-mapDiv",{
+				// 	items:[
+				// 	new sap.ui.core.HTML({
+				// 		content:"<div id='analysisByDepartment_1' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
+				// 	}),
+				// 	new sap.ui.core.HTML({
+				// 		content:"<div id='analysisByDepartment_2' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
+				// 	}),
+				// 	new sap.ui.core.HTML({
+				// 		content:"<div id='analysisByDepartment_3' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
+				// 	}),
+				// 	new sap.ui.core.HTML({
+				// 		content:"<div id='analysisByDepartment_4' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
+				// 	}),
+				// 	new sap.ui.core.HTML({
+				// 		content:"<div id='analysisByDepartment_5' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
+				// 	}),
+				// 	new sap.ui.core.HTML({
+				// 		content:"<div id='analysisByDepartment_6' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
+				// 	}),
+				// 	new sap.ui.core.HTML({
+				// 		content:"<div id='analysisByDepartment_7' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
+				// 	}),
+				// 	new sap.ui.core.HTML({
+				// 		content:"<div id='analysisByDepartment_8' style='display:block;float:left;width:12.5%;height: 550px;'></div>"
+				// 	})
+				// 	]
+				// })				
+			]
 		});
-		
-		var timeButton = new sap.m.Button({
-	        icon: "sap-icon://history",
-	       // press:
-		});
-		
-		var settingButton = new sap.m.Button({
-	        icon: "sap-icon://settings",
+		var btn_personizedChart = new sap.m.Button({
+	        icon: "sap-icon://globe",
 	       press:function(){
-	       	bus.publish("splitapp","toDetail","manager.analysisByCountry");
 	       }
 		});
 		
-	    var footer = new sap.m.Bar({ 
-            contentRight: [mailButton,timeButton,settingButton]
-	    });
-	
-		var page = new sap.m.Page({
-			title: "Title",
-			headerContent:logoutBtn,
-			footer:footer,
-			content: [objectheader]
+		var btn_tableChart = new sap.m.Button({
+	        icon: "sap-icon://table-chart",
+	       press:function(){
+	    	   // var vbox = sap.ui.getCore().byId('tablevbox');
+	    	   // vbox.removeAllItems();
+	    	   // vbox.addItem(tableChart);
+	   		   // // bus.publish('tableChart','draw', model.data['analysisByCountry']);
+	    	   // bus.publish('tableChart','draw');
+	       }
 		});
+		
+		var btn_barChart = new sap.m.Button({
+	        icon: "sap-icon://pie-chart",
+	       	press:function(){
+	       		// bus.publish('chartDiv','draw');
+	        }
+		});
+		
+		var sgBtn_chartType = new sap.m.SegmentedButton({
+			buttons:[btn_personizedChart,btn_tableChart,btn_barChart],
+			selectedButton:btn_personizedChart
 
- 		return page;
+		});
+		var btn_setTime = new sap.m.Button({
+                icon: "sap-icon://history",
+                  press : function() {
+                  	// bus.publish("splitapp","toDetail","manager.analysisByCountry");
+                	  //	monthActionSheet.openBy(this);
+                                   
+                        }        
+        });	
+		var btn_setting = new sap.m.Button({
+                icon: "sap-icon://settings",
+              	press : function() {
+              			// bus.publish("splitapp","toDetail","manager.analysisByPerson");
+                	}        
+        });
+	    var footer = new sap.m.Bar({ 
+            contentLeft: [sgBtn_chartType],
+            contentRight:[btn_setTime,btn_setting]
+	    });
+ 		return new sap.m.Page({
+			title: "Travel Steward",
+			content: [
+				content,				
+			],
+			footer:footer
+		});
+		
 	}
 
 });
