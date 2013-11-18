@@ -18,7 +18,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
  				contentLeft: [new sap.m.Button("newReqBackButton", {
  					icon: "sap-icon://nav-back"})
  							 ],
-				contentMiddle: [new sap.m.Label({text: "New Request"})],
+				contentMiddle: [new sap.m.Label({text: "新建请求"})],
 				contentRight: [
 				               new sap.m.Button({
 				            	   icon: "sap-icon://log",
@@ -32,10 +32,10 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			        	  layout: sap.ui.commons.form.SimpleFormLayout.GridLayout,
 			        	 content:[
 			        	          new sap.ui.commons.Title({ // this starts a new group
-			        	        	  text: "Base Information"
+			        	        	  text: "基本信息"
 			        	          }),
 			        	        new sap.m.Label({
-			        	        	text:"From"
+			        	        	text:"起始"
 			        	        }),
 //			        	        new sap.m.HBox({
 //			        	        	items: [new sap.m.DateTimeInput({
@@ -50,7 +50,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			        	        new sap.m.HBox({
 				    	           }),
 			    	           new sap.m.Label({
-			    	        	   text:"End"
+			    	        	   text:"结束"
 			    	           }),
 			    	           new sap.m.DateTimeInput("backDate", {
 			    	        	   type: sap.m.DateTimeInputType.Date,
@@ -60,13 +60,13 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			    	           new sap.m.HBox({
 			    	           }),
 			    	           new sap.m.Label({
-			    	        	   text:"Dest"
+			    	        	   text:"地点"
 			    	           }),
 			    	           new sap.m.HBox({
 			    	        	   items:[
 			    	        	   new sap.m.Select("desCoun", {
 				    	        	   items: [
-							            	    new sap.ui.core.Item({text: "USA"}),
+							            	    new sap.ui.core.Item({text: "美国"}),
 							            	    new sap.ui.core.Item({text: "Germany"}),
 							            	    new sap.ui.core.Item({text: "China"})
 							            	  ],
@@ -76,7 +76,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 				    	           }),
 				    	           new sap.m.Select("desReg", {
 				    	        	   items: [
-							            	    new sap.ui.core.Item({text:"Los Angeles"}),
+							            	    new sap.ui.core.Item({text:"洛杉矶"}),
 							            	    new sap.ui.core.Item({text:"Washington D.C"}),
 							            	    new sap.ui.core.Item({text:"New York"})
 							            	  ],
@@ -93,35 +93,35 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 //	        	    	        	         ]
 //	        	    	       }),
 			    	           new sap.m.Label({
-			    	        	   text:"Rea"
+			    	        	   text:"理由"
 			    	           }),
 			    	           new sap.m.Select("traRea", {
 			    	        	   items: [
-						            	    new sap.ui.core.Item({text: "Deal Support"}),
+						            	    new sap.ui.core.Item({text: "销售"}),
 						            	    new sap.ui.core.Item({text: "Customer Engagement"}),
 						            	    new sap.ui.core.Item({text: "Meeting"}),
 						            	  ],
 			    	           }),
 			    	           new sap.ui.commons.Title({ // this starts a new group
-			        	        	  text: "Detail Information"
+			        	        	  text: "详细信息"
 			        	          }),
 			        	       new sap.m.Label({
-			        	    	   text: "To"
+			        	    	   text: "去程"
 			        	       }),
 			        	       new sap.m.Select("toWay", {
 	        	    	        	  items:[
-	        	    	        	         new sap.ui.core.Item({text: "Flight"}),
+	        	    	        	         new sap.ui.core.Item({text: "飞机"}),
 	        	    	        	         new sap.ui.core.Item({text: "Train"}),
 	        	    	        	         ]
 	        	    	       }),
 	        	    	       new sap.m.HBox({
 			    	           }),
 	        	    	       new sap.m.Label({
-	        	    	        	  text: "Back"
+	        	    	        	  text: "返程"
 	        	    	          }),
 	        	    	          new sap.m.Select("backWay", {
 	        	    	        	  items:[
-	        	    	        	         new sap.ui.core.Item({text: "Flight"}),
+	        	    	        	         new sap.ui.core.Item({text: "飞机"}),
 	        	    	        	         new sap.ui.core.Item({text: "Train"}),
 	        	    	        	         ]
 	        	    	       }),
@@ -151,7 +151,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 //			        	       }),
 	        	    	       
 			        	       new sap.m.Label({
-			    	        	   text:"Pl Exp"
+			    	        	   text:"花费"
 			    	           }),
 			    	           new sap.m.Input({
 			    	        	   type: sap.m.InputType.Number,
@@ -160,10 +160,10 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			    	           new sap.m.HBox({
 			    	           }),
 			    	           new sap.m.Label({
-			    	        	   text:"Note"
+			    	        	   text:"备注"
 			    	           }),
 			    	           new sap.m.TextArea({
-			    	        	   value: "I need to go there for deal support. I will live in 4-star hotel for 4 days.",
+			    	        	   value: "我需要去和客户签一份订单，我会在洛杉矶4星的酒店住四天。",
 			    	        	   rows: 4 
 			    	           }),
 			    	           new sap.ui.commons.Title({ // this starts a new group
@@ -180,7 +180,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			        	    	  
 						        	  icon: "sap-icon://accept",
 						        	  type: sap.m.ButtonType.Accept,
-						        	  text: "Submit"
+						        	  text: "提交"
 						          }).addStyleClass("floatRight"),
 			    	           ]
 			          }).addStyleClass("padding10"),
