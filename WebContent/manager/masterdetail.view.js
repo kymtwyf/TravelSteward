@@ -40,7 +40,9 @@ sap.ui.jsview("manager.masterdetail", {
 		var department = new sap.m.ObjectAttribute("department",{
 			active:true,
 			press:function(){
-				console.log( util.tools.splitString(this.getText()));
+		            var splitapp = sap.ui.getCore().byId('splitApp');
+		           	splitapp.toDetail("manager.analysis");
+		 	
 			}
 		});
 		
