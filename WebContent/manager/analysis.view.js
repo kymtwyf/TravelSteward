@@ -34,7 +34,7 @@ sap.ui.jsview("manager.analysis", {
 			items:[
 				objectheader,
 				new sap.ui.core.HTML("analysisByDepartment_chart",{
-					content:"<div id='analysisByDepartment_chart' style='width: 70%; height: 600px;position:relative;left:5%;top 100px'></div>"
+					content:"<div id='analysisByDepartment_chart' style='width: 100%; height: 480px;'></div>"
 				})
 				// new sap.m.HBox("analysisByDepartment-mapDiv",{
 				// 	items:[

@@ -87,7 +87,6 @@ sap.ui.controller("manager.analysis", {
 			}
 
 		}
-		
 		 chart = new AmCharts.AmSerialChart();
 		    chart.dataProvider = realData;
 		    chart.categoryField = "department";
@@ -96,10 +95,7 @@ sap.ui.controller("manager.analysis", {
 		    // AXES
 		    // category
 		    var categoryAxis = chart.categoryAxis;
-		    categoryAxis.labelRotation = 45; // this line makes category values to be rotated
 		    categoryAxis.gridAlpha = 0;
-		    categoryAxis.fillAlpha = 1;
-		    categoryAxis.fillColor = "#FAFAFA";
 		    categoryAxis.gridPosition = "start";
 		    
 		    // value
