@@ -45,34 +45,34 @@ util.uiFactory = {
     		console.log(sumAmount);
     		switch (i) {
             case 0:
-            	DataItem.MONTHNAME = "January";
+            	DataItem.MONTHNAME = "一月";
                 break;
             case 1:
-            	DataItem.MONTHNAME = "February";
+            	DataItem.MONTHNAME = "二月";
                 break;
             case 2:
-            	DataItem.MONTHNAME = "March";
+            	DataItem.MONTHNAME = "三月";
                 break;
             case 3:
-            	DataItem.MONTHNAME = "April";
+            	DataItem.MONTHNAME = "四月";
                 break;
             case 4:
-            	DataItem.MONTHNAME = "May";
+            	DataItem.MONTHNAME = "五月";
                 break;
             case 5:
-            	DataItem.MONTHNAME = "June";
+            	DataItem.MONTHNAME = "六月";
                 break;
             case 6:
-            	DataItem.MONTHNAME = "July";
+            	DataItem.MONTHNAME = "七月";
                 break;
             case 7:
-            	DataItem.MONTHNAME = "August";
+            	DataItem.MONTHNAME = "八月";
                 break;
             case 8:
-            	DataItem.MONTHNAME = "September";
+            	DataItem.MONTHNAME = "九月";
                 break;
             case 9:
-            	DataItem.MONTHNAME = "Octomber";
+            	DataItem.MONTHNAME = "十月";
                 break;
     		
     		};
@@ -81,7 +81,7 @@ util.uiFactory = {
     	var temp = sumAmount + 25676799.79;
     	var DataItem11={
     			MONTH : 11,
-    			MONTHNAME : "November",
+    			MONTHNAME : "十一月",
     			BUDGET: 339149417 ,
     			SALEAMOUNT: 25676799.79,
     			OPEN: sumAmount.toFixed(2),
@@ -96,7 +96,7 @@ util.uiFactory = {
     	temp = sumAmount + 25676799.79;
     	var DataItem12={
     			MONTH : 12,
-    			MONTHNAME : "December",
+    			MONTHNAME : "十二月",
     			BUDGET: 339149417 ,
     			SALEAMOUNT: 25676799.79,
     			OPEN: sumAmount.toFixed(2),
@@ -186,7 +186,7 @@ util.uiFactory = {
     	    graph.fillAlphas = 0.4;
     	    graph.bullet = "round";
     	    graph.valueField = "AMOU";
-    	    graph.balloonText = "Cost on [[category]]: ￥[[AMOU]] ";
+    	    graph.balloonText = "花费在 [[category]]: ￥[[AMOU]] ";
     	    chart.addGraph(graph);
     	    
     	    // GUIDES
@@ -371,12 +371,12 @@ util.uiFactory = {
                         budget = parseFloat(budget);
                         switch(total>budget){
                         case true: {
-                            objectStatus.setText("Overspend");
+                            objectStatus.setText("超支");
                             objectStatus.setState("Error");
                             break;
                         }
                         case false: {
-                            objectStatus.setText("In Budget");
+                            objectStatus.setText("低于预算");
                             objectStatus.setStatus("Success");
                             break;
                         }

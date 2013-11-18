@@ -25,16 +25,16 @@ sap.ui.controller("travelsteward.StaffNewReqPage", {
 				   dataType:"jsonp",
 				   data: {
 					   reqId: 10000188,
-					   peId: 765,
+					   peId: 81,
 					   toDate: "2013/11/26",
 					   backDate: "2013/12/01",
-					   toWay: "Flight",
-					   backWay: "Flight",
-					   plExp: 20000,
-					   traRea: "Deal Support",
-					   desCoun: "USA",
-					   desReg: "Los Angeles",
-					   note: "I need to go there to do a deal support. I will live in 4-star hotel for 4 days."
+					   toWay: "飞机",
+					   backWay: "飞机",
+					   plExp: 30000,
+					   traRea: "销售",
+					   desCoun: "美国",
+					   desReg: "洛杉矶",
+					   note: "我需要去和客户签一份订单，我会在洛杉矶4星的酒店住四天。"
 				   },
 				   success:function(res){
 					  //alert('Request Success');

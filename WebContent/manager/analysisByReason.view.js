@@ -83,13 +83,19 @@ sap.ui.jsview("manager.analysisByReason", {
                 icon: "sap-icon://settings",      
         });
 		
+		var btn_message = new sap.m.Button({
+			icon: "sap-icon://email",
+            //type: "Reject",
+            //text: "Reject",
+          });
+		
 		var footer = new sap.m.Bar({ 
 	          contentLeft: [sgBtn_chartType],
-	          contentRight:[btn_setTime,btn_setting]
+	          contentRight:[btn_message,btn_setTime,btn_setting]
 	    });	
 		
 		var page = new sap.m.Page("analysisByReason",{
-			title:"Analysis By Reason",
+			title:"出差费用分析（按目的）",
 			enableScrolling:false,
 			content: [content],
 			footer:footer

@@ -47,10 +47,10 @@ sap.ui.controller("manager.masterdetail", {
         	for(var i = 0; i<requestdata.length; i++){
         		if(requestdata[i].REQID == id){
         			
-        			proposal.setText("Name: "+requestdata[i].PNAME);
-        			personalid.setText("EmployerID: "+requestdata[i].PEID);
-        		    email.setText("Email: "+requestdata[i].EMAIL);
-        		    department.setText("Department: "+requestdata[i].DNAME);
+        			proposal.setText("名字: "+requestdata[i].PNAME);
+        			personalid.setText("员工ID: "+requestdata[i].PEID);
+        		    email.setText("电子邮箱: "+requestdata[i].EMAIL);
+        		    department.setText("部门: "+requestdata[i].DNAME);
         		    status.setText(requestdata[i].STATUS);
         		    destinationCountry.setValue(requestdata[i].DESCOUN);
         		    destinationCity.setValue(requestdata[i].DESREG);

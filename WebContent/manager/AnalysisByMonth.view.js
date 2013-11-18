@@ -83,13 +83,19 @@ sap.ui.jsview("manager.AnalysisByMonth", {
                 icon: "sap-icon://settings",      
         });
 		
+		var btn_message = new sap.m.Button({
+			icon: "sap-icon://email",
+            //type: "Reject",
+            //text: "Reject",
+          });
+		
 		var footer = new sap.m.Bar({ 
 	          contentLeft: [sgBtn_chartType],
-	          contentRight:[btn_setTime,btn_setting]
+	          contentRight:[btn_message,btn_setTime,btn_setting]
 	    });	
 		
 		var page = new sap.m.Page("analysisByMonth",{
-			title:"Analysis By Month",
+			title:"出差费用分析（按月份)",
 			// enableScrolling:false,
 			//customHeader: customerHeader,
 			content: [content],

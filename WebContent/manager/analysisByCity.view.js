@@ -92,12 +92,19 @@ sap.ui.jsview("manager.analysisByCity", {
               			bus.publish("splitapp","toDetail",{pageId:"manager.analysisByPerson"});
                 	}        
         });
+		
+		var btn_message = new sap.m.Button({
+			icon: "sap-icon://email",
+            //type: "Reject",
+            //text: "Reject",
+          });
+		
 	    var footer = new sap.m.Bar({ 
             contentLeft: [sgBtn_chartType],
-            contentRight:[btn_setTime,btn_setting]
+            contentRight:[btn_message,btn_setTime,btn_setting]
 	    });
  		return new sap.m.Page({
-			title: "Analysis by Region",
+			title: "出差费用分析（按城市)",
 			content: [
 				content,				
 			],
