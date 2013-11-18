@@ -1,0 +1,63 @@
+
+/*
+ * remove dialog standard padding
+ */
+.sapMDialog .sapMDialogScrollCont {
+	padding: 0;
+}
+
+/*
+ * do not wrap tile info 
+ */
+.sapMStdTileInfo {
+	white-space: normal;
+	margin-top: 0rem;
+	text-align: left;
+	color: #555;
+}
+
+/*
+ * make tile title larger
+ */
+.sapMStdTileTitle {
+	font-size: 1.1rem;
+}
+.tab{
+	text-align:center;	
+}
+.tcosth{
+	text-indent:50px;
+	color:#ff0000;
+}
+.refresh{
+	padding:0;
+	padding-left:10px;
+	background:transparent;
+	color:white;
+}
+.sapMFeedListItemTextText{
+	padding-right:45px
+}
+<<<<<<< HEAD
+=======
+
+.sapMShellCentralBox {
+	width: 1024px;
+	margin-left: -512px;
+	left: 50%;
+	background: url(/TravelSteward/img/273304_h_ergb_s_gl.jpg);
+}
+
+.bgImage {
+	background: url(/TravelSteward/img/p1.jpg);
+}
+
+
+.sapMOH {
+font-family: Microsoft YaHei,Helvetica,sans-serif;
+}
+
+.sapMObjectAttributeDiv {
+	font-family: Microsoft YaHei,Helvetica,sans-serif;
+}
+>>>>>>> bac88f12ab22abc72d791c2d04c6010b78fda0c4
