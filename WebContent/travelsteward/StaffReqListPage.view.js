@@ -30,7 +30,7 @@ sap.ui.jsview("travelsteward.StaffReqListPage", {
 				var i = 0;
 				for(var j = requestdata.length-1; j>=0; j-- ){
 					requestItems.items[i] = [];
-					requestItems.items[i].title = "Request No."+requestdata[j].REQID;
+					requestItems.items[i].title = "No."+requestdata[j].REQID;
 					requestItems.items[i].number = requestdata[j].PLEXP;
 					requestItems.items[i].numberUnit =  "RMB";
 					
