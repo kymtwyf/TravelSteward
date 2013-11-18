@@ -30,7 +30,7 @@ sap.ui.jsview("manager.analysisByReason", {
 //	    });
 		
 		
-		var objectheader = new sap.m.ObjectHeader("oheaderByReason",{
+		var objectheader = new sap.m.ObjectHeader({
 			title:"Cost in different Reasons",
 			 attributes : [
 							new sap.m.ObjectAttribute("descriptionByReason",{

@@ -55,7 +55,8 @@ sap.ui.jsview("manager.masterdetail", {
 			type: sap.m.ListType.Navigation, 
             label: "Country",
             press: function(oControlEvent){
-				alert("Hey Man! You can add an event here");
+          		bus.publish("splitapp","toDetail",{pageId:"manager.analysisByCity"});
+				// alert("Hey Man! You can add an event here");
 			}
         });
 		var destinationCity = new sap.m.DisplayListItem("destinationcity",{
@@ -64,7 +65,7 @@ sap.ui.jsview("manager.masterdetail", {
              press: function(oControlEvent){
 				//alert("Hey Man! You can add an event here");
 				console.log('pressed');
-          		bus.publish("splitapp","toDetail","manager.analysisByCity");
+          		bus.publish("splitapp","toDetail",{pageId:"manager.analysisByCity"});
 
 			}
         });

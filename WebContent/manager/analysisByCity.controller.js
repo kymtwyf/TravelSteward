@@ -74,15 +74,21 @@ sap.ui.controller("manager.analysisByCity", {
 	        },
 	        
 	        fills: {
-	        	
-	        defaultFill: '#EDDC4E'
+	        	">120M":"#FF0F00",
+	        	"40M~120M":"#FF6600",
+	        	"<40M":"#FCD202",
+	     	   defaultFill: "#04D215"
 	        },
 	        data:{
 		        "IL":{
+		        	"fillKey":"40M~120M",
 
+		        },
+		        "CA":{
+		        	"fillKey":">120M"
 		        }
    	 		}	
-});
+		});
  // var election = new Datamap({
  //        scope: 'world',
  //        element: document.getElementById('analysisByCity-mapDiv'),

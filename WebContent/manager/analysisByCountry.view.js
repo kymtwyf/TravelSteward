@@ -99,7 +99,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 		var btn_setTime = new sap.m.Button({
                 icon: "sap-icon://history",
                   press : function() {
-                  	bus.publish("splitapp","toDetail","manager.analysisByCountry");
+                  	bus.publish("splitapp","toDetail",{pageId:"manager.analysisByCountry"});
                 	  //	monthActionSheet.openBy(this);
                                    
                         }        
@@ -107,7 +107,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 		var btn_setting = new sap.m.Button({
                 icon: "sap-icon://settings",
               	press : function() {
-              		bus.publish("splitapp","toDetail","manager.analysis");
+              		bus.publish("splitapp","toDetail",{pageId:"manager.analysis"});
                              // bus.publish('mapDiv','draw',model.data.getFakeData());
                     	}        
         });

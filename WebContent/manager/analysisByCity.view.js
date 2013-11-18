@@ -80,7 +80,8 @@ sap.ui.jsview("manager.analysisByCity", {
 		var btn_setTime = new sap.m.Button({
                 icon: "sap-icon://history",
                   press : function() {
-                  	bus.publish("splitapp","toDetail","manager.analysisByCountry");
+                  	bus.publish("splitapp","toDetail",{
+                  		pageId:"manager.analysisByCountry"});
                 	  //	monthActionSheet.openBy(this);
                                    
                         }        
@@ -88,7 +89,7 @@ sap.ui.jsview("manager.analysisByCity", {
 		var btn_setting = new sap.m.Button({
                 icon: "sap-icon://settings",
               	press : function() {
-              			bus.publish("splitapp","toDetail","manager.analysisByPerson");
+              			bus.publish("splitapp","toDetail",{pageId:"manager.analysisByPerson"});
                 	}        
         });
 	    var footer = new sap.m.Bar({ 
@@ -96,7 +97,7 @@ sap.ui.jsview("manager.analysisByCity", {
             contentRight:[btn_setTime,btn_setting]
 	    });
  		return new sap.m.Page({
-			title: "Title !!!",
+			title: "Analysis by Region",
 			content: [
 				content,				
 			],

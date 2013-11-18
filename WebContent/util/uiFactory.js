@@ -299,7 +299,7 @@ util.uiFactory = {
 			            text: "ViewDetail",
 			            icon: "sap-icon://drill-down",
 			            press:function(){
-                            bus.publish("splitapp","toDetail","manager.analysisByCity");
+                            bus.publish("splitapp","toDetail",{pageId:"manager.analysisByCity",transition:"fade"});
 			            }
 	            	})
                 }) 

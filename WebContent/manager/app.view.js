@@ -57,10 +57,18 @@ sap.ui.jsview("manager.app", {
 			this.app.backMaster("manager.master");
 		}
 		
-		function toDetail(channelId,eventId,pageId){
+		function toDetail(channelId,eventId,data){
+			var pageId = data.pageId;
+			var transitionName = data.transition;
+
 			console.log(pageId);
 			if(sap.ui.getCore().byId(pageId)){
-				this.app.toDetail(pageId);
+				if(transitionName){
+					this.app.toDetail(pageId,transitionName);
+				}else{
+					this.app.toDetail(pageId);
+				}
+
 			}
 		}
 		function backDetail(channelId,eventId,pageId){
