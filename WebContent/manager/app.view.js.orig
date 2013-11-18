@@ -31,17 +31,18 @@ sap.ui.jsview("manager.app", {
 		
 		this.app.addMasterPage(sap.ui.jsview("manager.masterdetail", "manager.masterdetail"));
 		console.log('analysisBycountry added加载');
-<<<<<<< HEAD
 		
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByPerson", "manager.analysisByPerson"));
 
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByCountry", "manager.analysisByCountry"));
 		
+		this.app.addDetailPage(sap.ui.jsview("manager.AnalysisByMonth", "manager.AnalysisByMonth"));
+<<<<<<< HEAD
 		this.app.addDetailPage(sap.ui.jsview("manager.analysisByCity", "manager.analysisByCity"));
 =======
-		this.app.addDetailPage(sap.ui.jsview("manager.analysisByCountry", "manager.analysisByCountry"));
-		this.app.addDetailPage(sap.ui.jsview("manager.AnalysisByMonth", "manager.AnalysisByMonth"));
->>>>>>> 98b5aaa0dc6df58c9fa7040718b329f2e26cf760
+		this.app.addDetailPage(sap.ui.jsview("manager.analysisByReason", "manager.analysisByReason"));
+
+>>>>>>> 9d620585b78613ace2945098e46de2c997d6526d
 		
 		this.app.toDetail("manager.analysisByCountry");
 
