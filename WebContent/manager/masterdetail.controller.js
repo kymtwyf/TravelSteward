@@ -85,11 +85,11 @@ sap.ui.controller("manager.masterdetail", {
     	   var selected = evt.getParameters().item.getText();
     	   var transSelect = sap.ui.getCore().byId("transSelect");
     	   var sendMessButton = sap.ui.getCore().byId("sendMessButton");
-    	   if(selected == "Detail") {
+    	   if(selected == "详细信息") {
     		   transSelect.setVisible(false);
     		   sendMessButton.setVisible(false);
     	   }
-    	   else if(selected == "Comments") {
+    	   else if(selected == "评论") {
     		   transSelect.setVisible(true);
     		   sendMessButton.setVisible(true);
     	   }

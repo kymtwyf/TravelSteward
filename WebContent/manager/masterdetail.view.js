@@ -216,7 +216,7 @@ sap.ui.jsview("manager.masterdetail", {
 		var detailFooter = new sap.m.Bar({
 			contentLeft:[
 			             new sap.m.CheckBox("transSelect", {
-			            	 text: "auto-translate",
+			            	 text: "自动翻译",
 			            	 visible: false
 			             })
 			             ],

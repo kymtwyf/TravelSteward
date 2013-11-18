@@ -50,7 +50,8 @@
 	background: url(/TravelSteward/img/p1.jpg);
 }
 .sapMText,.sapMOH .sapMObjectAttributeDiv,.sapMObjStatus,.sapUiBody,.sapMBar-CTX.sapMPageHeader .sapMLabel,
-.sapMDialog-CTX .sapMBar-CTX .sapMLabel,.sapMListTbl .sapMText, .sapMListTbl .sapMLabel,.sapMObjLTitle,.sapMBtn{
+.sapMDialog-CTX .sapMBar-CTX .sapMLabel,.sapMListTbl .sapMText, .sapMListTbl .sapMLabel,.sapMObjLTitle,.sapMBtn,
+.sapMITBText,.sapMFeedListItemTextName,.sapMFeedListItemTextText,.sapMFeedListItemFooter,.sapMBar-CTX.sapMFooter-CTX .sapMLabel{
 	font-family: Microsoft YaHei,Arial,Helvetica,sans-serif;
 }
 
