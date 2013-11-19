@@ -52,10 +52,10 @@ util.tools = {
 	autoSetContainerSize:function(sId){
 		var width = $('#main').width();
 		var height = $('#main').height();
-		$("#"+sId).width(width*0.8);
+		$("#"+sId).width(0.9*width);
 		$("#"+sId).height(height*0.7);
 		$("#"+sId).css({
-			"left":width*0.1,
+			"left":width*0.05,
 			//"border":"solid"
 		});
 

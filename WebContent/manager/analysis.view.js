@@ -17,7 +17,7 @@ sap.ui.jsview("manager.analysis", {
 		//这个用来写analysis by department 每个部门预算和实际之间的关系
 		// var objectheader = util.uiFactory.getAnalysisObjectHeader("analysisByDepartment");
 		var objectStatus = new sap.m.ObjectStatus({
-	        text : "In Budget",
+	        text : "低于预算",
 	        state : "Success"
         });
         var attribute = new sap.m.ObjectAttribute({
@@ -67,7 +67,7 @@ sap.ui.jsview("manager.analysis", {
 			]
 		});
 		var btn_personizedChart = new sap.m.Button({
-	        icon: "sap-icon://globe",
+	        icon: "sap-icon://bar-chart",
 	       press:function(){
 	       }
 		});
@@ -114,7 +114,7 @@ sap.ui.jsview("manager.analysis", {
             contentRight:[btn_setTime,btn_setting]
 	    });
  		return new sap.m.Page({
-			title: "Travel Steward",
+			title: "出差费用分析（按部门)",
 			content: [
 				content,				
 			],

@@ -36,7 +36,7 @@ util.uiFactory = {
         			OPEN: null,
         			CLOSE: null
         	};
-    		DataItem.MONTH = chartData[i].MON;
+    		DataItem.MONTH = chartData[i].MON+"月";
     		DataItem.BUDGET = chartData[i].BUDG;
     		DataItem.SALEAMOUNT = chartData[i].TRAEXP;
     		DataItem.OPEN = sumAmount.toFixed(2);
@@ -83,7 +83,7 @@ util.uiFactory = {
     	}
     	var temp = sumAmount + 25676799.79;
     	var DataItem11={
-    			MONTH : 11,
+    			MONTH : 11+"月",
     			MONTHNAME : "十一月",
     			BUDGET: 339149417 ,
     			SALEAMOUNT: 25676799.79,
@@ -98,7 +98,7 @@ util.uiFactory = {
     	sumAmount = temp;
     	temp = sumAmount + 25676799.79;
     	var DataItem12={
-    			MONTH : 12,
+    			MONTH : 12+"月",
     			MONTHNAME : "十二月",
     			BUDGET: 339149417 ,
     			SALEAMOUNT: 25676799.79,
@@ -304,7 +304,7 @@ util.uiFactory = {
 			            press:function(){
                             // mapPopover.close();
                             bus.publish('popover','close');
-                            bus.publish("splitapp","toDetail",{pageId:"manager.analysisByCity",transition:"fade"});
+                            bus.publish("splitapp","toDetail",{pageId:"manager.analysisByCity",transition:"flip"});
 			            }
 	            	})
                 }) 
@@ -406,15 +406,19 @@ util.uiFactory = {
         }
     },
     createTable:function(data){
+        var newData = [];
     	for(var i = 0; i<data.length; i ++){
-    		data[i].SALEAMOU= util.tools.formatNumber(data[i].SALEAMOU);
-    		data[i].TRAEXP=	util.tools.formatNumber(data[i].TRAEXP);
+            var cell = {};
+            cell.COUNAME = data[i].COUNAME;
+    		cell.SALEAMOU= util.tools.formatNumber(data[i].SALEAMOU);
+    		cell.TRAEXP=	util.tools.formatNumber(data[i].TRAEXP);
     		console.log("ababababababababa================<<<<<<");
-    		console.log(data[i].SALEAMOU);
+    		console.log(cell.SALEAMOU);
+            newData.push(cell);
     	}
     	
     	var tableChartData = {
-			    items : data
+			    items : newData
 			};
     	var tableChartModel= new sap.ui.model.json.JSONModel(tableChartData);
     	

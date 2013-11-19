@@ -27,12 +27,12 @@ sap.ui.controller("manager.analysisByCity", {
 		var screenWidth = 1024;
 		var screenHeight = $(window).height();
 		$('#analysisByCity-mapDiv').css({
-			"width":0.8*screenWidth,
+			"width":screenWidth,
 			"height":0.6*screenHeight,
 			"display":"block",
 			"position":"relative",
-			"top":"-10px",
-			"left":0.1*screenWidth,		
+			"top":"-60px",
+			// "left":0.05*screenWidth,		
 
 		});
 		$('#analysisByCity-tablevbox').css({
@@ -67,27 +67,37 @@ sap.ui.controller("manager.analysisByCity", {
 	        geographyConfig: {
 	          highlightBorderColor: '#bada55',
 	         popupTemplate: function(geography, data) {
-	            return data?'<div class="hoverinfo"><strong>State:' + geography.properties.name + '</strong> <br />' + 'Sale:'+data.cost + ' </div>':null;
+	            return data?'<div class="hoverinfo"><strong>地区:' + geography.properties.name + '</strong> <br />' + '花费:'+data.cost + ' </div>':null;
 	          },
 	          highlightBorderWidth: 3
 	        },
-	        
+	        done:function(datamap){
+                $(".datamaps-legend").css({"z-index":0});   
+	        },
 	        fills: {
 	        	"超过1.2亿":"#FF0F00",
 	        	"4000万到1.2亿":"#FF6600",
 	        	"少于4000万":"#FCD202",
-	        	"无数据":"#04D215",
-	     	   defaultFill: "#04D215"
+	        	"无数据":"RGBA(4,210,21,0.3)",
+	     	   defaultFill: "RGBA(4,210,21,0.3)"
 	        },
 	        data:{
 		        "IL":{
 		        	"fillKey":"4000万到1.2亿",
-		        	"cost":"60M",
+		        	"cost":"6000万",
 		        },
 		        "CA":{
 		        	"fillKey":"超过1.2亿",
-		        	"cost":"122M"
+		        	"cost":"12200万"
 		        },
+		        "TX":{
+		        	"fillKey":"少于4000万",
+		        	"cost":"2000万"
+		        },
+		        "NY":{
+		        	"fillKey":"少于4000万",
+		        	"cost":"2600万"
+		        }
    	 		}	
 		});
 		analysisByCity_map.legend();

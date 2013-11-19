@@ -25,7 +25,7 @@ sap.ui.jsview("manager.analysisByCity", {
           text : "1,752,346张发票"
         });
         var objectheader = new sap.m.ObjectHeader({            
-              title:"Total Cost in America",
+              title:"美国差旅总花费",
               number : "240,632,500.48",
               numberUnit : "RMB",
               firstStatus : objectStatus,

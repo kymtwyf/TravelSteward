@@ -34,7 +34,7 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 			title:"销售部差旅支出",
 			 attributes : [
 							new sap.m.ObjectAttribute("descriptionbyMonth",{
-								text:"2013年"
+								text:"2013年至今"
 							})
 			               	],
 		     firstStatus : new sap.m.ObjectStatus("statusbyMonth",{

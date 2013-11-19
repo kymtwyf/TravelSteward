@@ -52,7 +52,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 		//for test
 		bus.publish("analysisHeader","update",{
 			title:"差旅总支出",
-			description:"2013年",
+			description:"2013年至今",
 			total:"670278320.76",
 			currency:'RMB',
 			budget:"730278320"
