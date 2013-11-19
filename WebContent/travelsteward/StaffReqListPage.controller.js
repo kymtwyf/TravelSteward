@@ -18,7 +18,7 @@ sap.ui.controller("travelsteward.StaffReqListPage", {
 		jQuery.ajax({
 			//url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllReqs?$format=json",
 			//jsonp parameter
-			url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getReqs.xsjs",
+			url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getStaffReqs.xsjs",
 			dataType: "jsonp",
 			//end 
 			error:function(error){
