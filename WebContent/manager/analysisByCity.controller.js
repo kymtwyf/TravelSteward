@@ -27,11 +27,12 @@ sap.ui.controller("manager.analysisByCity", {
 		var screenWidth = 1024;
 		var screenHeight = $(window).height();
 		$('#analysisByCity-mapDiv').css({
-			"width":0.9*screenWidth,
-			"height":0.7*screenHeight,
+			"width":0.8*screenWidth,
+			"height":0.6*screenHeight,
 			"display":"block",
 			"position":"relative",
-			"left":0.05*screenWidth,			
+			"top":"-10px",
+			"left":0.1*screenWidth,		
 
 		});
 		$('#analysisByCity-tablevbox').css({
@@ -46,8 +47,6 @@ sap.ui.controller("manager.analysisByCity", {
 			"height":0.7*screenHeight,
 			"left":0.05*screenWidth,
 			"display":"none"
-
-			
 		});
 		bus.subscribe('analysisByCity','show',function(channelId,eventId,index){
 
@@ -68,138 +67,32 @@ sap.ui.controller("manager.analysisByCity", {
 	        geographyConfig: {
 	          highlightBorderColor: '#bada55',
 	         popupTemplate: function(geography, data) {
-	            return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong> <br />Electoral Votes:' +  data.electoralVotes + ' </div>'
+	            return data?'<div class="hoverinfo"><strong>State:' + geography.properties.name + '</strong> <br />' + 'Sale:'+data.cost + ' </div>':null;
 	          },
 	          highlightBorderWidth: 3
 	        },
 	        
 	        fills: {
-	        	">120M":"#FF0F00",
-	        	"40M~120M":"#FF6600",
-	        	"<40M":"#FCD202",
+	        	"超过1.2亿":"#FF0F00",
+	        	"4000万到1.2亿":"#FF6600",
+	        	"少于4000万":"#FCD202",
+	        	"无数据":"#04D215",
 	     	   defaultFill: "#04D215"
 	        },
 	        data:{
 		        "IL":{
-		        	"fillKey":"40M~120M",
-
+		        	"fillKey":"4000万到1.2亿",
+		        	"cost":"60M",
 		        },
 		        "CA":{
-		        	"fillKey":">120M"
-		        }
+		        	"fillKey":"超过1.2亿",
+		        	"cost":"122M"
+		        },
    	 		}	
 		});
- // var election = new Datamap({
- //        scope: 'world',
- //        element: document.getElementById('analysisByCity-mapDiv'),
- //        projection: 'mercator'
- //      });
+		analysisByCity_map.legend();
+		analysisByCity_map.draw();
  
- 
- //    var presidentialTrips = [
- //        {
- //            origin: {
- //                latitude: 38.895111,
- //                longitude: -77.036667
- //            },
- //            destination: {
- //                latitude: 32.066667,
- //                longitude: 34.783333 
- //            }
- //        },
- //        {
- //            origin: {
- //                latitude: 38.895111,
- //                longitude: -77.036667
- //            },
- //            destination: {
- //                latitude: 19.433333,
- //                longitude: -99.133333
- //            }
- //        },
- //        {
- //            origin: {
- //                latitude: 38.895111,
- //                longitude: -77.036667
- //            },
- //            destination: {
- //                latitude: 9.933333,
- //                longitude: -84.083333
- //            }
- //        },
- //        {
- //            origin: {
- //                latitude: 38.895111,
- //                longitude: -77.036667
- //            },
- //            destination: {
- //                latitude: 54.597 ,
- //                longitude: -5.93
- //            }
- //        },
- //        {
- //            origin: {
- //                latitude: 38.895111,
- //                longitude: -77.036667
- //            },
- //            destination: {
- //                latitude: 52.516667,
- //                longitude: 13.383333 
- //            }
- //        },
- //        {
- //            origin: {
- //                latitude: 38.895111,
- //                longitude: -77.036667
- //            },
- //            destination: {
- //                latitude: 14.692778,
- //                longitude: -17.446667
- //            }
- //        },
- //        {
- //            origin: {
- //                latitude: 38.895111,
- //                longitude: -77.036667
- //            },
- //            destination: {
- //                latitude: -26.204444,
- //                longitude: 28.045556
- //            }
- //        },
- //                {
- //            origin: {
- //                latitude: 38.895111,
- //                longitude: -77.036667
- //            },
- //            destination: {
- //                latitude: -6.8,
- //                longitude: 39.283333 
- //            }
- //        },
- //                {
- //            origin: {
- //                latitude: 38.895111,
- //                longitude: -77.036667
- //            },
- //            destination: {
- //                latitude: 59.329444,
- //                longitude: 18.068611
- //            }
- //        },
- //                {
- //            origin: {
- //                latitude: 38.895111,
- //                longitude: -77.036667
- //            },
- //            destination: {
- //                latitude: 59.95 ,
- //                longitude: 30.3
- //            }
- //        }
- //    ];
- 
- //  election.arc( presidentialTrips, {strokeWidth: 2});
 
 			
 	},
