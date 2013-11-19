@@ -147,8 +147,8 @@ util.uiFactory = {
     	    
     	    // Trend lines used for connectors
     	    var trendLine = new AmCharts.TrendLine();
-    	    trendLine.initialCategory = "1";
-    	    trendLine.finalCategory = "12";
+    	    trendLine.initialCategory = "1月";
+    	    trendLine.finalCategory = "12月";
     	    trendLine.initialValue = 339149417;
     	    trendLine.finalValue = 339149417;
     	    trendLine.lineColor = "#000000";
