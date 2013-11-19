@@ -119,7 +119,7 @@ sap.ui.controller("manager.masterdetail", {
        this.keepRefresh = true;												//start refresh messages
        
        
-       if(controller.keepRefresh) {											//run once immediately						
+       /*if(controller.keepRefresh) {											//run once immediately						
 		   $.ajax({
 			   type:"get",
 			   async:false,
@@ -155,14 +155,14 @@ sap.ui.controller("manager.masterdetail", {
 				  alert('Fail to get messages from HANA server!');
 			  }
 		 });
-	   }		
+	   }*/	
        
-       if(!this.startRefresh) {
+       if(!controller.startRefresh) {
     	   setInterval(function() {												//set timer
-        	   if(controller.keepRefresh) {									
+        	   if(controller.keepRefresh) {								
         		   $.ajax({
         			   type:"get",
-        			   async:false,
+        			   async:true,
 //        			   url:"http://ld9415:8002/ta/TravelAnalysis/ta.xsodata/AllMess?$filter=(REQID eq "+controller.reqId+")&$orderby=STIME asc&$format=json",
 //        			   dataType:"json",
         			   url: "http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/getChat.xsjs?reqId="+controller.reqId,
@@ -210,7 +210,7 @@ sap.ui.controller("manager.masterdetail", {
 	
 	keepRefresh: false,														//control whether refresh
 	
-	refreshInterval: 3000,													//millsecond
+	refreshInterval: 5000,													//millsecond
 	
 	transCont: null,
 	
