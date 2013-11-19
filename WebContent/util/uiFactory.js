@@ -44,7 +44,8 @@ util.uiFactory = {
     		sumAmount = sumAmount + DataItem.SALEAMOUNT;
     		
     		DataItem.CLOSE = sumAmount.toFixed(2) ;
-    		console.log(sumAmount);
+    		
+    		console.log(DataItem.CLOSE);
     		switch (i) {
             case 0:
             	DataItem.MONTHNAME = "一月";
@@ -405,6 +406,12 @@ util.uiFactory = {
         }
     },
     createTable:function(data){
+    	for(var i = 0; i<data.length; i ++){
+    		data[i].SALEAMOU= util.tools.formatNumber(data[i].SALEAMOU);
+    		data[i].TRAEXP=	util.tools.formatNumber(data[i].TRAEXP);
+    		console.log("ababababababababa================<<<<<<");
+    		console.log(data[i].SALEAMOU);
+    	}
     	
     	var tableChartData = {
 			    items : data
