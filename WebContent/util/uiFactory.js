@@ -278,19 +278,19 @@ util.uiFactory = {
 
         jQuery.sap.require('util.tools');
 		this.mapPopover = new sap.m.Popover("mapPopover",{                                                                                                        //popover
-                title: "Detail",
+                title: "详情",
                 placement: sap.m.PlacementType.Right,
                 content: [
                 	new sap.m.List({
 				        items: [
 					        new sap.m.ObjectListItem({
-					        	title:'Country:'+(sCountry?sCountry:"unknown"),
+					        	title:'国家:'+(sCountry?sCountry:"未知"),
 					            attributes:[
 						            new sap.m.ObjectAttribute({
-						              text : "Total Sale:"+(sSale?util.tools.formatNumberToBM(sSale.toString()):0)
+						              text : "总销售额:"+(sSale?util.tools.formatNumberToBM(sSale.toString()):0)+" RMB"
 						            }),
 						            new sap.m.ObjectAttribute({
-						              text : "Trip Cost:"+(sCost?util.tools.formatNumberToBM(sCost.toString()):0)
+						              text : "出差支出:"+(sCost?util.tools.formatNumberToBM(sCost.toString()):0)+" RMB"
 						            })
 					            ]
 					        }),		        
@@ -299,7 +299,7 @@ util.uiFactory = {
                 ],
                 footer: new sap.m.Bar({
                 	contentMiddle:new sap.m.Button({
-			            text: "ViewDetail",
+			            text: "查看详细",
 			            icon: "sap-icon://drill-down",
 			            press:function(){
                             // mapPopover.close();
