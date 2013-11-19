@@ -20,7 +20,7 @@ sap.ui.controller("manager.masterdetail", {
 	
 	
 	
-	onBeforeShow:function(evt){
+	onBeforeShow:function(evt){ //console.log("Refresh");
        
         var proposal=sap.ui.getCore().byId("proposal");
         var personalid = sap.ui.getCore().byId("personalid");
@@ -116,7 +116,7 @@ sap.ui.controller("manager.masterdetail", {
        
        
        //handle refresh messages
-       this.keepRefresh = true;												//start refresh messages
+       //this.keepRefresh = true;												//start refresh messages
        
        
        /*if(controller.keepRefresh) {											//run once immediately						
@@ -157,9 +157,9 @@ sap.ui.controller("manager.masterdetail", {
 		 });
 	   }*/	
        
-       if(!controller.startRefresh) {
+       //if(!controller.startRefresh) {
     	   setInterval(function() {												//set timer
-        	   if(controller.keepRefresh) {								
+        	   //if(controller.keepRefresh) {								
         		   $.ajax({
         			   type:"get",
         			   async:true,
@@ -195,10 +195,10 @@ sap.ui.controller("manager.masterdetail", {
         				  alert('Fail to get messages from HANA server!');
         			  }
         		 });
-        	   }																//endif keepRefresh
+        	   //}																//endif keepRefresh
     		}, controller.refreshInterval); 
-    	   this.startRefresh = true;
-       	}
+    	   //this.startRefresh = true;
+       	//}
        
        
      },

@@ -117,7 +117,10 @@ sap.ui.jsview("travelsteward.StaffReqListPage", {
  				            	   icon: "sap-icon://email"
  				               }),
  				              new sap.m.Button({
-				            	   icon: "sap-icon://action-settings"
+				            	   icon: "sap-icon://action-settings",
+				            	   press: function() {
+				            		   window.location.href = "/TravelSteward/testStaffMessage.html";
+				            	   }
 				               }),
  				               ]
 			})
