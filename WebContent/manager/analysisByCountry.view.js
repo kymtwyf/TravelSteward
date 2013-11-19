@@ -26,10 +26,10 @@ sap.ui.jsview("manager.analysisByCountry", {
 				          header: new sap.m.Label({text: "国家"})
 				        }),
 				        new sap.m.Column({
-				          header: new sap.m.Label({text: "支出"})
+				          header: new sap.m.Label({text: "支出(RMB)"})
 				        }),
 				        new sap.m.Column({
-				          header: new sap.m.Label({text: "销售额"})
+				          header: new sap.m.Label({text: "销售额(RMB)"})
 				        })
 				     ]
 		});

@@ -34,9 +34,9 @@ sap.ui.jsview("travelsteward.StaffReqListPage", {
 					requestItems.items[i].number = requestdata[j].PLEXP;
 					requestItems.items[i].numberUnit =  "RMB";
 					
-					if(requestdata[j].STATUS =="Approved")
+					if(requestdata[j].STATUS =="批准")
 						requestItems.items[i].state = "Success";
-				    else if (requestdata[j].STATUS =="Pending")
+				    else if (requestdata[j].STATUS =="待处理")
 				    	requestItems.items[i].state = "Warning";
 				    else requestItems.items[i].state = "Error";
 					
