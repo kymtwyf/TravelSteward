@@ -175,10 +175,10 @@ sap.ui.controller("manager.masterdetail", {
         					   var list = sap.ui.getCore().byId("messList");
         					   var imgSrc = null;
         					   if(res.d.results[controller.locMessCount].FNAME == "Tu Hao") {
-        						   imgSrc = "img/p1.jpg";
+        						   imgSrc = "img/p11.jpg";
         					   }
         					   else {
-        						   imgSrc = "img/p2.jpg";
+        						   imgSrc = "img/p22.jpg";
         					   }
         					   var feedItem = new sap.m.FeedListItem({
         			    		   sender: res.d.results[controller.locMessCount].FNAME,
@@ -246,7 +246,7 @@ sap.ui.controller("manager.masterdetail", {
 		  var list = sap.ui.getCore().byId("messList");					//refresh list immediately
   	   var feedItem = new sap.m.FeedListItem({
   		   sender: "Tu Hao",
-  		   icon: "img/p1.jpg",
+  		   icon: "img/p11.jpg",
   		   //info: "Message",
   		   timestamp: new Date().toLocaleString(),
   		   text: transCont,
