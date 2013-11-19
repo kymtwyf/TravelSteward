@@ -275,7 +275,13 @@ util.uiFactory = {
 		if(this.mapPopover){
 			this.mapPopover.destroy();
 		}
-
+        console.log('当前国家');
+        console.log(sCountry);
+        switch(sCountry){
+            case "United States of America": sCountry = "美国";break;
+            case "Germany": sCountry = "德国";break;
+            case "China": sCountry = "中国";break;
+        }
         jQuery.sap.require('util.tools');
 		this.mapPopover = new sap.m.Popover("mapPopover",{                                                                                                        //popover
                 title: "详情",
