@@ -20,16 +20,63 @@ sap.ui.jsview("manager.analysis", {
 	        text : "In Budget",
 	        state : "Success"
         });
+		
+		var popoverlist = new sap.m.List("list");
+		
+        var aliReason=new sap.m.ActionListItem('aliReason',{                                                                                        //action list item
+            tap:function(oControlEvent){
+            	 var splitapp = sap.ui.getCore().byId('splitApp');
+		           	splitapp.toDetail("manager.analysisByReason");
+            }
+        });
+		aliReason.setText("按出差理由");
+		
+        var aliMonth=new sap.m.ActionListItem('aliMonth',{                                                                                        //action list item
+            tap:function(oControlEvent){
+
+            }
+                  
+
+	    });
+	    aliMonth.setText("按月份");
+
+	    popoverlist.addItem(aliReason);
+	    popoverlist.addItem(aliMonth);
+	    
+		var popover = new sap.m.Popover("popover",{                                                                                                        //popover
+            title: "查看详细",
+            placement: sap.m.PlacementType.Right,
+            content: popoverlist
+        });        
+		popover.setOffsetX(-600); 
+		popover.setOffsetY(300);
+		document.ondblclick = mouseDBClick;
+	    
+		
+		
         var attribute = new sap.m.ObjectAttribute({
           text : "Year 2013"
         });
-        var objectheader = new sap.m.ObjectHeader({            
+        var objectheader = new sap.m.ObjectHeader("objectByD",{            
               title:"Total Trip Cost",
               number : "607,422,422.99",
               numberUnit : "RMB",
               firstStatus : objectStatus,
               attributes:attribute
         });
+        
+        function mouseDBClick(ev){                                //double click will pop over
+        	popover.openBy(objectheader);
+        
+              // console.log($('#popover').width());
+			//	$('#popover').width("198px");
+              //       var height = $("#popover").height();    
+                   //("#popover").css({"top":mousePositionY-height/2,"left":mousePositionX+15});    
+                     // $("#popover").width('194px');
+                 //}
+
+               //  return true;;
+        }
 		var content = new sap.m.VBox({
 			items:[
 				objectheader,
