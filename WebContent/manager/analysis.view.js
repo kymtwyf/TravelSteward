@@ -26,7 +26,7 @@ sap.ui.jsview("manager.analysis", {
         var aliReason=new sap.m.ActionListItem('aliReason',{                                                                                        //action list item
             tap:function(oControlEvent){
             	 var splitapp = sap.ui.getCore().byId('splitApp');
-		           	splitapp.toDetail("manager.analysisByReason");
+		           	splitapp.toDetail("manager.analysisByReason","flip");
             }
         });
 		aliReason.setText("按出差理由");
