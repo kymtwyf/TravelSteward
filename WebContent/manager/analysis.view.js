@@ -131,15 +131,9 @@ sap.ui.jsview("manager.analysis", {
 	       }
 		});
 		
-		var btn_barChart = new sap.m.Button({
-	        icon: "sap-icon://pie-chart",
-	       	press:function(){
-	       		// bus.publish('chartDiv','draw');
-	        }
-		});
 		
 		var sgBtn_chartType = new sap.m.SegmentedButton({
-			buttons:[btn_personizedChart,btn_tableChart,btn_barChart],
+			buttons:[btn_personizedChart,btn_tableChart],
 			selectedButton:btn_personizedChart
 
 		});
