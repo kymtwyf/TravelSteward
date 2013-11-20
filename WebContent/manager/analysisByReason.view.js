@@ -53,7 +53,7 @@ sap.ui.jsview("manager.analysisByReason", {
 		
 		
 		var btn_waterfallChart = new sap.m.Button({
-	        icon: "sap-icon://bar-chart",
+	        icon: "sap-icon://radar-chart",
 //	       	press:function(){
 //	       		
 //	        }

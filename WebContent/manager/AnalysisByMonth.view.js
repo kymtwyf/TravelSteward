@@ -57,7 +57,7 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 		
 		
 		var btn_waterfallChart = new sap.m.Button({
-	        icon: "sap-icon://bar-chart",
+	        icon: "sap-icon://upstacked-chart",
 //	       	press:function(){
 //	       		
 //	        }
