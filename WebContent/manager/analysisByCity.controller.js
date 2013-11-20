@@ -103,7 +103,14 @@ sap.ui.controller("manager.analysisByCity", {
 		analysisByCity_map.legend();
 		analysisByCity_map.draw();
  
-
+		jQuery.sap.require("sap.m.MessageToast");
+		//TODO
+		/*sap.m.MessageToast.show("检索用时 "+spendTime/1000+" 秒",{
+		 	duration:2000
+		 });*/
+		sap.m.MessageToast.show("检索用时 "+118/1000+" 秒",{
+		 	duration:2000
+		 });
 			
 	},
 

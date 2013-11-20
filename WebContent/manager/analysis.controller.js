@@ -27,9 +27,9 @@ sap.ui.controller("manager.analysis", {
 		jQuery.sap.require('model.data');
 		var screenWidth = 1024;
 		var screenHeight = $(window).height();
-		$('#analysisByDepartment-mapDiv').css({
+		$('#analysisByDepartment_chart').css({
 			"width":screenWidth,
-			"height":screenHeight*0.8,
+			"height":screenHeight*0.6,
 			"display":"block"
 		});
 
@@ -150,7 +150,6 @@ sap.ui.controller("manager.analysis", {
 		    chartCursor.zoomable = false;
 		    chartCursor.categoryBalloonEnabled = false;
 		    chart.addChartCursor(chartCursor);
-		    
 		    
 		    // WRITE
 		    chart.write("analysisByDepartment_chart");

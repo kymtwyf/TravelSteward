@@ -50,7 +50,7 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 			items:[
 				objectheader,
 				new sap.ui.core.HTML("chartDivByMonth",{
-					content:"<div id='chartDivByMonth' style='width: 100%; height: 500px;'></div>"
+					content:"<div id='chartDivByMonth' style='width: 100%; height: 450px;'></div>"
 				})
 			]
 		});

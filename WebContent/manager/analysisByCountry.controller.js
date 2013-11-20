@@ -11,6 +11,7 @@ sap.ui.controller("manager.analysisByCountry", {
 		var refreshInterval = 5000;
 		var btn_message = sap.ui.getCore().byId('btn_message');
 		var app = sap.ui.getCore().byId('splitApp');
+		btn_message.setType("Reject");
 		btn_message.attachPress(function() {
 			btn_message.setType("Default");
 			app.showMaster("manager.master");
@@ -41,7 +42,7 @@ sap.ui.controller("manager.analysisByCountry", {
 				}
 			});
 	    });
-		
+		/*
 		function startTiming(channelID,eventID,start){
 		     setInterval(function() {												//set timer	
 		    		   $.ajax({
@@ -68,7 +69,7 @@ sap.ui.controller("manager.analysisByCountry", {
 		}
 		bus.subscribe("time","start",startTiming,this);
 		console.log('analysisBycountry ON INIT');
-
+*/
 		jQuery.sap.require('model.data');
 		jQuery.sap.require('model.fakeData');
 		jQuery.sap.require('util.queries');
@@ -96,7 +97,7 @@ sap.ui.controller("manager.analysisByCountry", {
 //
 //	},
 	onBeforeShow:function(evt){
-		bus.publish("time","start");
+//		bus.publish("time","start");
 		console.log('analysisByCountry onbeforeshow');
 		console.log($('#mapDiv'));
 		console.log($("#analysisByCountry").height());

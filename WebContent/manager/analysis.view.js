@@ -21,11 +21,11 @@ sap.ui.jsview("manager.analysis", {
 	        state : "Success"
         });
         var attribute = new sap.m.ObjectAttribute({
-          text : "Year 2013"
+          text : "2013年至今"
         });
         var objectheader = new sap.m.ObjectHeader({            
-              title:"Total Trip Cost",
-              number : "607,422,422.99",
+              title:"差旅总支出",
+              number : "670,278,320.76",
               numberUnit : "RMB",
               firstStatus : objectStatus,
               attributes:attribute

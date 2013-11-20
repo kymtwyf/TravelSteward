@@ -126,7 +126,7 @@ sap.ui.jsview("manager.analysisByCountry", {
 	
 		var page = new sap.m.Page("analysisByCountry",{
 			title:"出差费用分析（按国家)",
-			enableScrolling:false,
+			//enableScrolling:false,
 			footer:footer,
 			content: [content]
 		});

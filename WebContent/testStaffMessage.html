@@ -23,12 +23,15 @@
   			<option value ="Okay, I will pay attention. Thank you.( 好的，我会注意的。谢谢你。)">2</option>
 		</select>
 		<br />
+		<br />
+		<br />
 		<input type="submit" value="Send" onclick="send()">
 </body>
 <script>
 var send = function() {
 	//alert(""+$("#reqId").val()+" "+$("#from").val()+" "+$("#to").val()+" "+new Date().toLocaleString()+" "+ $("#content").val());
-$.ajax({
+var date = new Date();
+	$.ajax({
 	   type:"get",
 	   async:true,													//asynchron is ok
 	   url:"http://ld9415.wdf.sap.corp:8002/ta/TravelAnalysis/xsjs/insertChat.xsjs",
@@ -37,7 +40,7 @@ $.ajax({
 		   reqId: $("#reqId").val(),
 		   from: $("#from").val(),
 		   to: $("#to").val(),
-		   time: new Date().toLocaleString(),
+		   time: date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(),
 		   content: $("#content").val()
 	   },
 	   success:function(transCont){

@@ -14,11 +14,14 @@ util.uiFactory = {
         chart.valueField = "TRAEXP";
         chart.titleField = "COUNAME";
         chart.dataProvider = chartData;
+        chart.fontSize = 18;
         chart.depth3D = 15;
         chart.angle = 30;
         chart.outlineColor = "#FFFFFF";
         chart.outlineAlpha = 0.8;
+	    
         chart.outlineThickness = 2;
+        
         chart.write("chartDiv");
     },
     createChartByMonth: function(sId,data){
@@ -175,19 +178,23 @@ util.uiFactory = {
     	    // VALUE AXIS
     	    var valueAxis = new AmCharts.ValueAxis();
     	    valueAxis.gridType = "circles";
-    	    valueAxis.fillAlpha = 0.05;
-    	    valueAxis.fillColor = "#000000";
+    	    valueAxis.fillAlpha = 0.2;
+    	   valueAxis.fillColor = "#000000";
     	    valueAxis.axisAlpha = 0.2;
     	    valueAxis.gridAlpha = 0;
     	    valueAxis.fontWeight = "bold";
+    	    valueAxis.fontSize = 15;
     	    valueAxis.minimum = 0;
     	    chart.addValueAxis(valueAxis);
     	    
     	    // GRAPH
     	    var graph = new AmCharts.AmGraph();
     	    graph.lineColor = "#000000";
+    	    graph.lineThickness = 1;
+    	    graph.lineAlphas = 0.8;
     	    graph.fillAlphas = 0.4;
     	    graph.bullet = "round";
+    	    graph.bulletSize = 8;
     	    graph.valueField = "AMOU";
     	    graph.balloonText = "花费在 [[category]]: ￥[[AMOU]] ";
     	    chart.addGraph(graph);

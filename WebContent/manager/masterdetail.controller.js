@@ -175,10 +175,10 @@ sap.ui.controller("manager.masterdetail", {
         					   var list = sap.ui.getCore().byId("messList");
         					   var imgSrc = null;
         					   if(res.d.results[controller.locMessCount].FNAME == "Tu Hao") {
-        						   imgSrc = "img/p11.jpg";
+        						   imgSrc = "img/p11.png";
         					   }
         					   else {
-        						   imgSrc = "img/p22.jpg";
+        						   imgSrc = "img/p22.png";
         					   }
         					   var feedItem = new sap.m.FeedListItem({
         			    		   sender: res.d.results[controller.locMessCount].FNAME,
@@ -242,18 +242,22 @@ sap.ui.controller("manager.masterdetail", {
 	},
 	
 	sendMessage: function(transCont) {
-		this.locMessCount++;
+		
 		  var list = sap.ui.getCore().byId("messList");					//refresh list immediately
+		  var date = new Date();
   	   var feedItem = new sap.m.FeedListItem({
   		   sender: "Tu Hao",
-  		   icon: "img/p11.jpg",
+  		   icon: "img/p11.png",
   		   //info: "Message",
-  		   timestamp: new Date().toLocaleString(),
+  		   timestamp: date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(),
   		   text: transCont,
   		   iconDensityAware:false
   	   });
   	   feedItem.addStyleClass("feedItem");
   	   list.insertItem(feedItem, 0);
+  	 this.locMessCount++;
+  	   //alert(this.reqId+" "+transCont);
+  	   //var date = new Date();
 		$.ajax({
 			   type:"get",
 			   async:true,													//asynchron is ok
@@ -264,10 +268,10 @@ sap.ui.controller("manager.masterdetail", {
 				   reqId: this.reqId,
 				   from: 18,
 				   to: 3000,
-				   time: new Date().toLocaleString(),
+				   time: date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(),
 				   content: transCont
 			   },
-			   success:function(transCont){
+			   success:function(res){
 				  //console.log("SendMessage "+this.reqId+" "+18+" "+81+" "+time+" "+transCont);
 			  },
 			  error:function(){
