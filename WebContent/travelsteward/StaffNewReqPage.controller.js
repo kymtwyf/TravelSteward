@@ -26,8 +26,8 @@ sap.ui.controller("travelsteward.StaffNewReqPage", {
 				   data: {
 					   reqId: 10000188,
 					   peId: 3000,
-					   toDate: "2013/11/26",
-					   backDate: "2013/12/01",
+					   toDate: "2013/12/01",
+					   backDate: "2013/12/06",
 					   toWay: "飞机",
 					   backWay: "飞机",
 					   plExp: 30000,

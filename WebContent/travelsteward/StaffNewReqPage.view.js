@@ -45,7 +45,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			        	        new sap.m.DateTimeInput("toDate", {
 			        	        	type: sap.m.DateTimeInputType.Date,
 			        	        	displayFormat: 'y/M/d',
-			        	        	value: "2013-11-26"
+			        	        	value: "2013-12-01"
 			        	        }),
 			        	        new sap.m.HBox({
 				    	           }),
@@ -55,7 +55,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			    	           new sap.m.DateTimeInput("backDate", {
 			    	        	   type: sap.m.DateTimeInputType.Date,
 			    	        	   displayFormat: 'y/MM/dd',
-			    	        	   value: "2013-12-01"
+			    	        	   value: "2013-12-06"
 			    	           }),
 			    	           new sap.m.HBox({
 			    	           }),
@@ -155,7 +155,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			    	           }),
 			    	           new sap.m.Input({
 			    	        	   type: sap.m.InputType.Number,
-			    	        	   value: "20000"
+			    	        	   value: "30000"
 			    	           }),
 			    	           new sap.m.HBox({
 			    	           }),
@@ -163,7 +163,7 @@ sap.ui.jsview("travelsteward.StaffNewReqPage", {
 			    	        	   text:"备注"
 			    	           }),
 			    	           new sap.m.TextArea({
-			    	        	   value: "我需要去和客户签一份订单，我会在洛杉矶4星的酒店住四天。",
+			    	        	   value: "我需要去和客户谈一笔生意，我会在洛杉矶4星的酒店住四天。",
 			    	        	   rows: 4 
 			    	           }),
 			    	           new sap.ui.commons.Title({ // this starts a new group
