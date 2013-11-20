@@ -20,9 +20,44 @@ sap.ui.jsview("manager.analysis", {
 	        text : "低于预算",
 	        state : "Success"
         });
+		
+		var popoverlist = new sap.m.List("list");
+		
+        var aliReason=new sap.m.ActionListItem('aliReason',{                                                                                        //action list item
+            tap:function(oControlEvent){
+            	 var splitapp = sap.ui.getCore().byId('splitApp');
+		           	splitapp.toDetail("manager.analysisByReason","flip");
+            }
+        });
+		aliReason.setText("按出差理由");
+		
+        var aliMonth=new sap.m.ActionListItem('aliMonth',{                                                                                        //action list item
+            tap:function(oControlEvent){
+
+            }
+                  
+
+	    });
+	    aliMonth.setText("按月份");
+
+	    popoverlist.addItem(aliReason);
+	    popoverlist.addItem(aliMonth);
+	    
+		var popover = new sap.m.Popover("popover",{                                                                                                        //popover
+            title: "查看详细",
+            placement: sap.m.PlacementType.Right,
+            content: popoverlist
+        });        
+		popover.setOffsetX(-600); 
+		popover.setOffsetY(300);
+		document.ondblclick = mouseDBClick;
+	    
+		
+		
         var attribute = new sap.m.ObjectAttribute({
           text : "2013年至今"
         });
+
         var objectheader = new sap.m.ObjectHeader({            
               title:"差旅总支出",
               number : "670,278,320.76",
@@ -30,6 +65,19 @@ sap.ui.jsview("manager.analysis", {
               firstStatus : objectStatus,
               attributes:attribute
         });
+        
+        function mouseDBClick(ev){                                //double click will pop over
+        	popover.openBy(objectheader);
+        
+              // console.log($('#popover').width());
+			//	$('#popover').width("198px");
+              //       var height = $("#popover").height();    
+                   //("#popover").css({"top":mousePositionY-height/2,"left":mousePositionX+15});    
+                     // $("#popover").width('194px');
+                 //}
+
+               //  return true;;
+        }
 		var content = new sap.m.VBox({
 			items:[
 				objectheader,
@@ -83,15 +131,9 @@ sap.ui.jsview("manager.analysis", {
 	       }
 		});
 		
-		var btn_barChart = new sap.m.Button({
-	        icon: "sap-icon://pie-chart",
-	       	press:function(){
-	       		// bus.publish('chartDiv','draw');
-	        }
-		});
 		
 		var sgBtn_chartType = new sap.m.SegmentedButton({
-			buttons:[btn_personizedChart,btn_tableChart,btn_barChart],
+			buttons:[btn_personizedChart,btn_tableChart],
 			selectedButton:btn_personizedChart
 
 		});
