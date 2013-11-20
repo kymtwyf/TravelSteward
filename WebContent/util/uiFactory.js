@@ -14,11 +14,14 @@ util.uiFactory = {
         chart.valueField = "TRAEXP";
         chart.titleField = "COUNAME";
         chart.dataProvider = chartData;
+        chart.fontSize = 18;
         chart.depth3D = 15;
         chart.angle = 30;
         chart.outlineColor = "#FFFFFF";
         chart.outlineAlpha = 0.8;
+	    
         chart.outlineThickness = 2;
+        
         chart.write("chartDiv");
     },
     createChartByMonth: function(sId,data){
@@ -36,7 +39,7 @@ util.uiFactory = {
         			OPEN: null,
         			CLOSE: null
         	};
-    		DataItem.MONTH = chartData[i].MON;
+    		DataItem.MONTH = chartData[i].MON+"月";
     		DataItem.BUDGET = chartData[i].BUDG;
     		DataItem.SALEAMOUNT = chartData[i].TRAEXP;
     		DataItem.OPEN = sumAmount.toFixed(2);
@@ -83,7 +86,7 @@ util.uiFactory = {
     	}
     	var temp = sumAmount + 25676799.79;
     	var DataItem11={
-    			MONTH : 11,
+    			MONTH : 11+"月",
     			MONTHNAME : "十一月",
     			BUDGET: 339149417 ,
     			SALEAMOUNT: 25676799.79,
@@ -98,7 +101,7 @@ util.uiFactory = {
     	sumAmount = temp;
     	temp = sumAmount + 25676799.79;
     	var DataItem12={
-    			MONTH : 12,
+    			MONTH : 12+"月",
     			MONTHNAME : "十二月",
     			BUDGET: 339149417 ,
     			SALEAMOUNT: 25676799.79,
@@ -147,8 +150,8 @@ util.uiFactory = {
     	    
     	    // Trend lines used for connectors
     	    var trendLine = new AmCharts.TrendLine();
-    	    trendLine.initialCategory = "1";
-    	    trendLine.finalCategory = "12";
+    	    trendLine.initialCategory = "1月";
+    	    trendLine.finalCategory = "12月";
     	    trendLine.initialValue = 339149417;
     	    trendLine.finalValue = 339149417;
     	    trendLine.lineColor = "#000000";
@@ -175,19 +178,23 @@ util.uiFactory = {
     	    // VALUE AXIS
     	    var valueAxis = new AmCharts.ValueAxis();
     	    valueAxis.gridType = "circles";
-    	    valueAxis.fillAlpha = 0.05;
-    	    valueAxis.fillColor = "#000000";
+    	    valueAxis.fillAlpha = 0.2;
+    	   valueAxis.fillColor = "#000000";
     	    valueAxis.axisAlpha = 0.2;
     	    valueAxis.gridAlpha = 0;
     	    valueAxis.fontWeight = "bold";
+    	    valueAxis.fontSize = 15;
     	    valueAxis.minimum = 0;
     	    chart.addValueAxis(valueAxis);
     	    
     	    // GRAPH
     	    var graph = new AmCharts.AmGraph();
     	    graph.lineColor = "#000000";
+    	    graph.lineThickness = 1;
+    	    graph.lineAlphas = 0.8;
     	    graph.fillAlphas = 0.4;
     	    graph.bullet = "round";
+    	    graph.bulletSize = 8;
     	    graph.valueField = "AMOU";
     	    graph.balloonText = "花费在 [[category]]: ￥[[AMOU]] ";
     	    chart.addGraph(graph);
@@ -275,22 +282,28 @@ util.uiFactory = {
 		if(this.mapPopover){
 			this.mapPopover.destroy();
 		}
-
+        console.log('当前国家');
+        console.log(sCountry);
+        switch(sCountry){
+            case "United States of America": sCountry = "美国";break;
+            case "Germany": sCountry = "德国";break;
+            case "China": sCountry = "中国";break;
+        }
         jQuery.sap.require('util.tools');
 		this.mapPopover = new sap.m.Popover("mapPopover",{                                                                                                        //popover
-                title: "Detail",
+                title: "详情",
                 placement: sap.m.PlacementType.Right,
                 content: [
                 	new sap.m.List({
 				        items: [
 					        new sap.m.ObjectListItem({
-					        	title:'Country:'+(sCountry?sCountry:"unknown"),
+					        	title:'国家:'+(sCountry?sCountry:"未知"),
 					            attributes:[
 						            new sap.m.ObjectAttribute({
-						              text : "Total Sale:"+(sSale?util.tools.formatNumberToBM(sSale.toString()):0)
+						              text : "总销售额:"+(sSale?util.tools.formatNumberToBM(sSale.toString()):0)+" RMB"
 						            }),
 						            new sap.m.ObjectAttribute({
-						              text : "Trip Cost:"+(sCost?util.tools.formatNumberToBM(sCost.toString()):0)
+						              text : "出差支出:"+(sCost?util.tools.formatNumberToBM(sCost.toString()):0)+" RMB"
 						            })
 					            ]
 					        }),		        
@@ -299,12 +312,12 @@ util.uiFactory = {
                 ],
                 footer: new sap.m.Bar({
                 	contentMiddle:new sap.m.Button({
-			            text: "ViewDetail",
+			            text: "查看详细",
 			            icon: "sap-icon://drill-down",
 			            press:function(){
                             // mapPopover.close();
                             bus.publish('popover','close');
-                            bus.publish("splitapp","toDetail",{pageId:"manager.analysisByCity",transition:"fade"});
+                            bus.publish("splitapp","toDetail",{pageId:"manager.analysisByCity",transition:"flip"});
 			            }
 	            	})
                 }) 
@@ -406,15 +419,19 @@ util.uiFactory = {
         }
     },
     createTable:function(data){
+        var newData = [];
     	for(var i = 0; i<data.length; i ++){
-    		data[i].SALEAMOU= util.tools.formatNumber(data[i].SALEAMOU);
-    		data[i].TRAEXP=	util.tools.formatNumber(data[i].TRAEXP);
+            var cell = {};
+            cell.COUNAME = data[i].COUNAME;
+    		cell.SALEAMOU= util.tools.formatNumber(data[i].SALEAMOU);
+    		cell.TRAEXP=	util.tools.formatNumber(data[i].TRAEXP);
     		console.log("ababababababababa================<<<<<<");
-    		console.log(data[i].SALEAMOU);
+    		console.log(cell.SALEAMOU);
+            newData.push(cell);
     	}
     	
     	var tableChartData = {
-			    items : data
+			    items : newData
 			};
     	var tableChartModel= new sap.ui.model.json.JSONModel(tableChartData);
     	

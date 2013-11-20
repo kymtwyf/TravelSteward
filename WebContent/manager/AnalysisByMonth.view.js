@@ -34,12 +34,12 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 			title:"销售部差旅支出",
 			 attributes : [
 							new sap.m.ObjectAttribute("descriptionbyMonth",{
-								text:"2013年"
+								text:"2013年至今"
 							})
 			               	],
 		     firstStatus : new sap.m.ObjectStatus("statusbyMonth",{
-		    	 			text:"OK",
-		    	 			state:"Error"
+		    	 			text:"预计不会超出预算",
+		    	 			state:"Success"
 		     }),
 		     number:"282,570,965.94",
 		     numberUnit:"RMB"
@@ -50,7 +50,7 @@ sap.ui.jsview("manager.AnalysisByMonth", {
 			items:[
 				objectheader,
 				new sap.ui.core.HTML("chartDivByMonth",{
-					content:"<div id='chartDivByMonth' style='width: 100%; height: 540px;'></div>"
+					content:"<div id='chartDivByMonth' style='width: 100%; height: 450px;'></div>"
 				})
 			]
 		});

@@ -34,14 +34,10 @@ sap.ui.jsview("manager.analysisByReason", {
 			title:"销售部差旅支出",
 			 attributes : [
 							new sap.m.ObjectAttribute("descriptionByReason",{
-								text:"2013年"
+								text:"2013年至今"
 							})
 			               	],
-		     firstStatus : new sap.m.ObjectStatus("statusByReason",{
-		    	 			text:"OK",
-		    	 			state:"Error"
-		     }),
-		     number:"282,570,965.94",
+			 number:"282,570,965.94",
 		     numberUnit:"RMB"
 		});
 		
@@ -50,7 +46,7 @@ sap.ui.jsview("manager.analysisByReason", {
 			items:[
 				objectheader,
 				new sap.ui.core.HTML("chartDivByReason",{
-					content:"<div id='chartDivByReason' style='width: 100%; height: 540px;'></div>"
+					content:"<div id='chartDivByReason' style='width: 100%; height: 540px;position:relative;top:-50px;'></div>"
 				})
 			]
 		});
@@ -96,7 +92,6 @@ sap.ui.jsview("manager.analysisByReason", {
 		
 		var page = new sap.m.Page("analysisByReason",{
 			title:"出差费用分析（按目的）",
-			enableScrolling:false,
 			content: [content],
 			footer:footer
 		});

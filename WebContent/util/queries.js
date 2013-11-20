@@ -96,16 +96,17 @@ util.queries = {
 					// var numberB = parseFloat(model.data.numberBase);
 					// console.log('numberB: '+numberB);
 					if(cost>model.data.numberBase){
-						fillK = ">100%";
+						fillK = "超过预算";
 					}else if(cost/model.data.numberBase >0.8){
-						fillK = "80%~100%";
+						fillK = "占预算80%~100%";
 					}else if(cost/model.data.numberBase >0.2){
-						fillK = "20%~80%";
+						fillK = "占预算20%~80%";
 					}else if(cost/model.data.numberBase >0.01){
-						fillK = "1%~20%";
-					}else {
-						fillK = "0~1%";
+						fillK = "占预算0%~20%";
 					}
+					// else {
+					// 	fillK = "0~1%";
+					// }
 					data[resultSet[i].COUID] = {
 						fillKey:fillK,
 						cost : cost,

@@ -3,11 +3,12 @@ jQuery.sap.declare("model.data");
 model.data = {
 	numberBase:"200000000",//设置了1亿为基准100M,60M,20M,10M,1M
 	colorMapping:{
-		">100%":"RGB(254,62,50)",
-		"80%~100%":"RGB(251,246,106)",
-		"20%~80%":"RGB(119,255,51)",
-		"1%~20%":"RGB(253,254,213)",
-		"0~1%":"RGB(255,255,255)",
+		"超过预算":"RGB(254,62,50)",
+		"占预算80%~100%":"RGB(251,246,106)",
+		"占预算20%~80%":"RGB(119,255,51)",
+		"占预算0%~20%":"RGB(253,254,213)",
+		"无数据":"RGBA(93,209,249,1)",
+		// "0~1%":"RGB(255,255,255)",
 		defaultFill: 'RGBA(93,209,249,1)'
 	},
 
@@ -44,16 +45,17 @@ model.data = {
 			var cost = resultSet[i].TRAEXP;
 			var fillK ;
 			if(cost>this.numberBase){
-				fillK = ">100%";
+				fillK = "超过预算";
 			}else if(cost/this.numberBase >0.8){
-				fillK = "80%~100%";
+				fillK = "占预算80%~100%";
 			}else if(cost/this.numberBase >0.2){
-				fillK = "20%~80%";
+				fillK = "占预算20%~80";
 			}else if(cost/this.numberBase >0.01){
-				fillK = "1%~20%";
-			}else {
-				fillK = "0~1%";
+				fillK = "占预算0%~20%";
 			}
+			// else {
+			// 	fillK = "0~1%";
+			// }
 			data[resultSet[i].COUN] = {
 				fillKey:fillK,
 				cost : cost,
